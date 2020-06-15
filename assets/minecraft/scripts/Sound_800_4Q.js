@@ -41,7 +41,6 @@ function onUpdate(su) {
 		if(!isTrainProtection){
 			su.playSound('sound_krw', 'train.Pattern_Offing', 1, 1);
 		}
-
 		else{
 			su.stopSound('sound_krw', 'train.Pattern_Offing');
 		}
@@ -51,43 +50,30 @@ function onUpdate(su) {
 	/*switch(atsCount) {
 		case 10:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 11:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 12:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 13:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 14:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 15:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 16:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 17:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 18:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 19:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 20:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		case 21:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
-
 		default:su.stopSound('sound_krw', 'train.Pattern_Action');
 			break;
-
 		}*/
 
 
@@ -176,7 +162,7 @@ function onUpdate(su) {
       }
 
       //ch1
-      if(speed>0&&speed<1&& notch > 0){
+      if(speed>0&&speed<1 && notch > 0){
         var pit1 = 0.8,
             vol1 = 1.0;
         if(speed<2) vol1 = fadeCon(0, 0.0, 1, 1.0, su);
@@ -187,7 +173,7 @@ function onUpdate(su) {
       }
 
       //ch2
-      if(speed>1&&speed<6&& notch > 0){
+      if(speed>1&&speed<6 && notch > 0){
         var pit2 = 0.8,
             vol2 = 1.0;
         su.playSound('sound_krw', 'train.ch1', vol2, pit2);
@@ -197,7 +183,7 @@ function onUpdate(su) {
       }
 
       //ch2d
-      if(speed>5&&speed<60&& notch < 0){
+      if(speed>5&&speed<60 && notch < 0){
         var pit2d = 0.8,
             vol2d = 1.0;
         su.playSound('sound_krw', 'train.ch1d', vol2d, pit2d);
@@ -207,7 +193,7 @@ function onUpdate(su) {
       }
 
       //ch3
-      if(speed>6&&speed<35&& notch > 0){
+      if(speed>6&&speed<35 && notch > 0){
         var pit3 = 0.8,
             vol3 = 1.0;
         su.playSound('sound_krw', 'train.ch2', vol3, pit3);
@@ -217,7 +203,7 @@ function onUpdate(su) {
       }
 
       //ch3d
-      if(speed>6&&speed<70&& notch < 0){
+      if(speed>6&&speed<70 && notch < 0){
         var pit3d = 0.8,
             vol3d = 1.0;
         if(speed>45) vol3d = fadeCon(45, 1.0, 70, 0.0, su);
@@ -228,7 +214,7 @@ function onUpdate(su) {
       }
 
       //ch4
-      if(speed>35&&speed<70&& notch > 0){
+      if(speed>35&&speed<70 && notch > 0){
         var pit4 = 0.8,
             vol4 = 1.0;
         if(speed>45) vol4 = fadeCon(45, 1.0, 70, 0.0, su);
@@ -371,14 +357,14 @@ function onUpdate(su) {
 
 function PlayCompressor(su,CP,CPA,CPE){
   if(su.isComplessorActive()){
-    su.playSound('sound_mhnlib', CPA, 0.5, 1, false);
-    su.playSound('sound_mhnlib', CP, 0.5, 1);
+    su.playSound('sound_mhnlib', CPA, 0.6, 1, false);
+    su.playSound('sound_mhnlib', CP, 0.6, 1);
     su.stopSound('sound_mhnlib', CPE);
   }
   else{
     su.stopSound('sound_mhnlib', CPA);
     su.stopSound('sound_mhnlib', CP);
-    su.playSound('sound_mhnlib', CPE, 0.5, 1, false);
+    su.playSound('sound_mhnlib', CPE, 0.6, 1, false);
   }
   
 }
