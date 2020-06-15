@@ -6,11 +6,6 @@ importPackage(Packages.jp.ngt.ngtlib.io);
 function onUpdate(su) {
 
 	var entity = su.getEntity();
-	var entityID = -1;
-
-	if(entity != null){
-		entityID = entity.func_145782_y();
-	}
 	var signal = su.getEntity().getSignal();
 	var isControlCar = su.getEntity().isControlCar();
 	var dataMap = entity.getResourceState().getDataMap();
