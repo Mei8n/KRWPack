@@ -12,7 +12,7 @@
 "bogieModel2": { "modelFile": "ModelBogie.class",
 	         "textures": [["default", "textures/train/tp.png" ]]},
 
-"buttonTexture": "textures/train/K2000/button_K2000Mc.png",
+"buttonTexture": "textures/train/KRW800/button_KRW800Ch_Tc.png",
 
 
 
@@ -30,25 +30,6 @@
 
 "soundScriptPath": "scripts/Sound_800_4Q.js",
 
-"door_left": [
- {"objects": ["DOOR_LF"],
- "pos": [0.0, 0.0, 0.0],
- "transform": [[0.0, 0.0, 0.62]]},
- {"objects": ["DOOR_LB"],
- "pos": [0.0, 0.0, 0.0],
- "transform": [[0.0, 0.0, -0.62]]}
-],
-
-
-
-"door_right": [
- {"objects": ["DOOR_RF"],
- "pos": [0.0, 0.0, 0.0],
- "transform": [[0.0, 0.0, 0.62]]},
- {"objects": ["DOOR_RB"],
- "pos": [0.0, 0.0, 0.0],
- "transform": [[0.0, 0.0, -0.62]]}
-],
 
 
 "seatPos": [[12, 0, 90, 2], [12, 0, 70, 2], [12, 0, 50, 2], [12, 0, 10, 2],
