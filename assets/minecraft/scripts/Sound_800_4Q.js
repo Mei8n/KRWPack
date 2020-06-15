@@ -48,7 +48,7 @@ function onUpdate(su) {
 		*/
 
 
-	switch(atsCount) {
+	/*switch(atsCount) {
 		case 10:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
 			break;
 
@@ -88,7 +88,7 @@ function onUpdate(su) {
 		default:su.stopSound('sound_krw', 'train.Pattern_Action');
 			break;
 
-		}
+		}*/
 
 
 		//ORPâπê∫
