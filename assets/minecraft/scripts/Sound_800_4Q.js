@@ -2,6 +2,7 @@ importPackage(Packages.jp.ngt.rtm);
 importPackage(Packages.jp.ngt.rtm.render);
 importPackage(Packages.jp.ngt.ngtlib.util);
 importPackage(Packages.jp.ngt.ngtlib.io);
+importPackage(Packages.jp.kaiz.atsassistmod.api);
 
 function onUpdate(su) {
 
@@ -47,33 +48,14 @@ function onUpdate(su) {
 		*/
 
 
-	switch(atsCount) {
-		case 10:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 11:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 12:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 13:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 14:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 15:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 16:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 17:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 18:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 19:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 20:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		case 21:su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			break;
-		default:su.stopSound('sound_krw', 'train.Pattern_Action');
-			break;
+		if (atsCount != signal) {
+			if (signal >= 10 && signal <= 21) {
+				su.stopSound('sound_krw', 'train.Pattern_Action');
+				ControlTrain.logger("PlaySound")
+				su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
+			}
+
+			dataMap.setInt("atsCount", signal, 1);
 		}
 
 
@@ -87,7 +69,7 @@ function onUpdate(su) {
 		}
 
 		if(signal == 21 && speed > 1 && speed < 25){
-			su.playSound('sound_krw', 'train.ATS_ORP', 1, 1, false);
+			su.playSound('sound_krw', 'train.ATS_ORP', 1, 1);
 		}
 
 		else{
@@ -112,15 +94,15 @@ function onUpdate(su) {
 
 
 
-  //↓コンプレッサー音の指定↓
-  var CompressorName = "RTMLib.CP.CPloop16";
-  var CompressorActiveName = "RTMLib.CP.CPstart16";
-  var CompressorEndName = "RTMLib.CP.CPend16";
-  //↑コンプレッサー音の指定↑
-  
-  PlayCompressor(su,CompressorName,CompressorActiveName,CompressorEndName);
-  var speed = su.getSpeed(),
-      notch = su.getNotch();
+//↓コンプレッサー音の指定↓
+var CompressorName = "RTMLib.CP.CPloop16";
+var CompressorActiveName = "RTMLib.CP.CPstart16";
+var CompressorEndName = "RTMLib.CP.CPend16";
+//↑コンプレッサー音の指定↑
+
+PlayCompressor(su,CompressorName,CompressorActiveName,CompressorEndName);
+var speed = su.getSpeed(),
+    notch = su.getNotch();
 
 
 
