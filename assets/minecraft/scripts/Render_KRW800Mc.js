@@ -1,4 +1,4 @@
-//Render_KRW800Mc.js  by unlock [ Mpc, Tc‹¤—p ]
+//Render_KRW800Mc.js  by unlock [ Mpc, Tcï¿½ï¿½ï¿½p ]
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,9 +22,9 @@ importPackage(Packages.jp.ngt.rtm.sound); //MovingSoundTileEntity
 
 //###################################################################
 
-//doorOpn(Cls)SecFƒhƒA‚ğŠJ‚­(•Â‚¶‚é)‚Ì‚É•K—v‚È•b”
-//doorOpn(Cls)SpdFƒhƒA‚ğŠJ‚­(•Â‚¶‚é)‚Æ‚«‚Ìè‡
-//[•b”,“®‚©‚·‹——£(Ò°ÄÙŠî€(ÒÀ¾ºã‚Ì”’l/100))]
+//doorOpn(Cls)Secï¿½Fï¿½hï¿½Aï¿½ï¿½ï¿½Jï¿½ï¿½(ï¿½Â‚ï¿½ï¿½ï¿½)ï¿½Ì‚É•Kï¿½vï¿½È•bï¿½ï¿½
+//doorOpn(Cls)Spdï¿½Fï¿½hï¿½Aï¿½ï¿½ï¿½Jï¿½ï¿½(ï¿½Â‚ï¿½ï¿½ï¿½)ï¿½Æ‚ï¿½ï¿½Ìè‡
+//[ï¿½bï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(Ò°ï¿½ÙŠî€(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½l/100))]
 
 var doorOpnSec = 2.3;
 var doorOpnSpd = [
@@ -46,8 +46,8 @@ var doorClsSpd = [
     [0.09, 0.0]
 ];
 
-//‹ì“®‹——£F[ 0.65(65) ]
-//g—p‰¹ºF[  ]
+//ï¿½ì“®ï¿½ï¿½ï¿½ï¿½ï¿½F[ 0.65(65) ]
+//ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½ï¿½F[  ]
 
 //###################################################################
 
@@ -78,7 +78,7 @@ var soundList = {};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function MhnConfig(par1) { //ƒRƒ“ƒtƒBƒO
+function MhnConfig(par1) { //ï¿½Rï¿½ï¿½ï¿½tï¿½Bï¿½O
 
     var Mc = {},
         Rev = {},
@@ -88,24 +88,24 @@ function MhnConfig(par1) { //ƒRƒ“ƒtƒBƒO
 
     //###################################################################
 
-    Mc.Angle = 9; //ƒ}ƒXƒRƒ“‰ñ“]Šp“x‚Ìâ‘Î’l
+    Mc.Angle = 9; //ï¿½}ï¿½Xï¿½Rï¿½ï¿½ï¿½ï¿½]ï¿½pï¿½xï¿½Ìï¿½Î’l
 
-    Rev.Angle = 35; //ƒŒƒo[ƒT‰ñ“]Šp“x‚Ìâ‘Î’l
+    Rev.Angle = 35; //ï¿½ï¿½ï¿½oï¿½[ï¿½Tï¿½ï¿½]ï¿½pï¿½xï¿½Ìï¿½Î’l
 
-    Mc.PosX = 0.8316; //ƒ}ƒXƒRƒ“‚Ì‰ñ“]²XÀ•W(Ò°ÄÙ’PˆÊ)
+    Mc.PosX = 0.8316; //ï¿½}ï¿½Xï¿½Rï¿½ï¿½ï¿½Ì‰ï¿½]ï¿½ï¿½Xï¿½ï¿½ï¿½W(Ò°ï¿½Ù’Pï¿½ï¿½)
     Mc.PosY = 0.8000; //Y
     Mc.PosZ = 9.0400; //Z
 
-    Rev.PosX = 0.5657; //ƒŒƒo[ƒT‚Ì‰ñ“]²XÀ•W(Ò°ÄÙ’PˆÊ)
+    Rev.PosX = 0.5657; //ï¿½ï¿½ï¿½oï¿½[ï¿½Tï¿½Ì‰ï¿½]ï¿½ï¿½Xï¿½ï¿½ï¿½W(Ò°ï¿½Ù’Pï¿½ï¿½)
     Rev.PosY = 0.8400; //Y
     Rev.PosZ = 9.1660; //Z
 
-    bogie.bd = 6.50; //‘äÔŠÔ‹——£(‘äÔ‚Í‘OŒã‘ÎÌˆÊ’u‚Æ‚·‚é)
-    bogie.wd = 1.05; //‘äÔ²‹—€2
-    bogie.wy = -0.527; //Ô—Ö²YÀ•W
+    bogie.bd = 6.50; //ï¿½ï¿½ÔŠÔ‹ï¿½ï¿½ï¿½(ï¿½ï¿½Ô‚Í‘Oï¿½ï¿½ÎÌˆÊ’uï¿½Æ‚ï¿½ï¿½ï¿½)
+    bogie.wd = 1.05; //ï¿½ï¿½Ôï¿½ï¿½ï¿½ï¿½ï¿½2
+    bogie.wy = -0.527; //ï¿½Ô—Öï¿½Yï¿½ï¿½ï¿½W
 
-    panta.ro1 = 33; //ƒpƒ“ƒ^“®ìŠp1
-    panta.ro2 = 63; //ƒpƒ“ƒ^“®ìŠp2
+    panta.ro1 = 33; //ï¿½pï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½p1
+    panta.ro2 = 63; //ï¿½pï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½p2
 
     //###################################################################
 
@@ -159,54 +159,54 @@ function MhnConfig(par1) { //ƒRƒ“ƒtƒBƒO
 
 function init(par1, par2) {
 
-    //‘O–Ê ŠO‘•
-    body1 = renderer.registerParts(new Parts("‘O–Ê", "‘O–Ê2", "‘O–Ê3", "‘O–ÊƒXƒeƒbƒv", "‘O–Ê‘‹", "”ö“”˜g", "è‚·‚è", "‘OÆ“”", "ü‚è‘Ñ", "‘O–Ê‘‹’Œ", "‘O–Ê‘‹HƒSƒ€"));
+    //ï¿½Oï¿½ï¿½ ï¿½Oï¿½ï¿½
+    body1 = renderer.registerParts(new Parts("ï¿½Oï¿½ï¿½", "ï¿½Oï¿½ï¿½2", "ï¿½Oï¿½ï¿½3", "ï¿½Oï¿½ÊƒXï¿½eï¿½bï¿½v", "ï¿½Oï¿½Ê‘ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½g", "ï¿½è‚·ï¿½ï¿½", "ï¿½Oï¿½Æ“ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½Oï¿½Ê‘ï¿½ï¿½ï¿½", "ï¿½Oï¿½Ê‘ï¿½Hï¿½Sï¿½ï¿½"));
 
-    //ŠO‘•
-    body2 = renderer.registerParts(new Parts("‘¤–Ê", "æ–±ˆõ”àŠO", "‰J”ó", "ŒË‘Ü‘‹", "ŒË‘Ü‘‹•”ƒVƒƒƒhƒEˆ—", "‘¤–ÊHƒSƒ€", "ŠÔŠO", "‘‹˜gŠO",
-        "‘¤–Ê‘‹ŠO", "ƒhƒA‰º", "‰®ª", "—â–[", "ŠÑ’Ê”àŠO", "–y", "“n‚è”Â", "°", "TSUMA", "obj6", "obj8"));
+    //ï¿½Oï¿½ï¿½
+    body2 = renderer.registerParts(new Parts("ï¿½ï¿½ï¿½ï¿½", "ï¿½æ–±ï¿½ï¿½ï¿½ï¿½ï¿½O", "ï¿½Jï¿½ï¿½", "ï¿½Ë‘Ü‘ï¿½", "ï¿½Ë‘Ü‘ï¿½ï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½hï¿½Eï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½Hï¿½Sï¿½ï¿½", "ï¿½ÔŠO", "ï¿½ï¿½ï¿½gï¿½O",
+        "ï¿½ï¿½ï¿½Ê‘ï¿½ï¿½O", "ï¿½hï¿½Aï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½[", "ï¿½Ñ’Ê”ï¿½ï¿½O", "ï¿½y", "ï¿½nï¿½ï¿½ï¿½", "ï¿½ï¿½", "TSUMA", "obj6", "obj8"));
 
-    //‘O–Ê “à‘• (‰^“]º)
-    cab_body = renderer.registerParts(new Parts("æ–±ˆõ”à“à"));
+    //ï¿½Oï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½^ï¿½]ï¿½ï¿½)
+    cab_body = renderer.registerParts(new Parts("ï¿½æ–±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"));
 
-    //“à‘•
-    interior = renderer.registerParts(new Parts("ŠÔ", "‘‹˜g“à", "‘¤–Ê‘‹“à", "“à‘¤", "L˜g", "ÀÈ", "ƒ|[ƒ‹",
-        "dØ‚è‹qº‘¤", "È–Ê“à‘¤", "ŠÑ’Ê”à“à", "“Vˆä", "°", "È–Ê", "obj4", "obj5"));
+    //ï¿½ï¿½ï¿½ï¿½
+    interior = renderer.registerParts(new Parts("ï¿½ï¿½", "ï¿½ï¿½ï¿½gï¿½ï¿½", "ï¿½ï¿½ï¿½Ê‘ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½Lï¿½ï¿½ï¿½g", "ï¿½ï¿½ï¿½ï¿½", "ï¿½|ï¿½[ï¿½ï¿½",
+        "ï¿½dï¿½Ø‚ï¿½qï¿½ï¿½ï¿½ï¿½", "ï¿½È–Ê“ï¿½ï¿½ï¿½", "ï¿½Ñ’Ê”ï¿½ï¿½ï¿½", "ï¿½Vï¿½ï¿½", "ï¿½ï¿½", "ï¿½È–ï¿½", "obj4", "obj5"));
 
-    //°‰º
-    body3 = renderer.registerParts(new Parts("°‰º", "’ê", "‰e", "”zŠÇ", "’òq", "˜AŒ‹Ší", "ƒWƒƒƒ“ƒpü", "ATSÔãq"));
+    //ï¿½ï¿½ï¿½ï¿½
+    body3 = renderer.registerParts(new Parts("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½", "ï¿½e", "ï¿½zï¿½ï¿½", "ï¿½ï¿½q", "ï¿½Aï¿½ï¿½ï¿½ï¿½", "ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½", "ATSï¿½Ôï¿½q"));
 
-    //‘OÆ“”
-    headlighton = renderer.registerParts(new Parts("‘OÆ“”“_"));
-    headlightoff = renderer.registerParts(new Parts("‘OÆ“”–Å"));
+    //ï¿½Oï¿½Æ“ï¿½
+    headlighton = renderer.registerParts(new Parts("ï¿½Oï¿½Æ“ï¿½ï¿½_"));
+    headlightoff = renderer.registerParts(new Parts("ï¿½Oï¿½Æ“ï¿½ï¿½ï¿½"));
 
-    //”ö“”
-    taillighton = renderer.registerParts(new Parts("”ö“”“_"));
-    taillightoff = renderer.registerParts(new Parts("”ö“”–Å"));
+    //ï¿½ï¿½ï¿½ï¿½
+    taillighton = renderer.registerParts(new Parts("ï¿½ï¿½ï¿½ï¿½ï¿½_"));
+    taillightoff = renderer.registerParts(new Parts("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"));
 
-    //ƒhƒAŠO
+    //ï¿½hï¿½Aï¿½O
     doorLFo = renderer.registerParts(new Parts("door_LF"));
     doorLBo = renderer.registerParts(new Parts("door_LB"));
     doorRFo = renderer.registerParts(new Parts("door_RF"));
     doorRBo = renderer.registerParts(new Parts("door_RB"));
 
-    //ƒhƒA’†
+    //ï¿½hï¿½Aï¿½ï¿½
     doorLFi = renderer.registerParts(new Parts("door_LFN"));
     doorLBi = renderer.registerParts(new Parts("door_LBN"));
     doorRFi = renderer.registerParts(new Parts("door_RFN"));
     doorRBi = renderer.registerParts(new Parts("door_RBN"));
 
-    //‘äÔ
-    bogieF = renderer.registerParts(new Parts("bogieF")); //‘O‘äÔ
-    bogieB = renderer.registerParts(new Parts("bogieB")); //Œã‘äÔ
-    wheelF1 = renderer.registerParts(new Parts("wheelF1")); //Ô—Ö
+    //ï¿½ï¿½ï¿½
+    bogieF = renderer.registerParts(new Parts("bogieF")); //ï¿½Oï¿½ï¿½ï¿½
+    bogieB = renderer.registerParts(new Parts("bogieB")); //ï¿½ï¿½ï¿½ï¿½
+    wheelF1 = renderer.registerParts(new Parts("wheelF1")); //ï¿½Ô—ï¿½
     wheelF2 = renderer.registerParts(new Parts("wheelF2"));
     wheelB1 = renderer.registerParts(new Parts("wheelB1"));
     wheelB2 = renderer.registerParts(new Parts("wheelB2"));
 
-    //‰¼
-    MC = renderer.registerParts(new Parts("‚¤‚ñ‚°"));
-    Rev = renderer.registerParts(new Parts("‚¿‚ñ‚°"));
+    //ï¿½ï¿½
+    MC = renderer.registerParts(new Parts("ï¿½ï¿½ï¿½ï¿½"));
+    Rev = renderer.registerParts(new Parts("ï¿½ï¿½ï¿½ï¿½"));
 
 }
 
@@ -329,26 +329,26 @@ function renderController(entity, onUpdateTick) {
     var RevPosY = MhnConfig("RevPosY");
     var RevPosZ = MhnConfig("RevPosZ");
 
-    roMc = renderer.getData(entityID << MhnIDS("roMcID")); //ƒf[ƒ^•Û«««
+    roMc = renderer.getData(entityID << MhnIDS("roMcID")); //ï¿½fï¿½[ï¿½^ï¿½Ûï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     roRev = renderer.getData(entityID << MhnIDS("roRevID"));
 
     if (onUpdateTick == true) {
 
-        //ƒ}ƒXƒRƒ“‰Â“®
+        //ï¿½}ï¿½Xï¿½Rï¿½ï¿½ï¿½Â“ï¿½
         if (notch >= 0) {
             roMcAngle = notch * -McAngle;
         } else {
             roMcAngle = notch * -McAngle;
         }
 
-        //ƒ}ƒXƒRƒ““®ì•âŠÔ (¸ŞÛ°ÊŞÙ•Ï”‚ÅéŒ¾‚·‚é•K—v‚ ‚è)
+        //ï¿½}ï¿½Xï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Û°ï¿½ï¿½Ù•Ïï¿½ï¿½ÅéŒ¾ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½)
         if (roMc > roMcAngle) {
             roMc = roMc - (McAngle / 2);
         } else if (roMc < roMcAngle) {
             roMc = roMc + (McAngle / 2);
         }
 
-        //ƒŒƒo[ƒT‰Â“®
+        //ï¿½ï¿½ï¿½oï¿½[ï¿½Tï¿½Â“ï¿½
         if (direction == 0) {
             roRevAngle = RevAngle;
         } else if (direction == 1) {
@@ -357,7 +357,7 @@ function renderController(entity, onUpdateTick) {
             roRevAngle = -RevAngle;
         }
 
-        //ƒŒƒo[ƒT“®ì•âŠÔ (¸ŞÛ°ÊŞÙ•Ï”‚ÅéŒ¾‚·‚é•K—v‚ ‚è)
+        //ï¿½ï¿½ï¿½oï¿½[ï¿½Tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Û°ï¿½ï¿½Ù•Ïï¿½ï¿½ÅéŒ¾ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½)
         if (roRev > roRevAngle) {
             roRev = roRev - (RevAngle / 2);
         } else if (roRev < roRevAngle) {
@@ -367,15 +367,15 @@ function renderController(entity, onUpdateTick) {
     }
 
     renderer.setData(entityID << MhnIDS("roMcID"), roMc);
-    renderer.setData(entityID << MhnIDS("roRevID"), roRev); //ƒf[ƒ^•Ûªªª
+    renderer.setData(entityID << MhnIDS("roRevID"), roRev); //ï¿½fï¿½[ï¿½^ï¿½Ûï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    //ƒ}ƒXƒRƒ“
+    //ï¿½}ï¿½Xï¿½Rï¿½ï¿½
     GL11.glPushMatrix();
     renderer.rotate(roMc, "X", McPosX, McPosY, McPosZ);
     MC.render(renderer);
     GL11.glPopMatrix();
 
-    //ƒŒƒo[ƒT
+    //ï¿½ï¿½ï¿½oï¿½[ï¿½T
     GL11.glPushMatrix();
     renderer.rotate(roRev, "X", RevPosX, RevPosY, RevPosZ);
     Rev.render(renderer);
@@ -385,7 +385,7 @@ function renderController(entity, onUpdateTick) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function renderBogie(entity) { //‘äÔ
+function renderBogie(entity) { //ï¿½ï¿½ï¿½
 
     if (!entity) {} else {
         if (entity != null) {
@@ -408,7 +408,7 @@ function renderBogie(entity) { //‘äÔ
                 var f0 = renderer.getWheelRotationR(entity);
                 var bodyYaw = entity.field_70177_z;
 
-                //‘O‘äÔƒˆ[ƒ[ƒJƒ‹Šp
+                //ï¿½Oï¿½ï¿½Ôƒï¿½ï¿½[ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½p
                 var i = entity.getBogie(0).field_70177_z - bodyYaw;
                 if (i > 180) {
                     bogieFYaw = i - 360;
@@ -418,7 +418,7 @@ function renderBogie(entity) { //‘äÔ
                     bogieFYaw = i;
                 }
 
-                //Œã‘äÔƒˆ[ƒ[ƒJƒ‹Šp
+                //ï¿½ï¿½ï¿½Ôƒï¿½ï¿½[ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½p
                 var i = entity.getBogie(1).field_70177_z - bodyYaw - 180;
                 if (i > 180) {
                     bogieBYaw = i - 360;
@@ -428,7 +428,7 @@ function renderBogie(entity) { //‘äÔ
                     bogieBYaw = i;
                 }
 
-                //ƒsƒbƒ`ƒ[ƒJƒ‹Šp
+                //ï¿½sï¿½bï¿½`ï¿½ï¿½ï¿½[ï¿½Jï¿½ï¿½ï¿½p
                 bodyPitch = entity.field_70125_A;
                 bogieFPitch = entity.getBogie(0).field_70125_A * -1 + bodyPitch;
                 bogieBPitch = entity.getBogie(1).field_70125_A + bodyPitch;
@@ -437,7 +437,7 @@ function renderBogie(entity) { //‘äÔ
         }
     }
 
-    //‘O‘äÔ
+    //ï¿½Oï¿½ï¿½ï¿½
     GL11.glPushMatrix();
     renderer.rotate(bogieFYaw, "Y", 0.0, 0.0, bd0);
     renderer.rotate(bogieFPitch, "X", 0.0, 0.0, bd0);
@@ -452,7 +452,7 @@ function renderBogie(entity) { //‘äÔ
     GL11.glPopMatrix();
     GL11.glPopMatrix();
 
-    //Œã‘äÔ
+    //ï¿½ï¿½ï¿½ï¿½
     GL11.glPushMatrix();
     renderer.rotate(bogieBYaw, "Y", 0.0, 0.0, -bd0);
     renderer.rotate(bogieBPitch, "X", 0.0, 0.0, -bd0);
@@ -475,40 +475,40 @@ function renderInterior(entity, pass, onUpdateTick) {
     var isControlCar = MhnTS(entity, "isControlCar");
     var interiorLightState = entity == null ? 1 : MhnTS(entity, "indoorlight");
 
-    if (interiorLightState > 0) { //º“à“”‚ªON‚Å‚ ‚éê‡
+    if (interiorLightState > 0) { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ONï¿½Å‚ï¿½ï¿½ï¿½ê‡
 
-        //º“à“”ƒ‚[ƒh‚ğ—LŒø‚É‚·‚é
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½Lï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
         NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0);
         //NGTUtilClient.getMinecraft().field_71460_t.func_175072_h(); //1.10.2
     }
 
     GL11.glPushMatrix();
 
-    interior.render(renderer); //”­Œõ‚³‚¹‚éƒIƒuƒWƒFƒNƒg‚ğw’è(ŠÖ”‚à‰Â)
+    interior.render(renderer); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½wï¿½ï¿½(ï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½)
     renderDoors(1);
 
     if (interiorLightState > 0) {
 
-        if (!isControlCar) { //ControlCar‚Å‚Í‚È‚¢(GUI‚Ì‹t“]ƒnƒ“ƒhƒ‹‚ª‘OˆÈŠO‚Å‚ ‚é)ê‡
+        if (!isControlCar) { //ControlCarï¿½Å‚Í‚È‚ï¿½(GUIï¿½Ì‹tï¿½]ï¿½nï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ÈŠOï¿½Å‚ï¿½ï¿½ï¿½)ï¿½ê‡
 
-            //º“à“”ƒ‚[ƒh‚ğ—LŒø‚É‚·‚é
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½Lï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½
             NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0);
             //NGTUtilClient.getMinecraft().field_71460_t.func_175072_h(); //1.10.2
 
         } else {
 
-            //º“à“”ƒ‚[ƒh‚ğ–³Œø‚É‚·‚é
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ğ–³Œï¿½ï¿½É‚ï¿½ï¿½ï¿½
             NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);
             //NGTUtilClient.getMinecraft().field_71460_t.func_180436_i(); //1.10.2
         }
     }
 
-    cab_body.render(renderer); //©‹t“]ƒnƒ“ƒhƒ‹‚ª‘OˆÈŠO‚Ìê‡‚É”­Œõ‚³‚¹‚éƒIƒuƒWƒFƒNƒg‚ğw’è
+    cab_body.render(renderer); //ï¿½ï¿½ï¿½tï¿½]ï¿½nï¿½ï¿½ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ÈŠOï¿½Ìê‡ï¿½É”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½wï¿½ï¿½
     renderController(entity, onUpdateTick);
 
     if (interiorLightState > 0 && !isControlCar) {
 
-        //º“à“”ƒ‚[ƒh‚ğ–³Œø‚É‚·‚é
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½hï¿½ğ–³Œï¿½ï¿½É‚ï¿½ï¿½ï¿½
         NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);
         //NGTUtilClient.getMinecraft().field_71460_t.func_180436_i(); //1.10.2
     }
@@ -518,8 +518,8 @@ function renderInterior(entity, pass, onUpdateTick) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//ƒhƒA‚ÌŠJ•Â‚ğ”»’è‚µAdoorOpnSec‚Åw’è‚³‚ê‚½•b”“à‚ÉdoorOpnSpd‚É‚Äw’è‚³‚ê‚½ƒXƒeƒbƒv‚Ì‡‚ÉƒhƒA‚ğˆÚ“®‚µ‚Ü‚·
-//‚¤‚Ü‚­‚â‚ê‚ÎA‰½‚©•¨‚ğ“®‚©‚µ‚½‚¢‚Æ‚«‚É—¬—p‚Å‚«‚Ü‚·
+//ï¿½hï¿½Aï¿½ÌŠJï¿½Â‚ğ”»’è‚µï¿½AdoorOpnSecï¿½Åwï¿½è‚³ï¿½ê‚½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½doorOpnSpdï¿½É‚Äwï¿½è‚³ï¿½ê‚½ï¿½Xï¿½eï¿½bï¿½vï¿½Ìï¿½ï¿½Éƒhï¿½Aï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½
+//ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½ÎAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ğ“®‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½É—ï¿½ï¿½pï¿½Å‚ï¿½ï¿½Ü‚ï¿½
 function updateDoors(entity) {
     if (entityID == -1) return;
     var movingTick = getArrayFromData(entityID << doorMovingTickID, 2);
@@ -534,8 +534,8 @@ function updateDoors(entity) {
             doorState[i] = 3;
         }
 
-        //doorState[i]‚ª1(ƒhƒA‚ğŠJ‚¯‚Ä‚é“r’†)‚Ìê‡doorOpnSpd‚ğAdoorState[i]‚ª3(ƒhƒA‚ğ•Â‚ß‚Ä‚é“r’†)‚Ìê‡doorClsSpd‚ğspd‚É‘ã“ü‚µ‚Ü‚·B
-        //‚Ç‚¿‚ç‚Å‚à‚È‚¢ê‡ ‚ÍAif(spd != -1)ƒuƒƒbƒN“à‚ÌƒhƒA‚ğˆÚ“®‚·‚éˆ—‚ğƒXƒLƒbƒv‚·‚é‚½‚ß-1‚ğ‘ã“ü‚µ‚Ü‚·B
+        //doorState[i]ï¿½ï¿½1(ï¿½hï¿½Aï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½Ä‚ï¿½rï¿½ï¿½)ï¿½Ìê‡doorOpnSpdï¿½ï¿½ï¿½AdoorState[i]ï¿½ï¿½3(ï¿½hï¿½Aï¿½ï¿½Â‚ß‚Ä‚ï¿½rï¿½ï¿½)ï¿½Ìê‡doorClsSpdï¿½ï¿½spdï¿½É‘ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
+        //ï¿½Ç‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ ï¿½ÍAif(spd != -1)ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½Ìƒhï¿½Aï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½éˆï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Lï¿½bï¿½vï¿½ï¿½ï¿½é‚½ï¿½ï¿½-1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
         var spd = doorState[i] == 1 ? doorOpnSpd : (doorState[i] == 3 ? doorClsSpd : -1);
         if (spd != -1) {
             var altick = 0;
@@ -553,7 +553,7 @@ function updateDoors(entity) {
                 var opnSpeed = spd[j][0];
                 var movement = spd[j][1];
                 //20 ticks per second
-                //20tick–ˆ•b
+                //20tickï¿½ï¿½ï¿½b
                 if (movingTick[i] <= (altick + (opnSpeed * 20))) {
                     if (!shouldUpdate) break;
 
@@ -682,8 +682,8 @@ function playSoundEvent(entity, domain, path, repeat) {
         var resource = new ResourceLocation(domain, path);
         sound = new MovingSoundTrain(entity, resource, repeat, false);
     }
-    sound.setVolume(1.0); //‰¹—Ê
-    sound.setPitch(1.0); //ƒsƒbƒ`
+    sound.setVolume(1.0); //ï¿½ï¿½ï¿½ï¿½
+    sound.setPitch(1.0); //ï¿½sï¿½bï¿½`
     if (!isAlreadyAdded) {
         NGTUtilClient.playSound(sound);
         soundList[entityID].push(sound);
@@ -714,7 +714,7 @@ function renderATS(entity, pass) {
 
     if (entity == null) return;
 
-    //ATS.render(renderer);//â‘Ì
+    //ATS.render(renderer);//â‘ï¿½
 
     var dataMap = MhnTS(entity, 'dataMap');
     var Signal = MhnTS(entity, "getSignal");
@@ -837,13 +837,13 @@ function render(entity, pass, par3) {
 
     GL11.glPushMatrix();
 
-    //‘OÆ“”
-    if (trainDir == 0) { //is
+    //ï¿½Oï¿½Æ“ï¿½
+    if (trainDir == 0) { //ï¿½iï¿½s
         GL11.glPushMatrix();
         headlighton.render(renderer);
         taillightoff.render(renderer);
         GL11.glPopMatrix();
-    } else { //Œã‘Ş
+    } else { //ï¿½ï¿½ï¿½
         GL11.glPushMatrix();
         headlightoff.render(renderer);
         taillighton.render(renderer);
@@ -874,18 +874,18 @@ function render(entity, pass, par3) {
     } else {
         entityID = MhnTS(entity, "entityID");
 
-        //Tick‚Ì”’l‚ª•Ï‰»‚µ‚½ÛAshouldUpdate‚ªtrue‚É‚È‚è‚Ü‚·B
-        //shouldUpdate‚ªtrue‚É‚È‚é‚Æ‚«‚¾‚¯‰½‚ç‚©‚Ì•¨‘Ì‚ğˆÚ“®‚·‚é‚±‚Æ‚É‚æ‚èAˆÚ“®‘¬“x‚ğˆê’è‚É•Û‚¿‚È‚ª‚çˆÚ“®‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-        //shouldUpdate‚ğƒOƒ[ƒoƒ‹•Ï”‚Æ‚µ‚ÄéŒ¾‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
+        //Tickï¿½Ìï¿½ï¿½lï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÛAshouldUpdateï¿½ï¿½trueï¿½É‚È‚ï¿½Ü‚ï¿½ï¿½B
+        //shouldUpdateï¿½ï¿½trueï¿½É‚È‚ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚©ï¿½Ì•ï¿½ï¿½Ì‚ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½é‚±ï¿½Æ‚É‚ï¿½ï¿½Aï¿½Ú“ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½É•Û‚ï¿½ï¿½È‚ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½é‚±ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½Ü‚ï¿½ï¿½B
+        //shouldUpdateï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½[ï¿½oï¿½ï¿½ï¿½Ïï¿½ï¿½Æ‚ï¿½ï¿½ÄéŒ¾ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
         var prevTick = renderer.getData(entityID << prevTickID);
         var currentTick = MhnTS(entity, "tick");
         shouldUpdate = ((prevTick != currentTick) && (pass == 0));
 
         if (shouldUpdate) renderer.setData(entityID << prevTickID, currentTick);
 
-        //Ÿ‚Ì‚æ‚¤‚É‚µ‚Ä•Ï”‚ğEntity‚²‚Æ‚ÉéŒ¾‚·‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-        //"renderer.getData(entityID << (•Ï”ID))" & "renderer.setData(entityID << (•Ï”ID), (•Ï”‚Ìƒf[ƒ^))"
-        //(•Ï”‚ÌID‚ğ‚±‚Ìƒtƒ@ƒCƒ‹‚Ìã•”‚ÅŠe©éŒ¾‚µ‚Ä‚¨‚­•K—v‚ª‚ ‚è‚Ü‚·)
+        //ï¿½ï¿½ï¿½Ì‚æ‚¤ï¿½É‚ï¿½ï¿½Ä•Ïï¿½ï¿½ï¿½Entityï¿½ï¿½ï¿½Æ‚ÉéŒ¾ï¿½ï¿½ï¿½é‚±ï¿½Æ‚ï¿½ï¿½Å‚ï¿½ï¿½Ü‚ï¿½ï¿½B
+        //"renderer.getData(entityID << (ï¿½Ïï¿½ID))" & "renderer.setData(entityID << (ï¿½Ïï¿½ID), (ï¿½Ïï¿½ï¿½Ìƒfï¿½[ï¿½^))"
+        //(ï¿½Ïï¿½ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½Ìã•”ï¿½ÅŠeï¿½ï¿½ï¿½éŒ¾ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½)
         doorState = getArrayFromData(entityID << doorStateID, 2);
         doorMovement = getArrayFromData(entityID << doorMovementID, 2);
         doorStateInTrain = MhnTS(entity, "doorState");
