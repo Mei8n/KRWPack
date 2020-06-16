@@ -183,7 +183,7 @@ function onUpdate(su) {
       }
 
       //ch2d
-      if(speed>5&&speed<60 && notch < 0){
+      if(speed>5&&speed<6 && notch < 0){
         var pit2d = 0.8,
             vol2d = 1.0;
         su.playSound('sound_krw', 'train.ch1d', vol2d, pit2d);
