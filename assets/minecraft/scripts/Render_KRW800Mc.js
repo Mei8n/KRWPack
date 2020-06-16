@@ -579,74 +579,6 @@ function renderDoors(io) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function playsoundBell(entity, state, id) {
-	var entityId = MhnTS(entity, "entityID");
-	var playingSound = soundPlayingList[entityId];
-	if(playingSound === undefined) playingSound = [];
-
-	if(state) {
-		if(!playingSound[id]) {
-			stopSoundEvent(entity, "sound_krw", "train.Pattern_Action");
-			playSoundEvent(entity, "sound_krw", "train.Pattern_Action", false);
-			playingSound[id] = true;
-		}
-	} else {
-		playingSound[id] = false;
-	}
-	soundPlayingList[entityId] = playingSound;
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function stopSoundEvent(entity, domain, path) {
-	var entityID = MhnTS(entity, "entityID");
-	if(soundList[entityID] === undefined) return;
-	var sound = getSoundEvent(entity, domain, path);
-	if(sound === null) return;
-	sound.stop();
-	soundList[entityID].some(function(v, i) {
-		if(v === sound) soundList[entityID].splice(i, 1);
-	});
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function playSoundEvent(entity, domain, path, repeat) {
-	var entityID = MhnTS(entity, "entityID");
-	if(soundList[entityID] === undefined) {
-		soundList[entityID] = [];
-	}
-	var sound = getSoundEvent(entity, domain, path);
-	var isAlreadyAdded = sound !== null;
-	if(!isAlreadyAdded) {
-		var resource = new ResourceLocation(domain, path);
-		sound = new MovingSoundTrain(entity, resource, repeat, false);
-	}
-	sound.setVolume(1.0);//‰¹—Ê
-	sound.setPitch(1.0);//ƒsƒbƒ`
-	if(!isAlreadyAdded) {
-		NGTUtilClient.playSound(sound);
-		soundList[entityID].push(sound);
-	}
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function getSoundEvent(entity, domain, path) {
-	var entityID = MhnTS(entity, "entityID");
-	if(soundList[entityID] === undefined) return null;
-	for(var i = 0; i < soundList[entityID].length; i++) {
-		var sound = soundList[entityID][i];
-		var resource = sound.func_147650_b();
-		if(resource.func_110624_b().equals(domain) && resource.func_110623_a().equals(path)) {
-			return sound;
-		}
-	}
-	return null;
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 var HashMap = Java.type("java.util.HashMap");
 var isBreaking = new HashMap();
 
@@ -658,7 +590,6 @@ function renderATS(entity, pass) {
 
 	var dataMap = MhnTS(entity, 'dataMap');
 	var Signal = MhnTS(entity, "getSignal");
-	var atsCount = dataMap.getInt('atsCount');
 	var isControlCar = MhnTS(entity, "isControlCar");
 	var ATSspeed = Math.floor(MhnTS(entity, "speed"));
 
@@ -721,51 +652,51 @@ function renderATS(entity, pass) {
 
 	switch(Signal) {
 		case 10:renderATSHelper(810);
-			dataMap.setInt('atsCount', atsCount, 10);
+			dataMap.setInt('atsCount', Signal, 10);
 			break;
 
 		case 11:renderATSHelper(15);
-			dataMap.setInt('atsCount', atsCount, 11);
+			dataMap.setInt('atsCount', Signal, 11);
 			break;
 
 		case 12:renderATSHelper(25);
-			dataMap.setInt('atsCount', atsCount, 12);
+			dataMap.setInt('atsCount', Signal, 12);
 			break;
 
 		case 13:renderATSHelper(30);
-			dataMap.setInt('atsCount', atsCount, 13);
+			dataMap.setInt('atsCount', Signal, 13);
 			break;
 
 		case 14:renderATSHelper(45);
-			dataMap.setInt('atsCount', atsCount, 14);
+			dataMap.setInt('atsCount', Signal, 14);
 			break;
 
 		case 15:renderATSHelper(65);
-			dataMap.setInt('atsCount', atsCount, 15);
+			dataMap.setInt('atsCount', Signal, 15);
 			break;
 
 		case 16:renderATSHelper(90);
-			dataMap.setInt('atsCount', atsCount, 16);
+			dataMap.setInt('atsCount', Signal, 16);
 			break;
 
 		case 17:renderATSHelper(100);
-			dataMap.setInt('atsCount', atsCount, 17);
+			dataMap.setInt('atsCount', Signal, 17);
 			break;
 
 		case 18:renderATSHelper(110);
-			dataMap.setInt('atsCount', atsCount, 18);
+			dataMap.setInt('atsCount', Signal, 18);
 			break;
 
 		case 19:renderATSHelper(120);
-			dataMap.setInt('atsCount', atsCount, 19);
+			dataMap.setInt('atsCount', Signal, 19);
 			break;
 
 		case 20:renderATSHelper(65);
-			dataMap.setInt('atsCount', atsCount, 20);
+			dataMap.setInt('atsCount', Signal, 20);
 			break;
 
 		case 21:renderATSHelper(45);
-			dataMap.setInt('atsCount', atsCount, 21);
+			dataMap.setInt('atsCount', Signal, 21);
 			break;
 
 		default:
