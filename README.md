@@ -1,5 +1,13 @@
 # KRWPack
 
+[![MCVer](https://img.shields.io/badge/Minecraft-1.7.10-brightgreen)](https://www.minecraft.net/)
+[![ForgeVer](https://img.shields.io/badge/Forge-10.13.4.1614-important)](https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.7.10.html)
+[![RTMVer](https://img.shields.io/badge/RealTrainMod-1.7.10.40-informational)](https://www.curseforge.com/minecraft/mc-mods/realtrainmod/files/2940834)  
+[![DLCount](https://img.shields.io/github/downloads/Mei8n/KRWPack/total)](https://github.com/Mei8n/KRWPack/releases)
+[![DLCountLatest](https://img.shields.io/github/downloads/Mei8n/KRWPack/latest/total)](https://github.com/Mei8n/KRWPack/releases/latest)
+[![LatestRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack)](https://github.com/Mei8n/KRWPack/releases/latest)
+[![LatestPreRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack?include_prereleases)](https://github.com/Mei8n/KRWPack/releases)
+
 Ver:0.1 現在更新中 800系が完成したらVer1.0リリースします
 
 ## ATS仕様書
