@@ -10,6 +10,11 @@
 
 Ver:0.1 現在更新中 800系が完成したらVer1.0リリースします
 
+## Download
+
+Latest Release [Download](https://github.com/Mei8n/KRWPack/releases/latest)  
+Latest Pre-Release [Download](https://github.com/Mei8n/KRWPack/releases)
+
 ## ATS仕様書
 
 Hキー(仮) 保安電源投入\
