@@ -5,7 +5,7 @@
 "trainType": "EC",
 
 "trainModel2": { "modelFile": "KRW800Ch_Tc.mqo",
-                   "textures": [["mat1", "textures/train/KRW800/KRW800.png", "AlphaBlend"]],
+                   "textures": [["mat1", "textures/train/KRW800/KRW800.png", "AlphaBlend,Light"]],
 				 "rendererPath": "scripts/Render_KRW800Mc.js" },
 
 
@@ -37,22 +37,12 @@
 	[-12, 0, 90, 2], [-12, 0, 70, 2], [-12, 0, 50, 2], [-12, 0, 10, 2],
 	[-12, 0, -140, 2], [-12, 0, -110, 2], [-12, 0, -90, 2], [-12, 0, -70, 2], [-12, 0, -30, 2], [-12, 0, -10, 2]],
 
-"isSingleTrain": true,
 "renderLight": true,
 "playerPos": [[0.8, 0.0, 8.9], [-0.8, 0.0, -8.9]],
 "bogiePos": [[0.0, 0.0, 7.0], [0.0, 0.0, -7.0]],
 "trainDistance": 10.0,
 "muteJointSound": true,
 "notDisplayCab": true,
-"doCulling": true,
-
-"interiorLights": [
-{
-"pos": [0.0, 1.0, 6.8]
-},
-{
-"pos": [0.0, 1.0, -6.8]
-}
-]
+"doCulling": true
 
 }
