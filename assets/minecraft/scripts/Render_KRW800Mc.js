@@ -1,5 +1,7 @@
 
-//Render_KRW800Mc.js  by unlock [ Mpc, Tc共用 ]
+//Render_KRW800Mc.js  by unlock [複製/コピペ/転載を禁ずる]
+
+//Please do not duplicate or copy.
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15,9 +17,8 @@ importPackage(Packages.jp.ngt.ngtlib.util);
 importPackage(Packages.jp.ngt.ngtlib.renderer);
 importPackage(Packages.jp.ngt.ngtlib.io);
 importPackage(Packages.jp.ngt.ngtlib.math);
-importPackage(Packages.jp.kaiz.atsassistmod.api); //ControlTrain renderATSHelper
-importPackage(Packages.net.minecraft.util); //ResourceLocation
-importPackage(Packages.jp.ngt.rtm.sound); //MovingSoundTileEntity
+
+importPackage(Packages.jp.kaiz.atsassistmod.api);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -53,68 +54,6 @@ var doorState;
 var doorStateInTrain;
 
 var shouldUpdate;
-
-var roMc;
-var roMcAngle;
-
-var roRev;
-var roRevAngle;
-
-var soundPlayingList = {};
-var soundList = {};
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function MhnConfig(par1) { //コンフィグ
-
-	var Mc = {},
-		Rev = {},
-		bogie = {},
-		panta = {},
-		r;
-
-//###################################################################
-
-	Mc.Angle = 9; //マスコン回転角度の絶対値
-
-	Rev.Angle = 35; //レバーサ回転角度の絶対値
-
-	Mc.PosX = 0.8316; //マスコンの回転軸X座標(ﾒｰﾄﾙ単位)
-	Mc.PosY = 0.8000; //Y
-	Mc.PosZ = 9.0400; //Z
-	
-	Rev.PosX = 0.5657; //レバーサの回転軸X座標(ﾒｰﾄﾙ単位)
-	Rev.PosY = 0.8400; //Y
-	Rev.PosZ = 9.1660; //Z
-
-	bogie.bd = 6.50; //台車間距離(台車は前後対称位置とする)
-	bogie.wd = 1.05; //台車軸距÷2
-	bogie.wy = -0.527; //車輪軸Y座標
-
-	panta.ro1 = 33; //パンタ動作角1
-	panta.ro2 = 63; //パンタ動作角2
-
-//###################################################################
-
-	switch(par1) {
-		case "McAngle" : r = Mc.Angle; break;
-		case "RevAngle" : r = Rev.Angle; break;
-		case "McPosX" : r = Mc.PosX; break;
-		case "McPosY" : r = Mc.PosY; break;
-		case "McPosZ" : r = Mc.PosZ; break;
-		case "RevPosX" : r = Rev.PosX; break;
-		case "RevPosY" : r = Rev.PosY; break;
-		case "RevPosZ" : r = Rev.PosZ; break;
-		case "bogieBd0" : r = bogie.bd; break;
-		case "bogieWd0" : r = bogie.wd; break;
-		case "bogieWy0" : r = bogie.wy; break;
-		case "pantaRo1" : r = panta.ro1; break;
-		case "pantaRo2" : r = panta.ro2; break;
-	}
-
-	return(r);
-
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -165,283 +104,268 @@ function init(par1, par2) {
 	wheelB1 = renderer.registerParts(new Parts("wheelB1"));
 	wheelB2 = renderer.registerParts(new Parts("wheelB2"));
 
-	//仮
-	MC = renderer.registerParts(new Parts("うんげ"));
-	Rev = renderer.registerParts(new Parts("ちんげ"));
-
+	//仮定義(動作確認用)
+	Mc = renderer.registerParts(new Parts("うんち"));
+	Br = renderer.registerParts(new Parts("うんこ"));
+	Rev = renderer.registerParts(new Parts("うんげ"));
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function MhnTS(entity, par1) {
+function updateTick(entity) {
 
-	var r;
+	if(entity == null) return false;
 
-	if(entity != null) {
+	var dataMap = entity.getResourceState().getDataMap();
+	var tick = renderer.getTick(entity);
 
-		switch(par1) {
-			case "dclampMoveL" : r = entity.doorMoveL / 60; break;
-			case "dclampMoveR" : r = entity.doorMoveR / 60; break;
-			case "speed" : r = entity.getSpeed() * 72.0; break;
-			case "notch" : r = entity.getNotch(); break;
-			case "trainDir" : r = entity.getTrainStateData(0); break;
-			case "doorState" : r = entity.getTrainStateData(4); break;
-			case "lightState" : r = entity.getTrainStateData(5); break;
-			case "rollsign" : r = entity.getTrainStateData(8); break;
-			case "direction" : r = entity.getTrainStateData(10); break;
-			case "indoorlight" : r = entity.getTrainStateData(11); break;
-			case "isControlCar" : r = entity.isControlCar(); break;
-			case "getSignal" : r = entity.getSignal(); break;
-			case "entityID" : r = entity.func_145782_y(); break;
-			case "tick" : r = renderer.getTick(entity); break;
-			case 'dataMap': r = entity.getResourceState().getDataMap(); break;
-		}
-	}
+	var prevTick = dataMap.getInt("prevTick");
 
-	return r;
-
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function MhnIDS(par1) {
-
-	var r;
-
-	switch(par1){
-		case "tickID" : r = 5; break;
-		case "roMcID" : r = 6; break;
-		case "roRevID" : r = 7; break;
-	}
-
-	return r;
-
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function detectTick(entity) {
-
-	var entityID = MhnTS(entity, "entityID");
-	var tick = MhnTS(entity, "tick");
-
-	var prevTick = renderer.getData(entityID << MhnIDS("tickID"));
-
-	renderer.setData(entityID << MhnIDS("tickID"), tick);
+	dataMap.setInt("prevTick", tick, false);
 
 	if(tick != prevTick) return true;
+
 	return false;
 
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function getArrayFromData(ID,amount) {
+
+	var ret = renderer.getData(ID);
+	if(ret == 0)
+	{
+		ret = [];
+		for(var i = 0; i < amount; i++)
+		{
+			ret[ret.length] = 0;
+		}
+	}
+	return ret;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var HashMap = Java.type("java.util.HashMap");
+var isBreaking = new HashMap();
+
+function renderATS(entity) {
+
+	if(entity == null) return;
+
+	//ATS.render(renderer);//筐体
+
+	var dataMap = entity.getResourceState().getDataMap();
+	var Signal = entity.getSignal();
+	var isControlCar = entity.isControlCar();
+	var ATSspeed = entity.getSpeed() * 72.0;
+
+	if(!isControlCar) return;
+
+	function renderATSHelper(int) {
+
+		if(ATSspeed > (int + 15)) {
+
+			//ATS_Emr.render(renderer);
+
+			dataMap.setBoolean('isOver5', false, 1);
+			dataMap.setBoolean('isOver10', true, 1);
+
+			ControlTrain.setNotch(-8);
+			isBreaking.put(entity, true);
+
+		} else if(ATSspeed > (int + 10)) {
+
+			//ATS_Emr.render(renderer);
+
+			dataMap.setBoolean('isOver5', false, 1);
+			dataMap.setBoolean('isOver10', true, 1);
+
+			ControlTrain.setNotch(-7);
+			isBreaking.put(entity, true);
+
+		} else if(ATSspeed > (int + 5)) {
+
+			//ATS_Emr.render(renderer);
+
+			dataMap.setBoolean('isOver5', false, 1);
+			dataMap.setBoolean('isOver10', true, 1);
+
+			ControlTrain.setNotch(-4);
+			isBreaking.put(entity, true);
+
+		} else if(ATSspeed > (int + 1)) {
+
+			//ATS_Arr.render(renderer);
+
+			dataMap.setBoolean('isOver5', true, 1);
+			dataMap.setBoolean('isOver10', false, 1);
+
+			if(isBreaking.get(entity)) {
+				ControlTrain.setNotch(0);
+				isBreaking.put(entity, false);
+			}
+
+		} else {
+			dataMap.setBoolean('isOver5', false, 1);
+			dataMap.setBoolean('isOver10', false, 1);
+
+			if(isBreaking.get(entity)) {
+				ControlTrain.setNotch(0);
+				isBreaking.put(entity, false);
+			}
+		}
+	}
+
+	switch(Signal) {
+		case 10:renderATSHelper(810);
+			dataMap.setInt('atsCount', Signal, 10);
+			break;
+
+		case 11:renderATSHelper(15);
+			dataMap.setInt('atsCount', Signal, 11);
+			break;
+
+		case 12:renderATSHelper(25);
+			dataMap.setInt('atsCount', Signal, 12);
+			break;
+
+		case 13:renderATSHelper(30);
+			dataMap.setInt('atsCount', Signal, 13);
+			break;
+
+		case 14:renderATSHelper(45);
+			dataMap.setInt('atsCount', Signal, 14);
+			break;
+
+		case 15:renderATSHelper(65);
+			dataMap.setInt('atsCount', Signal, 15);
+			break;
+
+		case 16:renderATSHelper(90);
+			dataMap.setInt('atsCount', Signal, 16);
+			break;
+
+		case 17:renderATSHelper(100);
+			dataMap.setInt('atsCount', Signal, 17);
+			break;
+
+		case 18:renderATSHelper(110);
+			dataMap.setInt('atsCount', Signal, 18);
+			break;
+
+		case 19:renderATSHelper(120);
+			dataMap.setInt('atsCount', Signal, 19);
+			break;
+
+		case 20:renderATSHelper(65);
+			dataMap.setInt('atsCount', Signal, 20);
+			break;
+
+		case 21:renderATSHelper(45);
+			dataMap.setInt('atsCount', Signal, 21);
+			break;
+
+		default:
+			break;
+
+		}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function renderController(entity, onUpdateTick) {
 
-	var entityID = MhnTS(entity, "entityID");
-	var notch = MhnTS(entity, "notch");
-	var direction = MhnTS(entity, "direction");
+	if(entity == null) return;
 
-	var McAngle = MhnConfig("McAngle");
+	var dataMap = entity.getResourceState().getDataMap(); //dataMap取得
+	var notch = entity.getNotch(); //ノッチ取得
+	var direction = entity.getTrainStateData(10); //レバーサ取得
 
-	var RevAngle = MhnConfig("RevAngle");
+	roMc = dataMap.getDouble("roMcData");   //データ保持
+	roBr = dataMap.getDouble("roBrData");   //
+	roRev = dataMap.getDouble("roRevData"); //
 
-	var McPosX = MhnConfig("McPosX");
-	var McPosY = MhnConfig("McPosY");
-	var McPosZ = MhnConfig("McPosZ");
+	if(onUpdateTick) {
 
-	var RevPosX = MhnConfig("RevPosX");
-	var RevPosY = MhnConfig("RevPosY");
-	var RevPosZ = MhnConfig("RevPosZ");
+		//-----------------------------------------------------------------------
 
-	roMc = renderer.getData(entityID << MhnIDS("roMcID"));//データ保持↓↓↓
-	roRev = renderer.getData(entityID << MhnIDS("roRevID"));
-
-	if(onUpdateTick == true) {
-
-		//マスコン可動
-		if(notch >= 0) {
-			roMcAngle = notch * -McAngle;
+		//マスコン
+		if(notch >= 0){             //ノッチが0以上なら
+			var roMcAngle = notch * -20;  //マスコン動作角 =ノッチ x -20°
 		} else {
-			roMcAngle = notch * -McAngle;
+			var roMcAngle = 0;           //ブレーキ動作角 = 0
 		}
 
-		//マスコン動作補間 (ｸﾞﾛｰﾊﾞﾙ変数で宣言する必要あり)
+		//動作補間
 		if(roMc > roMcAngle) {
-			roMc = roMc - (McAngle / 2);
+			roMc = roMc - (20 / 2);
 		} else if(roMc < roMcAngle) {
-			roMc = roMc + (McAngle / 2);
+			roMc = roMc + (20 / 2);
 		}
 
-		//レバーサ可動
-		if(direction == 0) {
-			roRevAngle = RevAngle;
-		} else if(direction == 1) {
-			roRevAngle = 0;
-		} else if(direction == 2) {
-			roRevAngle = -RevAngle;
+		//-----------------------------------------------------------------------
+
+		//ブレーキ
+		if(notch <= 0){             //ノッチが0以下なら
+			var roBrAngle = notch * -13;  //マスコン動作角 =ノッチ x -13°
+		} else {
+			var roBrAngle = 0;           //ブレーキ動作角 = 0
 		}
 
-		//レバーサ動作補間 (ｸﾞﾛｰﾊﾞﾙ変数で宣言する必要あり)
-		if(roRev > roRevAngle) {
-			roRev = roRev - (RevAngle / 2);
-		} else if(roRev < roRevAngle) {
-			roRev = roRev + (RevAngle / 2);
+		//動作補間
+		if(roBr > roBrAngle) {
+			roBr = roBr - (13 / 2);
+		} else if(roBr < roBrAngle) {
+			roBr = roBr + (13 / 2);
 		}
+
+		//-----------------------------------------------------------------------
+
+		//レバーサ
+		if(notch <= 0){             //ノッチが0以下なら
+			var roBrAngle = notch * -13;  //マスコン動作角 =ノッチ x -13°
+		} else {
+			var roBrAngle = 0;           //ブレーキ動作角 = 0
+		}
+
+		//動作補間
+		if(roBr > roBrAngle) {
+			roBr = roBr - (13 / 2);
+		} else if(roBr < roBrAngle) {
+			roBr = roBr + (13 / 2);
+		}
+
+		//-----------------------------------------------------------------------
 
 	}
 
-	renderer.setData(entityID << MhnIDS("roMcID"), roMc);
-	renderer.setData(entityID << MhnIDS("roRevID"), roRev);//データ保持↑↑↑
+	dataMap.setDouble("roMcData", roMc, false);    //データ保持
+	dataMap.setDouble("roBrData", roBr, false);    //
+	dataMap.setDouble("roRevData", roRev, false);  //
 
 	//マスコン
 	GL11.glPushMatrix();
-	renderer.rotate(roMc, "X", McPosX, McPosY, McPosZ);
-	MC.render(renderer);
+	renderer.rotate(roMc, 'Y', 0.0000, 0.0000, 0.0000); //回転軸
+	Mc.render(renderer);
+	GL11.glPopMatrix();
+
+	//ブレーキ
+	GL11.glPushMatrix();
+	renderer.rotate(roBr, 'Y', 0.0000, 0.0000, 0.0000); //回転軸
+	Br.render(renderer);
 	GL11.glPopMatrix();
 
 	//レバーサ
 	GL11.glPushMatrix();
-	renderer.rotate(roRev, "X", RevPosX, RevPosY, RevPosZ);
+	renderer.rotate(roRev, 'Y', 0.0000, 0.0000, 0.0000); //回転軸
 	Rev.render(renderer);
 	GL11.glPopMatrix();
 
-	}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderBogie(entity) { //台車
-
-	if(!entity) {} else {
-		if(entity != null) {
-			try {
-
-				var bd0 = MhnConfig("bogieBd0"),
-					wd0 = MhnConfig("bogieWd0"),
-					wy0 = MhnConfig("bogieWy0");
-
-				var f0 = 0.0,
-					bodyYaw = 0.0,
-					bogieFYaw = 0.0,
-					bogieBYaw = 0.0,
-					bodyPitch = 0.0,
-					bogieFPitch = 0.0,
-					bogieBPitch = 0.0,
-					slideX = 0.0,
-					slideY = 0.0;
-
-				var f0 = renderer.getWheelRotationR(entity);
-				var bodyYaw = entity.field_70177_z;
-
-				//前台車ヨーローカル角
-				var i = entity.getBogie(0).field_70177_z - bodyYaw;
-				if(i > 180) {
-					bogieFYaw = i - 360;
-				} else if(i < -180) {
-					bogieFYaw = i + 360;
-				} else {
-					bogieFYaw = i;
-				}
-
-				//後台車ヨーローカル角
-				var i = entity.getBogie(1).field_70177_z - bodyYaw - 180;
-				if(i > 180) {
-					bogieBYaw = i - 360;
-				} else if(i < -180) {
-					bogieBYaw = i + 360;
-				} else {
-					bogieBYaw = i;
-				}
-
-				//ピッチローカル角
-				bodyPitch = entity.field_70125_A;
-				bogieFPitch = entity.getBogie(0).field_70125_A * -1 + bodyPitch;
-				bogieBPitch = entity.getBogie(1).field_70125_A + bodyPitch;
-
-			} catch(error) {}
-		}
-	}
-
-	//前台車
-	GL11.glPushMatrix();
-	renderer.rotate(bogieFYaw, "Y", 0.0, 0.0, bd0);
-	renderer.rotate(bogieFPitch, "X", 0.0, 0.0, bd0);
-	bogieF.render(renderer);
-	GL11.glPushMatrix();
-	renderer.rotate(f0, "X", 0.0, wy0, bd0 + wd0);
-	wheelF1.render(renderer);
-	GL11.glPopMatrix();
-	GL11.glPushMatrix();
-	renderer.rotate(f0, "X", 0.0, wy0, bd0 - wd0);
-	wheelF2.render(renderer);
-	GL11.glPopMatrix();
-	GL11.glPopMatrix();
-
-	//後台車
-	GL11.glPushMatrix();
-	renderer.rotate(bogieBYaw, "Y", 0.0, 0.0, -bd0);
-	renderer.rotate(bogieBPitch, "X", 0.0, 0.0, -bd0);
-	bogieB.render(renderer);
-	GL11.glPushMatrix();
-	renderer.rotate(f0, "X", 0.0, wy0, -bd0 + wd0);
-	wheelB1.render(renderer);
-	GL11.glPopMatrix();
-	GL11.glPushMatrix();
-	renderer.rotate(f0, "X", 0.0, wy0, -bd0 - wd0);
-	wheelB2.render(renderer);
-	GL11.glPopMatrix();
-	GL11.glPopMatrix();
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderInterior(entity, pass, onUpdateTick) {
-
-	var isControlCar = MhnTS(entity, "isControlCar");
-	var interiorLightState = entity == null ? 1 : MhnTS(entity, "indoorlight");
-
-	if(interiorLightState > 0) { //室内灯がONである場合
-
-		//室内灯モードを有効にする
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0);
-	      //NGTUtilClient.getMinecraft().field_71460_t.func_175072_h(); //1.10.2
-	}
-
-	GL11.glPushMatrix();
-
-	interior.render(renderer); //発光させるオブジェクトを指定(関数も可)
-	renderDoors(1);
-
-	if(interiorLightState > 0) {
-
-		if(!isControlCar) { //ControlCarではない(GUIの逆転ハンドルが前以外である)場合
-
-			//室内灯モードを有効にする
-			NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0);
-		      //NGTUtilClient.getMinecraft().field_71460_t.func_175072_h(); //1.10.2
-
-		} else {
-
-			//室内灯モードを無効にする
-			NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);
-		      //NGTUtilClient.getMinecraft().field_71460_t.func_180436_i(); //1.10.2
-		}
-	}
-
-	cab_body.render(renderer); //←逆転ハンドルが前以外の場合に発光させるオブジェクトを指定
-	renderController(entity, onUpdateTick);
-
-	if(interiorLightState > 0 && !isControlCar) {
-
-		//室内灯モードを無効にする
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);
-	      //NGTUtilClient.getMinecraft().field_71460_t.func_180436_i(); //1.10.2
-	}
-
-	GL11.glPopMatrix();
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //ドアの開閉を判定し、doorOpnSecで指定された秒数内にdoorOpnSpdにて指定されたステップの順にドアを移動します
 //うまくやれば、何か物を動かしたいときに流用できます
@@ -577,150 +501,149 @@ function renderDoors(io) {
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var HashMap = Java.type("java.util.HashMap");
-var isBreaking = new HashMap();
-
-function renderATS(entity, pass) {
+function renderInterior(entity, onUpdateTick) {
 
 	if(entity == null) return;
 
-	//ATS.render(renderer);//筐体
+	var isControlCar = entity.isControlCar();
+	var interiorLightState = entity == null ? 1 : entity.getTrainStateData(11);
 
-	var dataMap = MhnTS(entity, 'dataMap');
-	var Signal = MhnTS(entity, "getSignal");
-	var isControlCar = MhnTS(entity, "isControlCar");
-	var ATSspeed = Math.floor(MhnTS(entity, "speed"));
+	if(interiorLightState > 0) { //室内灯がONである場合
 
-	if(!isControlCar) return;
+		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0) //室内灯モードを有効にする
 
-	function renderATSHelper(int) {
-
-		if(ATSspeed > (int + 15)) {
-
-			//ATS_Emr.render(renderer);
-
-			dataMap.setBoolean('isOver5', false, 1);
-			dataMap.setBoolean('isOver10', true, 1);
-
-			ControlTrain.setNotch(-8);
-			isBreaking.put(entity, true);
-
-		} else if(ATSspeed > (int + 10)) {
-
-			//ATS_Emr.render(renderer);
-
-			dataMap.setBoolean('isOver5', false, 1);
-			dataMap.setBoolean('isOver10', true, 1);
-
-			ControlTrain.setNotch(-7);
-			isBreaking.put(entity, true);
-
-		} else if(ATSspeed > (int + 5)) {
-
-			//ATS_Emr.render(renderer);
-
-			dataMap.setBoolean('isOver5', false, 1);
-			dataMap.setBoolean('isOver10', true, 1);
-
-			ControlTrain.setNotch(-4);
-			isBreaking.put(entity, true);
-
-		} else if(ATSspeed > (int + 1)) {
-
-			//ATS_Arr.render(renderer);
-
-			dataMap.setBoolean('isOver5', true, 1);
-			dataMap.setBoolean('isOver10', false, 1);
-
-			if(isBreaking.get(entity)) {
-				ControlTrain.setNotch(0);
-				isBreaking.put(entity, false);
-			}
-
-		} else {
-			dataMap.setBoolean('isOver5', false, 1);
-			dataMap.setBoolean('isOver10', false, 1);
-
-			if(isBreaking.get(entity)) {
-				ControlTrain.setNotch(0);
-				isBreaking.put(entity, false);
-			}
-		}
 	}
-
-	switch(Signal) {
-		case 10:renderATSHelper(810);
-			dataMap.setInt('atsCount', Signal, 10);
-			break;
-
-		case 11:renderATSHelper(15);
-			dataMap.setInt('atsCount', Signal, 11);
-			break;
-
-		case 12:renderATSHelper(25);
-			dataMap.setInt('atsCount', Signal, 12);
-			break;
-
-		case 13:renderATSHelper(30);
-			dataMap.setInt('atsCount', Signal, 13);
-			break;
-
-		case 14:renderATSHelper(45);
-			dataMap.setInt('atsCount', Signal, 14);
-			break;
-
-		case 15:renderATSHelper(65);
-			dataMap.setInt('atsCount', Signal, 15);
-			break;
-
-		case 16:renderATSHelper(90);
-			dataMap.setInt('atsCount', Signal, 16);
-			break;
-
-		case 17:renderATSHelper(100);
-			dataMap.setInt('atsCount', Signal, 17);
-			break;
-
-		case 18:renderATSHelper(110);
-			dataMap.setInt('atsCount', Signal, 18);
-			break;
-
-		case 19:renderATSHelper(120);
-			dataMap.setInt('atsCount', Signal, 19);
-			break;
-
-		case 20:renderATSHelper(65);
-			dataMap.setInt('atsCount', Signal, 20);
-			break;
-
-		case 21:renderATSHelper(45);
-			dataMap.setInt('atsCount', Signal, 21);
-			break;
-
-		default:
-			break;
-
-		}
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function render(entity, pass, par3) {
-
-	var onUpdateTick = false;
-
-	if(pass == 0) {
-	onUpdateTick = detectTick(entity);
-	}
-
-	var dclampMoveL = MhnTS(entity, "dclampMoveL");
-	var dclampMoveR = MhnTS(entity, "dclampMoveR");
-	var isControlCar = MhnTS(entity, "isControlCar");
-	var trainDir = MhnTS(entity, "trainDir");
 
 	GL11.glPushMatrix();
+
+	interior.render(renderer); //発光させるオブジェクトを指定(関数も可)
+	renderDoors(1);
+
+	//-----------------------------------------------------------
+
+	if(interiorLightState > 0) {
+
+		if(!isControlCar) { //ControlCarではない(GUIの逆転ハンドルが前以外である)場合
+
+			NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //室内灯モードを有効にする
+
+		} else {
+
+			NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //室内灯モードを無効にする
+
+		}
+	}
+
+	cab_body.render(renderer); //←逆転ハンドルが前以外の場合に発光させるオブジェクトを指定
+	renderController(entity, onUpdateTick);
+
+	if(interiorLightState > 0 && !isControlCar) {
+
+		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);//室内灯モードを無効にする
+
+	}
+
+	GL11.glPopMatrix();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function renderBogie(entity) {
+
+	var bd0 = 6.50;//台車間距離(台車は前後対称位置とする)
+		wd0 = 1.05; //台車軸距÷2
+		wy0 = -0.527; //車輪軸Y座標
+
+	var f0 = 0.0,
+		bodyYaw = 0.0,
+		bogieFYaw = 0.0,
+		bogieBYaw = 0.0,
+		bodyPitch = 0.0,
+		bogieFPitch = 0.0,
+		bogieBPitch = 0.0,
+		slideX = 0.0,
+		slideY = 0.0;
+
+	if(!entity) {} else {
+		if(entity != null) {
+			try {
+
+				var f0 = renderer.getWheelRotationR(entity);
+				var bodyYaw = entity.field_70177_z;
+
+				//前台車ヨーローカル角
+				var i = entity.getBogie(0).field_70177_z - bodyYaw;
+				if(i > 180) {
+					bogieFYaw = i - 360;
+				} else if(i < -180) {
+					bogieFYaw = i + 360;
+				} else {
+					bogieFYaw = i;
+				}
+
+				//後台車ヨーローカル角
+				var i = entity.getBogie(1).field_70177_z - bodyYaw - 180;
+				if(i > 180) {
+					bogieBYaw = i - 360;
+				} else if(i < -180) {
+					bogieBYaw = i + 360;
+				} else {
+					bogieBYaw = i;
+				}
+
+				//ピッチローカル角
+				bodyPitch = entity.field_70125_A;
+				bogieFPitch = entity.getBogie(0).field_70125_A * -1 + bodyPitch;
+				bogieBPitch = entity.getBogie(1).field_70125_A + bodyPitch;
+
+			} catch(error) {}
+		}
+	}
+
+	//前台車
+	GL11.glPushMatrix();
+	renderer.rotate(bogieFYaw, "Y", 0.0, 0.0, bd0);
+	renderer.rotate(bogieFPitch, "X", 0.0, 0.0, bd0);
+	bogieF.render(renderer);
+		GL11.glPushMatrix();
+		renderer.rotate(f0, "X", 0.0, wy0, bd0 + wd0);
+		wheelF1.render(renderer);
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		renderer.rotate(f0, "X", 0.0, wy0, bd0 - wd0);
+		wheelF2.render(renderer);
+		GL11.glPopMatrix();
+	GL11.glPopMatrix();
+
+	//後台車
+	GL11.glPushMatrix();
+	renderer.rotate(bogieBYaw, "Y", 0.0, 0.0, -bd0);
+	renderer.rotate(bogieBPitch, "X", 0.0, 0.0, -bd0);
+	bogieB.render(renderer);
+		GL11.glPushMatrix();
+		renderer.rotate(f0, "X", 0.0, wy0, -bd0 + wd0);
+		wheelB1.render(renderer);
+		GL11.glPopMatrix();
+		GL11.glPushMatrix();
+		renderer.rotate(f0, "X", 0.0, wy0, -bd0 - wd0);
+		wheelB2.render(renderer);
+		GL11.glPopMatrix();
+	GL11.glPopMatrix();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function renderOtherParts(entity) {
+
+	if(entity == null) {
+		headlightoff.render(renderer);
+		taillightoff.render(renderer);
+		return;
+	}
+
+	var trainDir = entity.getTrainStateData(0);
 
 	//前照灯
 	if(trainDir == 0) { //進行
@@ -735,23 +658,36 @@ function render(entity, pass, par3) {
 		GL11.glPopMatrix();
 	}
 
-	if(pass == 0 || pass == 1 || pass == 2 || pass == 3 || pass == 4) { 
+}
 
-	body1.render(renderer);
-	body2.render(renderer);
-	body3.render(renderer);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	renderBogie(entity);
-	renderATS(entity, pass);
+function render(entity, pass, par3) {
+
+	var onUpdateTick = false;
+
+	if(pass == 0) onUpdateTick = updateTick(entity);
+
+	GL11.glPushMatrix();
+
+	if(pass >= 0) { 
+
+		body1.render(renderer);
+		body2.render(renderer);
+		body3.render(renderer);
+
+		renderController(entity, onUpdateTick);
+		renderATS(entity);
+		renderBogie(entity);
+		renderOtherParts(entity);
 
 	}
 
-	//#################################################################################################################################
+	//-----------------------------------------------------------------------------------------
 
 	if(pass >= 2 || entity == null)
 	{
 		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0);
-	      //NGTUtilClient.getMinecraft().field_71460_t.func_175072_h(); //1.10.2
 		GLHelper.setLightmapMaxBrightness();
 	}
 
@@ -759,55 +695,32 @@ function render(entity, pass, par3) {
 		entityID = -1;
 	}
 	else{
-		entityID = MhnTS(entity, "entityID");
+		entityID = entity.func_145782_y();
 		
-		//Tickの数値が変化した際、shouldUpdateがtrueになります。
-		//shouldUpdateがtrueになるときだけ何らかの物体を移動することにより、移動速度を一定に保ちながら移動することができます。
-		//shouldUpdateをグローバル変数として宣言する必要があります。
 		var prevTick = renderer.getData(entityID << prevTickID);
-		var currentTick = MhnTS(entity, "tick");
+		var currentTick = renderer.getTick(entity);
 		shouldUpdate = ((prevTick != currentTick) && (pass == 0));
 		
 		if(shouldUpdate) renderer.setData(entityID << prevTickID, currentTick);
 		
-		//次のようにして変数をEntityごとに宣言することができます。
-		//"renderer.getData(entityID << (変数ID))" & "renderer.setData(entityID << (変数ID), (変数のデータ))"
-		//(変数のIDをこのファイルの上部で各自宣言しておく必要があります)
 		doorState = getArrayFromData(entityID << doorStateID, 2);
 		doorMovement = getArrayFromData(entityID << doorMovementID, 2);
-		doorStateInTrain = MhnTS(entity, "doorState");
+		doorStateInTrain = entity.getTrainStateData(4);
 		
 		updateDoors(entity);
 		
 	}
 
-	renderInterior(entity, pass, onUpdateTick);
+	renderInterior(entity, onUpdateTick);
 	renderDoors(0);
 
 	if(pass >= 2 || entity == null)
 	{
 		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);
-	      //NGTUtilClient.getMinecraft().field_71460_t.func_180436_i(); //1.10.2
 	}
 
-	//#################################################################################################################################
+	//-----------------------------------------------------------------------------------------
 
 	GL11.glPopMatrix();
 
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function getArrayFromData(ID,amount) {
-
-	var ret = renderer.getData(ID);
-	if(ret == 0)
-	{
-		ret = [];
-		for(var i = 0; i < amount; i++)
-		{
-			ret[ret.length] = 0;
-		}
-	}
-	return ret;
 }
