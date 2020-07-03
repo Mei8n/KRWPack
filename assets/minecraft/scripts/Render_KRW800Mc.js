@@ -64,14 +64,14 @@ function init(par1, par2) {
 
 	//外装
 	body2 = renderer.registerParts(new Parts("側面", "乗務員扉外", "雨樋", "戸袋窓", "戸袋窓部シャドウ処理", "側面Hゴム", "間外", "窓枠外",
-						 "側面窓外", "ドア下", "屋根", "冷房", "貫通扉外", "幌", "渡り板", "床", "TSUMA", "obj6", "obj8"));
+						 "側面窓外", "ドア下", "屋根", "冷房", "妻面外", "貫通扉外", "幌", "渡り板"));
 
 	//前面 内装 (運転室)
 	cab_body = renderer.registerParts(new Parts("乗務員扉内"));
 
 	//内装
 	interior = renderer.registerParts(new Parts("間", "窓枠内", "側面窓内", "内側", "広告枠", "座席", "ポール",
-						    "仕切り客室側", "妻面内側", "貫通扉内", "天井", "床", "妻面", "obj4", "obj5"));
+						    "仕切り客室側", "妻面内", "禁煙", "貫通扉内", "取っ手", "天井", "床"));
 
 	//床下
 	body3 = renderer.registerParts(new Parts("床下", "底", "影", "配管", "梯子", "連結器", "ジャンパ線", "ATS車上子"));
