@@ -85,6 +85,13 @@
     ]
  },
 
+  "train.Pattern_ATS": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_ATS"
+    ]
+ },
+
   "train.Switch_ATC": {
     "category": "neutral",
     "sounds": [
