@@ -112,6 +112,36 @@ function init(par1, par2) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function renderPreview(pass) {
+
+	if(pass == 0) {
+		body1.render(renderer);
+		body2.render(renderer);
+		cab_body.render(renderer);
+		interior.render(renderer);
+		body3.render(renderer);
+		headlightoff.render(renderer);
+		taillightoff.render(renderer);
+		doorLFo.render(renderer);
+		doorLBo.render(renderer);
+		doorRFo.render(renderer);
+		doorRBo.render(renderer);
+		doorLFi.render(renderer);
+		doorLBi.render(renderer);
+		doorRFi.render(renderer);
+		doorRBi.render(renderer);
+		bogieF.render(renderer);
+		bogieB.render(renderer);
+		wheelF1.render(renderer);
+		wheelF2.render(renderer);
+		wheelB1.render(renderer);
+		wheelB2.render(renderer);
+	}
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function updateTick(entity) {
 
 	if(entity == null) return false;
@@ -151,8 +181,6 @@ var HashMap = Java.type("java.util.HashMap");
 var isBreaking = new HashMap();
 
 function renderATS(entity) {
-
-	if(entity == null) return;
 
 	//ATS.render(renderer);//筐体
 
@@ -314,19 +342,19 @@ function atsConfirmation(entity) {
 
 function longATSAlert(entity) {
 
-	if(entity == null) return;
-
 	function atsTimer(entity) {
 		var shouldUpdate;
-		var count_5sectimerID = 12;
-		var countswitch_5sectimerID = 13;
+		//var count_5sectimerID = 12;
+		//var countswitch_5sectimerID = 13;
 	
 		var dataMap = entity.getResourceState().getDataMap();
 		atsWarnOn = dataMap.getboolean('atsWarnOn')
 	
-		var count_5sectimer = parseInt(renderer.getData(entityID << count_5sectimerID));
-		var countswitch_5sectimer = renderer.getData(entityID << countswitch_5sectimerID);
-	
+		//var count_5sectimer = parseInt(renderer.getData(entityID << count_5sectimerID));
+		//var countswitch_5sectimer = renderer.getData(entityID << countswitch_5sectimerID);
+		var count_5sectimer = dataMap.getInt('count_5sectimer');
+		var countswitch_5sectimer = dataMap.getInt('countswitch_5sectimer');
+
 	
 		if((shouldUpdate) && (atsWarnOn) && (countswitch_5sectimer == false)) {
 	
@@ -343,8 +371,10 @@ function longATSAlert(entity) {
 			++count_5sectimer;
 		}
 	
-		renderer.setData(entityID << count_5sectimerID, parseInt(count_5sectimer));
-		renderer.setData(entityID << countswitch_5sectimerID, countswitch_5sectimer);
+		//renderer.setData(entityID << count_5sectimerID, parseInt(count_5sectimer));
+		//renderer.setData(entityID << countswitch_5sectimerID, countswitch_5sectimer);
+		dataMap.setInt("count_5sectimer", count_5sectimer, false);
+		dataMap.setInt("countswitch_5sectimer", countswitch_5sectimer, false);
 	
 	}
 
@@ -372,8 +402,6 @@ function longATSAlert(entity) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function renderController(entity, onUpdateTick) {
-
-	if(entity == null) return;
 
 	var dataMap = entity.getResourceState().getDataMap(); //dataMap取得
 	var notch = entity.getNotch(); //ノッチ取得
@@ -601,14 +629,13 @@ function renderDoors(io) {
 
 function renderInterior(entity, onUpdateTick) {
 
-	if(entity == null) return;
-
 	var isControlCar = entity.isControlCar();
 	var interiorLightState = entity == null ? 1 : entity.getTrainStateData(11);
 
 	if(interiorLightState > 0) { //室内灯がONである場合
 
 		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0) //室内灯モードを有効にする
+		//GLHelper.setLightmapMaxBrightness();
 
 	}
 
@@ -624,6 +651,7 @@ function renderInterior(entity, onUpdateTick) {
 		if(!isControlCar) { //ControlCarではない(GUIの逆転ハンドルが前以外である)場合
 
 			NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //室内灯モードを有効にする
+			//GLHelper.setLightmapMaxBrightness();
 
 		} else {
 
@@ -648,96 +676,58 @@ function renderInterior(entity, onUpdateTick) {
 
 function renderBogie(entity) {
 
-	var bd0 = 6.50;//台車間距離(台車は前後対称位置とする)
-		wd0 = 1.05; //台車軸距÷2
-		wy0 = -0.527; //車輪軸Y座標
+	var roWh = renderer.getWheelRotationR(entity);
+	var trainYaw = entity.field_70177_z;
+	var trainPitch = entity.field_70125_A;
+	var entityBogieF = entity.getBogie(0);
+	var entityBogieB = entity.getBogie(1);
 
-	var f0 = 0.0,
-		bodyYaw = 0.0,
-		bogieFYaw = 0.0,
-		bogieBYaw = 0.0,
-		bodyPitch = 0.0,
-		bogieFPitch = 0.0,
-		bogieBPitch = 0.0,
-		slideX = 0.0,
-		slideY = 0.0;
+	if (!entityBogieF || !entityBogieB) return;
 
-	if(!entity) {} else {
-		if(entity != null) {
-			try {
+	var bogieYawF = (trainYaw - entityBogieF.field_70177_z) * -1;
+	var bogieYawB = (trainYaw - entityBogieB.field_70177_z) * -1 - 180;
+	var bogiePitchF = trainPitch - entityBogieF.field_70125_A;
+	var bogiePitchB = trainPitch - entityBogieB.field_70125_A * -1;
 
-				var f0 = renderer.getWheelRotationR(entity);
-				var bodyYaw = entity.field_70177_z;
-
-				//前台車ヨーローカル角
-				var i = entity.getBogie(0).field_70177_z - bodyYaw;
-				if(i > 180) {
-					bogieFYaw = i - 360;
-				} else if(i < -180) {
-					bogieFYaw = i + 360;
-				} else {
-					bogieFYaw = i;
-				}
-
-				//後台車ヨーローカル角
-				var i = entity.getBogie(1).field_70177_z - bodyYaw - 180;
-				if(i > 180) {
-					bogieBYaw = i - 360;
-				} else if(i < -180) {
-					bogieBYaw = i + 360;
-				} else {
-					bogieBYaw = i;
-				}
-
-				//ピッチローカル角
-				bodyPitch = entity.field_70125_A;
-				bogieFPitch = entity.getBogie(0).field_70125_A * -1 + bodyPitch;
-				bogieBPitch = entity.getBogie(1).field_70125_A + bodyPitch;
-
-			} catch(error) {}
-		}
-	}
+	var bogiePosZ = [6.5, -6.5]; //Z軸前からbogiePosZ[0],[1]
+	var wheelPosY = -0.527; //車輪回転軸Y
+	var wheelPosZ = [7.55, 5.45, -5.45, -7.55]; //Z軸前からwheelPosZ[0],[1],[2],[3]
 
 	//前台車
 	GL11.glPushMatrix();
-	renderer.rotate(bogieFYaw, "Y", 0.0, 0.0, bd0);
-	renderer.rotate(bogieFPitch, "X", 0.0, 0.0, bd0);
+	renderer.rotate(bogieYawF, 'Y', 0.0, 0.0, bogiePosZ[0]);
+	renderer.rotate(bogiePitchF, 'X', 0.0, 0.0, bogiePosZ[0]);
 	bogieF.render(renderer);
 		GL11.glPushMatrix();
-		renderer.rotate(f0, "X", 0.0, wy0, bd0 + wd0);
+		renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[0]);
 		wheelF1.render(renderer);
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
-		renderer.rotate(f0, "X", 0.0, wy0, bd0 - wd0);
+		renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[1]);
 		wheelF2.render(renderer);
 		GL11.glPopMatrix();
 	GL11.glPopMatrix();
-
+	
 	//後台車
 	GL11.glPushMatrix();
-	renderer.rotate(bogieBYaw, "Y", 0.0, 0.0, -bd0);
-	renderer.rotate(bogieBPitch, "X", 0.0, 0.0, -bd0);
+	renderer.rotate(bogieYawB, 'Y', 0.0, 0.0, bogiePosZ[1]);
+	renderer.rotate(bogiePitchB, 'X', 0.0, 0.0, bogiePosZ[1]);
 	bogieB.render(renderer);
 		GL11.glPushMatrix();
-		renderer.rotate(f0, "X", 0.0, wy0, -bd0 + wd0);
+		renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[2]);
 		wheelB1.render(renderer);
 		GL11.glPopMatrix();
 		GL11.glPushMatrix();
-		renderer.rotate(f0, "X", 0.0, wy0, -bd0 - wd0);
+		renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[3]);
 		wheelB2.render(renderer);
 		GL11.glPopMatrix();
 	GL11.glPopMatrix();
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function renderOtherParts(entity) {
-
-	if(entity == null) {
-		headlightoff.render(renderer);
-		taillightoff.render(renderer);
-		return;
-	}
 
 	var trainDir = entity.getTrainStateData(0);
 
@@ -759,6 +749,13 @@ function renderOtherParts(entity) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function render(entity, pass, par3) {
+
+	if(entity == null) {
+
+		renderPreview(pass);
+		return;
+
+	}
 
 	var onUpdateTick = false;
 
