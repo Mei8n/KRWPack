@@ -363,6 +363,7 @@ function longATSAlert(entity) {
 
 		atsTimer(entity);
 
+		
 		if(isATSRun) return;
 
 	}
