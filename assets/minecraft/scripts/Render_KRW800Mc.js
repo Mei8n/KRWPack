@@ -71,7 +71,7 @@ function init(par1, par2) {
 
 	//内装
 	interior = renderer.registerParts(new Parts("間", "窓枠内", "側面窓内", "内側", "広告枠", "座席", "ポール",
-						    "仕切り客室側", "妻面内", "禁煙", "貫通扉内", "取っ手", "天井", "床"));
+							"仕切り客室側", "妻面内", "禁煙", "貫通扉内", "取っ手", "天井", "床"));
 
 	//床下
 	body3 = renderer.registerParts(new Parts("床下", "底", "影", "配管", "梯子", "連結器", "ジャンパ線", "ATS車上子"));
@@ -267,10 +267,105 @@ function renderATS(entity) {
 			dataMap.setInt('atsCount', Signal, 21);
 			break;
 
+		case 22:renderATSHelper(0);
+			dataMap.setInt('atsCount', Signal, 22);
+			break;
+
 		default:
 			break;
 
 		}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function updateShouldUpdate(entityID, entity, pass) {
+	var prevTickID = 11;
+	var prevTick = renderer.getData(entityID << prevTickID);
+	var currentTick = renderer.getTick(entity);
+	shouldUpdate = ((prevTick != currentTick) && (pass == 0));
+	if(shouldUpdate) renderer.setData(entityID << prevTickID, currentTick);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function atsConfirmation(entity) {
+
+	riddenByEntity = entity.field_70153_n;
+	var dataMap = entity.getResourceState().getDataMap();
+	var notch = entity.getNotch();
+
+	/*if (riddenByEntity === NGTUtil.getClientPlayer()) { //ATS確認 キー決めてないから未実装
+		dataMap.setBoolean('isATSRun', Keyboard.isKeyDown(Keyboard.KEY_U), 1);
+	} else if (riddenByEntity == null) {
+		dataMap.setBoolean('isATSRun', false, 1);
+	}*/
+
+	if(notch < 0){		//ノッチが0未満の時
+		dataMap.setBoolean('isATSRun', true, 1);
+	}
+
+	else {
+		dataMap.setBoolean('isATSRun', false, 1);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function longATSAlert(entity) {
+
+	if(entity == null) return;
+
+	function atsTimer(entity) {
+		var shouldUpdate;
+		var count_5sectimerID = 12;
+		var countswitch_5sectimerID = 13;
+	
+		var dataMap = entity.getResourceState().getDataMap();
+		atsWarnOn = dataMap.getboolean('atsWarnOn')
+	
+		var count_5sectimer = parseInt(renderer.getData(entityID << count_5sectimerID));
+		var countswitch_5sectimer = renderer.getData(entityID << countswitch_5sectimerID);
+	
+	
+		if((shouldUpdate) && (atsWarnOn) && (countswitch_5sectimer == false)) {
+	
+			countswitch_5sectimer = true;
+	
+		} else if((shouldUpdate) && (count_5sectimer > 100) && (countswitch_5sectimer == true)) {
+	
+			countswitch_5sectimer = false;
+			count_5sectimer = 0;
+		}
+	
+		if((shouldUpdate) && (countswitch_5sectimer)) {
+	
+			++count_5sectimer;
+		}
+	
+		renderer.setData(entityID << count_5sectimerID, parseInt(count_5sectimer));
+		renderer.setData(entityID << countswitch_5sectimerID, countswitch_5sectimer);
+	
+	}
+
+	var dataMap = entity.getResourceState().getDataMap();
+	var signal = entity.getSignal();
+	var isControlCar = entity.isControlCar();
+	isATSRun = dataMap.getboolean('isATSRun')
+
+	if(!isControlCar) return;
+
+	dataMap.setBoolean('atsWarnOn', false, 1);
+	dataMap.setBoolean('atsWarnEmr', false, 1);
+
+	if(signal = 20) {
+		dataMap.setBoolean('atsWarnOn', true, 1);
+
+		atsTimer(entity);
+
+		if(isATSRun) return;
+
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
