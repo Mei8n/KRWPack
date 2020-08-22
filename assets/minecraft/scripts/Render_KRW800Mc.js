@@ -341,12 +341,14 @@ function atsConfirmation(entity) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function atsTimer(entity) {
+
 	var shouldUpdate;
 	//var count_5sectimerID = 12;
 	//var countswitch_5sectimerID = 13;
 
 	var dataMap = entity.getResourceState().getDataMap();
-	atsWarnEmr = dataMap.getBoolean('atsWarnEmr')
+	atsWarnOn = dataMap.getBoolean('atsWarnOn');
+	atsWarnEmr = dataMap.getBoolean('atsWarnEmr');
 
 	//var count_5sectimer = parseInt(renderer.getData(entityID << count_5sectimerID));
 	//var countswitch_5sectimer = renderer.getData(entityID << countswitch_5sectimerID);
@@ -382,10 +384,11 @@ function atsTimer(entity) {
 function longATSAlert(entity) {
 
 	var signal = entity.getSignal();
+	var speed = entity.getSpeed() *72;
 	var isControlCar = entity.isControlCar();
 	var dataMap = entity.getResourceState().getDataMap();
-	isATSRun = dataMap.getBoolean('isATSRun')
-	atsWarnEmr = dataMap.getBoolean('atsWarnEmr')
+	isATSRun = dataMap.getBoolean('isATSRun');
+	atsWarnEmr = dataMap.getBoolean('atsWarnEmr');
 
 	if(!isControlCar) return;
 
@@ -393,12 +396,14 @@ function longATSAlert(entity) {
 		ControlTrain.setNotch(-8);
 	}
 	
-	if((atsWarnEmr) && (speed = 0)){
+	if((atsWarnEmr) && (speed == 0)){
 		ControlTrain.setNotch(0);
 	}
 
-	if(signal = 20) {
+	if(signal == 20) {
 		dataMap.setBoolean('atsWarnOn', true, 1);
+
+		atsConfirmation(entity);
 
 		atsTimer(entity);
 		
@@ -782,6 +787,7 @@ function render(entity, pass, par3) {
 		body3.render(renderer);
 
 		renderController(entity, onUpdateTick);
+		updateShouldUpdate(entityID, entity, pass);
 		renderATS(entity);
 		atsTimer(entity);
 		longATSAlert(entity);
