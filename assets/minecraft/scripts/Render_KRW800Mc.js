@@ -340,63 +340,75 @@ function atsConfirmation(entity) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function longATSAlert(entity) {
-
-	function atsTimer(entity) {
-		var shouldUpdate;
-		//var count_5sectimerID = 12;
-		//var countswitch_5sectimerID = 13;
-	
-		var dataMap = entity.getResourceState().getDataMap();
-		atsWarnOn = dataMap.getboolean('atsWarnOn')
-	
-		//var count_5sectimer = parseInt(renderer.getData(entityID << count_5sectimerID));
-		//var countswitch_5sectimer = renderer.getData(entityID << countswitch_5sectimerID);
-		var count_5sectimer = dataMap.getInt('count_5sectimer');
-		var countswitch_5sectimer = dataMap.getInt('countswitch_5sectimer');
-
-	
-		if((shouldUpdate) && (atsWarnOn) && (countswitch_5sectimer == false)) {
-	
-			countswitch_5sectimer = true;
-	
-		} else if((shouldUpdate) && (count_5sectimer > 100) && (countswitch_5sectimer == true)) {
-	
-			countswitch_5sectimer = false;
-			count_5sectimer = 0;
-		}
-	
-		if((shouldUpdate) && (countswitch_5sectimer)) {
-	
-			++count_5sectimer;
-		}
-	
-		//renderer.setData(entityID << count_5sectimerID, parseInt(count_5sectimer));
-		//renderer.setData(entityID << countswitch_5sectimerID, countswitch_5sectimer);
-		dataMap.setInt("count_5sectimer", count_5sectimer, false);
-		dataMap.setInt("countswitch_5sectimer", countswitch_5sectimer, false);
-	
-	}
+function atsTimer(entity) {
+	var shouldUpdate;
+	//var count_5sectimerID = 12;
+	//var countswitch_5sectimerID = 13;
 
 	var dataMap = entity.getResourceState().getDataMap();
+	atsWarnEmr = dataMap.getBoolean('atsWarnEmr')
+
+	//var count_5sectimer = parseInt(renderer.getData(entityID << count_5sectimerID));
+	//var countswitch_5sectimer = renderer.getData(entityID << countswitch_5sectimerID);
+	var count_5sectimer = dataMap.getInt('count_5sectimer');
+	var countswitch_5sectimer = dataMap.getInt('countswitch_5sectimer');
+
+
+	if((shouldUpdate) && (atsWarnOn) && (countswitch_5sectimer == false)) {
+
+		countswitch_5sectimer = true;
+
+	} else if((shouldUpdate) && (count_5sectimer > 100) && (countswitch_5sectimer == true)) {
+
+		countswitch_5sectimer = false;
+		count_5sectimer = 0;
+		dataMap.setBoolean('atsWarnEmr', true, 1);
+	}
+
+	if((shouldUpdate) && (countswitch_5sectimer)) {
+
+		++count_5sectimer;
+	}
+
+	//renderer.setData(entityID << count_5sectimerID, parseInt(count_5sectimer));
+	//renderer.setData(entityID << countswitch_5sectimerID, countswitch_5sectimer);
+	dataMap.setInt("count_5sectimer", count_5sectimer, false);
+	dataMap.setInt("countswitch_5sectimer", countswitch_5sectimer, false);
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function longATSAlert(entity) {
+
 	var signal = entity.getSignal();
 	var isControlCar = entity.isControlCar();
-	isATSRun = dataMap.getboolean('isATSRun')
+	var dataMap = entity.getResourceState().getDataMap();
+	isATSRun = dataMap.getBoolean('isATSRun')
+	atsWarnEmr = dataMap.getBoolean('atsWarnEmr')
 
 	if(!isControlCar) return;
 
-	dataMap.setBoolean('atsWarnOn', false, 1);
-	dataMap.setBoolean('atsWarnEmr', false, 1);
+	if(atsWarnEmr){
+		ControlTrain.setNotch(-8);
+	}
+	
+	if((atsWarnEmr) && (speed = 0)){
+		ControlTrain.setNotch(0);
+	}
 
 	if(signal = 20) {
 		dataMap.setBoolean('atsWarnOn', true, 1);
 
 		atsTimer(entity);
-
 		
 		if(isATSRun) return;
 
+	} else {
+		dataMap.setBoolean('atsWarnOn', false, 1);
+		dataMap.setBoolean('atsWarnEmr', false, 1);
 	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -771,6 +783,8 @@ function render(entity, pass, par3) {
 
 		renderController(entity, onUpdateTick);
 		renderATS(entity);
+		atsTimer(entity);
+		longATSAlert(entity);
 		renderBogie(entity);
 		renderOtherParts(entity);
 
