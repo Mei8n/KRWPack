@@ -14,8 +14,8 @@ function onUpdate(su) {
 	var isOver5 = dataMap.getBoolean('isOver5');
 	var isOver10 = dataMap.getBoolean('isOver10');
   var atsCount = dataMap.getInt('atsCount');
-  var atsWarnOn = dataMap.getInt('atsWarnOn');
-  var atsWarnEmr = dataMap.getInt('atsWarnEmr');
+  var atsWarnOn = dataMap.getBoolean('atsWarnOn');
+  var atsWarnEmr = dataMap.getBoolean('atsWarnEmr');
 
 	//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
 
@@ -49,21 +49,21 @@ function onUpdate(su) {
 		}
     */
     
-   if(atsWarnOn){
-    su.playSound('sound_krw', 'train.Pattern_Emr', 1, 1);
-  }
+		if(atsWarnOn){
+		 	su.playSound('sound_krw', 'train.Pattern_Emr', 1, 1);
+		}
 
-  else{
-    su.stopSound('sound_krw', 'train.Pattern_Emr');
-  }
+		else{
+			su.stopSound('sound_krw', 'train.Pattern_Emr');
+		}
 
-  if(atsWarnEmr){
-    su.playSound('sound_krw', 'train.Pattern_Emr', 1, 1);
-  }
+		if(atsWarnEmr){
+			su.playSound('sound_krw', 'train.Pattern_Emr', 1, 1);
+		}
 
-  else{
-    su.stopSound('sound_krw', 'train.Pattern_Emr');
-  }
+		else{
+			su.stopSound('sound_krw', 'train.Pattern_Emr');
+		}
 
 
 		if (atsCount != signal) {
