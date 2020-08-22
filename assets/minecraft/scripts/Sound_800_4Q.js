@@ -6,14 +6,16 @@ importPackage(Packages.jp.kaiz.atsassistmod.api);
 
 function onUpdate(su) {
 
-	var entity = su.getEntity();
+  var entity = su.getEntity();
 	var signal = su.getEntity().getSignal();
 	var isControlCar = su.getEntity().isControlCar();
 	var dataMap = entity.getResourceState().getDataMap();
 
 	var isOver5 = dataMap.getBoolean('isOver5');
 	var isOver10 = dataMap.getBoolean('isOver10');
-	var atsCount = dataMap.getInt('atsCount');
+  var atsCount = dataMap.getInt('atsCount');
+  var atsWarnOn = dataMap.getInt('atsWarnOn');
+  var atsWarnEmr = dataMap.getInt('atsWarnEmr');
 
 	//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
 
@@ -45,7 +47,23 @@ function onUpdate(su) {
 		else{
 			su.stopSound('sound_krw', 'train.Pattern_Offing');
 		}
-		*/
+    */
+    
+   if(atsWarnOn){
+    su.playSound('sound_krw', 'train.Pattern_Emr', 1, 1);
+  }
+
+  else{
+    su.stopSound('sound_krw', 'train.Pattern_Emr');
+  }
+
+  if(atsWarnEmr){
+    su.playSound('sound_krw', 'train.Pattern_Emr', 1, 1);
+  }
+
+  else{
+    su.stopSound('sound_krw', 'train.Pattern_Emr');
+  }
 
 
 		if (atsCount != signal) {
