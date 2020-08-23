@@ -78,6 +78,13 @@
     ]
  },
 
+  "train.Pattern_Emr2": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Emr2"
+    ]
+ },
+
   "train.Pattern_Offing": {
     "category": "neutral",
     "sounds": [
