@@ -80,11 +80,11 @@ function init(par1, par2) {
 		"‘¤–Ê‘‹ŠO", "ƒhƒA‰º", "‰®ª", "—â–[", "È–ÊŠO", "ŠÑ’Ê”àŠO", "–y", "“n‚è”Â"));
 
 	//‘O–Ê “à‘• (‰^“]Žº)
-	cab_body = renderer.registerParts(new Parts("æ–±ˆõ”à“à"));
+	cab_body = renderer.registerParts(new Parts("æ–±ˆõ”à“à", "æ–±ˆõŽº“Vˆä", "æ–±ˆõŽº“à‘¤", "æ–±ˆõŽº°", "HƒSƒ€æ–±ˆõŽº‘¤", "‘O–Ê“à‘¤", "æ–±ˆõŽºŽdØ‚è_æ–±ˆõŽº"));
 
 	//“à‘•
 	interior = renderer.registerParts(new Parts("ŠÔ", "‘‹˜g“à", "‘¤–Ê‘‹“à", "“à‘¤", "L˜g", "ÀÈ", "ƒ|[ƒ‹",
-		"ŽdØ‚è‹qŽº‘¤", "È–Ê“à", "‹Ö‰Œ", "ŠÑ’Ê”à“à", "Žæ‚ÁŽè", "“Vˆä", "°"));
+		"ŽdØ‚è‹qŽº‘¤", "È–Ê“à", "‹Ö‰Œ", "ŠÑ’Ê”à“à", "Žæ‚ÁŽè", "“Vˆä", "°", "æ–±ˆõŽºŽdØ‚è_‹qŽº"));
 
 	//°‰º
 	body3 = renderer.registerParts(new Parts("°‰º", "’ê", "‰e", "”zŠÇ", "’òŽq", "˜AŒ‹Ší", "ƒWƒƒƒ“ƒpü", "ATSŽÔãŽq"));
@@ -375,7 +375,7 @@ function atsTimer(entity) {
 		timerCount = delaySeconds * 20;
 	} else if (timerCount == 0) {
 		dataMap.setBoolean('atsWarnEmr', true, 1);
-		timerCount = -1;
+		timerCount = -3;
 	} else {
 		timerCount--;
 	}
@@ -386,6 +386,7 @@ function atsTimer(entity) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function longATSAlert(entity) {
+	
 	if (!entity.isControlCar()) {
 		return;
 	}
@@ -396,20 +397,24 @@ function longATSAlert(entity) {
 	var isATSRun = dataMap.getBoolean('isATSRun');
 
 	if (dataMap.getBoolean('atsWarnEmr')) {
-		if (speed == 0) {
+		if (speed > 0) {
+			ControlTrain.setNotch(-8);
+		} else {
 			dataMap.setBoolean('atsWarnEmr', false, 1);
 			ControlTrain.setNotch(0);
-		} else {
-			ControlTrain.setNotch(-8);
 		}
 	}
 
 	if (signal == 20) {
+		dataMap.setBoolean('atsRunning', true, 1);
 		atsConfirmation(entity);
 		atsTimer(entity);
+
 		if (isATSRun) return;
+
 	} else {
 		dataMap.setInt("timerCount", -1, 1);
+		dataMap.setBoolean('atsRunning', false, 1);
 		dataMap.setBoolean('atsWarnOn0', false, 1);
 		dataMap.setBoolean('atsWarnOn1', false, 1);
 		dataMap.setBoolean('atsWarnEmr', false, 1);
@@ -773,7 +778,6 @@ function render(entity, pass, par3) {
 
 		renderController(entity, onUpdateTick);
 		renderATS(entity);
-		atsTimer(entity);
 		longATSAlert(entity);
 		renderBogie(entity);
 		renderOtherParts(entity);
