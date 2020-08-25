@@ -367,12 +367,12 @@ function atsTimer(entity) {
 		return;
 	} else if (dataMap.getBoolean('atsWarnEmr') || timerCount == -3) {
 		return;
-	} else if (entity.getNotch() < 0) {
-		timerCount = -2;
 	} else if (timerCount == -1) {
 		dataMap.setBoolean('atsWarnOn0', true, 1);
 		dataMap.setBoolean('atsWarnOn1', true, 1);
 		timerCount = delaySeconds * 20;
+	} else if (entity.getNotch() < 0) {
+		timerCount = -2;
 	} else if (timerCount == 0) {
 		dataMap.setBoolean('atsWarnEmr', true, 1);
 		timerCount = -3;
