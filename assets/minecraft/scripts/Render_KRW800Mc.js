@@ -296,6 +296,13 @@ function renderATS(entity) {
 		}
 	}
 
+	if(Signal != 20){
+		if (dataMap.getBoolean('isOver5') || dataMap.getBoolean('isOver10')) atsON.render(renderer);
+
+		else atsOFF.render(renderer);
+	}
+
+
 	switch (Signal) {
 		case 10:
 			renderATSHelper(810);
@@ -456,6 +463,8 @@ function longATSAlert(entity) {
 	var dataMap = entity.getResourceState().getDataMap();
 	var isATSRun = dataMap.getBoolean('isATSRun');
 	var atsWarnEmr = dataMap.getBoolean('atsWarnEmr');
+	var atsWarnOn0 = dataMap.getBoolean('atsWarnOn0');
+	var atsWarnOn1 = dataMap.getBoolean('atsWarnOn1');
 
 	if (atsWarnEmr) {
 		if (speed > 0) {
@@ -486,22 +495,30 @@ function longATSAlert(entity) {
 	shouldUpdate = ((prevTick != currentTick) && (pass == 0));
 	if(shouldUpdate) renderer.setData(entityID << prevTickID, currentTick);
 	
-	if (signal == 20 && !atsWarnEmr) {
-		var countup = parseInt(renderer.getData(entityID << countupID)) % 20;
-		if(shouldUpdate) renderer.setData(entityID << countupID, parseInt(++count));
+	if (signal == 20 && atsWarnOn0) {
+		var tick = renderer.getTick(entity);
+		var flash = tick % 20;
 	
-		if(count >= 0 && count <= 10) {
-	
+		if (flash <= 10) {
 			atsON.render(renderer);
 		}
 	
-		if(count > 10 && count <= 20) {
-	
+		else {
 			atsOFF.render(renderer);
 		}
 	}
 	
-	if (atsWarnEmr) atsON.render(renderer);
+	else if (atsWarnOn0) {
+		atsON.render(renderer);
+	}
+
+	else if (atsWarnOn1) {
+		atsOFF.render(renderer);
+	}
+
+	else if (signal == 20) {
+		atsOFF.render(renderer);
+	}
 
 }
 
