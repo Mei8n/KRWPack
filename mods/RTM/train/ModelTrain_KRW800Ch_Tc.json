@@ -5,7 +5,7 @@
 "trainType": "EC",
 
 "trainModel2": { "modelFile": "KRW800Ch_Tc.mqo",
-				 "textures": [["mat1", "textures/train/KRW800/KRW8004Q.png", "AlphaBlend,Light"],
+				 "textures": [["mat1", "textures/train/KRW800/KRW800.png", "AlphaBlend,Light"],
 					      ["mat2", "textures/train/KRW800/KRW800M.png", "AlphaBlend"]],
 				 "rendererPath": "scripts/Render_KRW800Mc.js" },
 
