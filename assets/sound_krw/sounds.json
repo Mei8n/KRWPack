@@ -13,6 +13,20 @@
     ]
  },
 
+  "train.800Horn1": {
+    "category": "neutral",
+    "sounds": [
+      "train/800Horn1"
+    ]
+ },
+
+  "train.800Horn2": {
+    "category": "neutral",
+    "sounds": [
+      "train/800Horn2"
+    ]
+ },
+
   "train.ch0": {
     "category": "neutral",
     "sounds": [

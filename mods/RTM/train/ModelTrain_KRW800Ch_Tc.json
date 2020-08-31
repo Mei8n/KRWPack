@@ -5,8 +5,8 @@
 "trainType": "EC",
 
 "trainModel2": { "modelFile": "KRW800Ch_Tc.mqo",
-				   "textures": [["mat1", "textures/train/KRW800/KRW800.png", "AlphaBlend,Light"],
-				["mat2", "textures/train/KRW800/KRW800M.png", "AlphaBlend"]],
+				 "textures": [["mat1", "textures/train/KRW800/KRW800.png", "AlphaBlend,Light"],
+					      ["mat2", "textures/train/KRW800/KRW800M.png", "AlphaBlend"]],
 				 "rendererPath": "scripts/Render_KRW800Mc.js" },
 
 
@@ -19,7 +19,6 @@
 
 "smoothing": true,
 "sound_BrakeRelease": "sound_mhnlib:RTMLib.Brake.Mhn_Brake_N24",
-"sound_Horn": "sound_mhnlib:RTMLib.Horn.Mhn_Horn_71",
 "sound_DoorOpen": "sound_mhnlib:RTMLib.Door.Mhn_Door_O20",
 "sound_DoorClose": "sound_mhnlib:RTMLib.Door.Mhn_Door_C20",
 "sound_Announcement": [

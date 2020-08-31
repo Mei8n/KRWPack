@@ -16,6 +16,7 @@ function onUpdate(su) {
 	var atsCount = dataMap.getInt('atsCount');
 	var atsWarnOn0 = dataMap.getBoolean('atsWarnOn0');
 	var atsWarnOn1 = dataMap.getBoolean('atsWarnOn1');
+	var isPushHorn = dataMap.getBoolean("isPushHorn");
 
 	//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
 
@@ -108,6 +109,16 @@ function onUpdate(su) {
 		else{
 			su.stopSound('sound_krw', 'train.Switch_ATS');
 			su.stopSound('sound_krw', 'train.Switch_ATC');
+		}
+
+		if(isPushHorn){
+			su.playSound('sound_krw', 'train.800Horn1', 1, 1, false);
+			su.stopSound('sound_krw', 'train.800Horn2');
+		}
+
+		else{
+			su.stopSound('sound_krw', 'train.800Horn1');
+			su.playSound('sound_krw', 'train.800Horn2', 1, 1, false);
 		}
 	}
 
