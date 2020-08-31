@@ -1,19 +1,19 @@
 {
 
-"trainName": "KRW800Ch_Tc",
+"trainName": "KRW800_Mc",
 
 "trainType": "EC",
 
-"trainModel2": { "modelFile": "KRW800Ch_Tc.mqo",
-				 "textures": [["mat1", "textures/train/KRW800/KRW800.png", "AlphaBlend,Light"],
-					      ["mat2", "textures/train/KRW800/KRW800M.png", "AlphaBlend"]],
-				 "rendererPath": "scripts/Render_KRW800Mc.js" },
+"trainModel2": { "modelFile": "KRW800_Mc.mqo",
+				"textures": [["mat1", "textures/train/KRW800/KRW800.png", "AlphaBlend,Light"],
+					     ["mat2", "textures/train/KRW800/KRW800M.png", "AlphaBlend"]],
+				"rendererPath": "scripts/Render_KRW800Mc.js" },
 
 
 "bogieModel2": { "modelFile": "ModelBogie.class",
 			 "textures": [["default", "textures/train/tp.png" ]]},
 
-"buttonTexture": "textures/train/KRW800/button_KRW800Ch_Tc.png",
+"buttonTexture": "textures/train/KRW800/button_KRW800_Mc.png",
 
 
 
@@ -28,7 +28,7 @@
 			["連絡ブザ", "sound_mhnlib:RTMLib.Sounds.Mhn_buzzer_10"],
 			["ワンマンチャイム", "sound_mhnlib:RTMLib.Sounds.Mhn_Chime_15"]],
 
-"soundScriptPath": "scripts/Sound_800_4Q.js",
+"soundScriptPath": "scripts/Sound_800.js",
 
 
 
