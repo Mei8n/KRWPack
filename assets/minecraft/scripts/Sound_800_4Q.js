@@ -68,7 +68,7 @@ function onUpdate(su) {
 		}
 
 
-		if (atsCount != signal) {
+/*		if (atsCount != signal) { //dataMapの削減の為コメントアウト
 			if (signal >= 10 && signal <= 21) {
 				su.stopSound('sound_krw', 'train.Pattern_Action');
 				ControlTrain.logger("PlaySound")
@@ -76,7 +76,98 @@ function onUpdate(su) {
 			}
 
 			dataMap.setInt("atsCount", signal, 1);
-		}
+		}*/
+
+		if(signal == 10){
+			su.playSound('sound_krw', 'train.Pattern_Action10', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action10');
+			   }
+
+		if(signal == 11){
+			su.playSound('sound_krw', 'train.Pattern_Action11', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action11');
+			   }
+
+		if(signal == 12){
+			su.playSound('sound_krw', 'train.Pattern_Action12', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action12');
+			   }
+			   
+		if(signal == 13){
+			su.playSound('sound_krw', 'train.Pattern_Action13', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action13');
+			   }
+
+		if(signal == 14){
+			su.playSound('sound_krw', 'train.Pattern_Action14', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action14');
+			   }
+
+		if(signal == 15){
+			su.playSound('sound_krw', 'train.Pattern_Action15', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action15');
+			   }
+
+		if(signal == 16){
+			su.playSound('sound_krw', 'train.Pattern_Action16', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action16');
+			   }
+
+		if(signal == 17){
+			su.playSound('sound_krw', 'train.Pattern_Action17', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action17');
+			   }
+
+		if(signal == 18){
+			su.playSound('sound_krw', 'train.Pattern_Action18', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action18');
+			   }
+
+		if(signal == 19){
+			su.playSound('sound_krw', 'train.Pattern_Action19', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action19');
+			   }
+
+		if(signal == 20){
+			su.playSound('sound_krw', 'train.Pattern_Action20', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action20');
+			   }
+
+		if(signal == 21){
+			su.playSound('sound_krw', 'train.Pattern_Action21', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action21');
+			   }
+
+		if(signal == 22){
+			su.playSound('sound_krw', 'train.Pattern_Action22', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action22');
+			   }
 
 
 		//ORP音声

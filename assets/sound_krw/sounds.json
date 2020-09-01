@@ -71,12 +71,97 @@
 
 
 
-  "train.Pattern_Action": {
+  "train.Pattern_Action10": {
     "category": "neutral",
     "sounds": [
-      "train/Pattern_Action"
+      "train/Pattern_Action10"
     ]
  },
+
+  "train.Pattern_Action11": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action11"
+    ]
+ },
+
+  "train.Pattern_Action12": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action12"
+    ]
+ },
+
+  "train.Pattern_Action13": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action13"
+    ]
+ },
+
+  "train.Pattern_Action14": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action14"
+    ]
+ },
+
+  "train.Pattern_Action15": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action15"
+    ]
+ },
+
+  "train.Pattern_Action16": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action16"
+    ]
+ },
+
+  "train.Pattern_Action17": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action17"
+    ]
+ },
+
+  "train.Pattern_Action18": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action18"
+    ]
+ },
+
+  "train.Pattern_Action19": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action19"
+    ]
+ },
+
+  "train.Pattern_Action20": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action20"
+    ]
+ },
+
+  "train.Pattern_Action21": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action21"
+    ]
+ },
+
+  "train.Pattern_Action22": {
+    "category": "neutral",
+    "sounds": [
+      "train/Pattern_Action22"
+    ]
+ },
+
 
   "train.Pattern_Arr": {
     "category": "neutral",

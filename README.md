@@ -8,7 +8,7 @@
 [![LatestRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack)](https://github.com/Mei8n/KRWPack/releases/latest)
 [![LatestPreRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack?include_prereleases)](https://github.com/Mei8n/KRWPack/releases)
 
-Ver:0.1 現在更新中 800系が完成したらVer1.0リリースします
+Ver:0.4 現在更新中 800系が完成したらVer1.0リリースします
 
 ## Download
 

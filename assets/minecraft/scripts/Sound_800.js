@@ -23,7 +23,7 @@ function onUpdate(su) {
 
 	if(isControlCar){
 
-		//ATS超過時音声
+		//ATS?????
 		if(isOver5){
 			su.playSound('sound_krw', 'train.Pattern_Arr', 1, 1);
 		}
@@ -40,7 +40,7 @@ function onUpdate(su) {
 			su.stopSound('sound_krw', 'train.Pattern_Emr');
 		}
 
-		//保安装置未投入音声 未実装
+		//????????? ???
 		/*
 		if(!isTrainProtection){
 			su.playSound('sound_krw', 'train.Pattern_Offing', 1, 1);
@@ -50,7 +50,7 @@ function onUpdate(su) {
 		}
 		*/
 		
-		//ATSロング警報
+		//ATS?????
 		if(atsWarnOn0){
 			su.playSound('sound_krw', 'train.Pattern_Emr2', 1, 1);
 		}
@@ -68,7 +68,7 @@ function onUpdate(su) {
 		}
 
 
-		if (atsCount != signal) {
+/*		if (atsCount != signal) { //dataMap????????????
 			if (signal >= 10 && signal <= 21) {
 				su.stopSound('sound_krw', 'train.Pattern_Action');
 				ControlTrain.logger("PlaySound")
@@ -76,10 +76,18 @@ function onUpdate(su) {
 			}
 
 			dataMap.setInt("atsCount", signal, 1);
+		}*/
+
+		if((signal == 10 ) || (signal == 11 ) || (signal == 12 ) || (signal == 13 ) || (signal == 14 ) || (signal == 15 ) || (signal == 16 ) || (signal == 17 ) || (signal == 18 ) || (signal == 19 ) || (signal == 20 ) || (signal == 21 ) || (signal == 22 )) {
+			su.stopSound('sound_krw', 'train.Pattern_Action');
+			su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
+		}
+		else {
+			su.stopSound('sound_krw', 'train.Pattern_Action');
 		}
 
 
-		//ORP音声
+		//ORP??
 		if(signal == 21){
 			su.playSound('sound_krw', 'train.ATS_Stopping', 1, 1, false);
 		}
@@ -97,7 +105,7 @@ function onUpdate(su) {
 		}
 
 
-		//ATS･ATC切り替え音声
+		//ATS?ATC??????
 		if(signal == 22){
 			su.playSound('sound_krw', 'train.Switch_ATS', 1, 1, false);
 		}
@@ -124,39 +132,15 @@ function onUpdate(su) {
 
 
 
-//↓コンプレッサー音の指定↓
+//?????????????
 var CompressorName = "RTMLib.CP.CPloop16";
 var CompressorActiveName = "RTMLib.CP.CPstart16";
 var CompressorEndName = "RTMLib.CP.CPend16";
-//↑コンプレッサー音の指定↑
+//?????????????
 
 PlayCompressor(su,CompressorName,CompressorActiveName,CompressorEndName);
 var speed = su.getSpeed(),
 		notch = su.getNotch();
-
-
-
-			//Breaker_On
-			if(speed>0&&speed<60&& notch > 0){
-				var pitBreaker_On = 1.0,
-						volBreaker_On = 1.0;
-				su.playSound('sound_krw', 'train.800BcOn', volBreaker_On, pitBreaker_On, false);
-			}
-			else{
-				su.stopSound('sound_krw', 'train.800BcOn');
-			}
-
-			//Breaker_Off
-			if(speed>0&&speed<60&& notch === 0){
-				var pitBreaker_Off = 1.0,
-						volBreaker_Off = 1.0;
-				su.playSound('sound_krw', 'train.800BcOff', volBreaker_Off, pitBreaker_Off, false);
-			}
-			else{
-				su.stopSound('sound_krw', 'train.800BcOff');
-			}
-
-
 
 	if(speed>0.1){
 			//Loop
