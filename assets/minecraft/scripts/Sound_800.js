@@ -11,19 +11,20 @@ function onUpdate(su) {
 	var isControlCar = su.getEntity().isControlCar();
 	var dataMap = entity.getResourceState().getDataMap();
 
-	var isOver5 = dataMap.getBoolean('isOver5');
-	var isOver10 = dataMap.getBoolean('isOver10');
-	var atsCount = dataMap.getInt('atsCount');
-	var atsWarnOn0 = dataMap.getBoolean('atsWarnOn0');
-	var atsWarnOn1 = dataMap.getBoolean('atsWarnOn1');
-	var isPushHorn = dataMap.getBoolean("isPushHorn");
-
-	//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
-
-
 	if(isControlCar){
+		
+		var isOver5 = dataMap.getBoolean('isOver5');
+		var isOver10 = dataMap.getBoolean('isOver10');
+		var isPushHorn = dataMap.getBoolean("isPushHorn");
+		//var atsCount = dataMap.getInt('atsCount');
+		//var atsWarnOn0 = dataMap.getBoolean('atsWarnOn0');
+		//var atsWarnOn1 = dataMap.getBoolean('atsWarnOn1');
+	
+		//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
 
-		//ATS?????
+
+
+		//ATS超過時音声
 		if(isOver5){
 			su.playSound('sound_krw', 'train.Pattern_Arr', 1, 1);
 		}
@@ -40,7 +41,7 @@ function onUpdate(su) {
 			su.stopSound('sound_krw', 'train.Pattern_Emr');
 		}
 
-		//????????? ???
+		//保安装置未投入音声 未実装
 		/*
 		if(!isTrainProtection){
 			su.playSound('sound_krw', 'train.Pattern_Offing', 1, 1);
@@ -48,9 +49,9 @@ function onUpdate(su) {
 		else{
 			su.stopSound('sound_krw', 'train.Pattern_Offing');
 		}
-		*/
 		
-		//ATS?????
+		
+		//ATSロング警報
 		if(atsWarnOn0){
 			su.playSound('sound_krw', 'train.Pattern_Emr2', 1, 1);
 		}
@@ -65,10 +66,10 @@ function onUpdate(su) {
 
 	   else{
 		   su.stopSound('sound_krw', 'train.Pattern_ATS');
-		}
+		} */
 
 
-/*		if (atsCount != signal) { //dataMap????????????
+/*		if (atsCount != signal) { //dataMapの削減の為コメントアウト
 			if (signal >= 10 && signal <= 21) {
 				su.stopSound('sound_krw', 'train.Pattern_Action');
 				ControlTrain.logger("PlaySound")
@@ -78,16 +79,99 @@ function onUpdate(su) {
 			dataMap.setInt("atsCount", signal, 1);
 		}*/
 
-		if((signal == 10 ) || (signal == 11 ) || (signal == 12 ) || (signal == 13 ) || (signal == 14 ) || (signal == 15 ) || (signal == 16 ) || (signal == 17 ) || (signal == 18 ) || (signal == 19 ) || (signal == 20 ) || (signal == 21 ) || (signal == 22 )) {
-			su.stopSound('sound_krw', 'train.Pattern_Action');
-			su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-		}
-		else {
-			su.stopSound('sound_krw', 'train.Pattern_Action');
-		}
+		if(signal == 10){
+			su.playSound('sound_krw', 'train.Pattern_Action10', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action10');
+			   }
+
+		if(signal == 11){
+			su.playSound('sound_krw', 'train.Pattern_Action11', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action11');
+			   }
+
+		if(signal == 12){
+			su.playSound('sound_krw', 'train.Pattern_Action12', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action12');
+			   }
+			   
+		if(signal == 13){
+			su.playSound('sound_krw', 'train.Pattern_Action13', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action13');
+			   }
+
+		if(signal == 14){
+			su.playSound('sound_krw', 'train.Pattern_Action14', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action14');
+			   }
+
+		if(signal == 15){
+			su.playSound('sound_krw', 'train.Pattern_Action15', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action15');
+			   }
+
+		if(signal == 16){
+			su.playSound('sound_krw', 'train.Pattern_Action16', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action16');
+			   }
+
+		if(signal == 17){
+			su.playSound('sound_krw', 'train.Pattern_Action17', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action17');
+			   }
+
+		if(signal == 18){
+			su.playSound('sound_krw', 'train.Pattern_Action18', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action18');
+			   }
+
+		if(signal == 19){
+			su.playSound('sound_krw', 'train.Pattern_Action19', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action19');
+			   }
+
+		if(signal == 20){
+			su.playSound('sound_krw', 'train.Pattern_Action20', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action20');
+			   }
+
+		if(signal == 21){
+			su.playSound('sound_krw', 'train.Pattern_Action21', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action21');
+			   }
+
+		if(signal == 22){
+			su.playSound('sound_krw', 'train.Pattern_Action22', 1, 1, false);
+			   }
+			   else{
+			su.stopSound('sound_krw', 'train.Pattern_Action22');
+			   }
 
 
-		//ORP??
+		//ORP音声
 		if(signal == 21){
 			su.playSound('sound_krw', 'train.ATS_Stopping', 1, 1, false);
 		}
@@ -105,7 +189,7 @@ function onUpdate(su) {
 		}
 
 
-		//ATS?ATC??????
+		//ATS･ATC切り替え音声
 		if(signal == 22){
 			su.playSound('sound_krw', 'train.Switch_ATS', 1, 1, false);
 		}
@@ -119,6 +203,7 @@ function onUpdate(su) {
 			su.stopSound('sound_krw', 'train.Switch_ATC');
 		}
 
+		//警笛長押し
 		if(isPushHorn){
 			su.playSound('sound_krw', 'train.800Horn1', 1, 1, false);
 			su.stopSound('sound_krw', 'train.800Horn2');
@@ -132,11 +217,11 @@ function onUpdate(su) {
 
 
 
-//?????????????
+//↓コンプレッサー音の指定↓
 var CompressorName = "RTMLib.CP.CPloop16";
 var CompressorActiveName = "RTMLib.CP.CPstart16";
 var CompressorEndName = "RTMLib.CP.CPend16";
-//?????????????
+//↑コンプレッサー音の指定↑
 
 PlayCompressor(su,CompressorName,CompressorActiveName,CompressorEndName);
 var speed = su.getSpeed(),

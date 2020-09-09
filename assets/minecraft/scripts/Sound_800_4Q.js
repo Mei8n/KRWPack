@@ -11,17 +11,18 @@ function onUpdate(su) {
 	var isControlCar = su.getEntity().isControlCar();
 	var dataMap = entity.getResourceState().getDataMap();
 
-	var isOver5 = dataMap.getBoolean('isOver5');
-	var isOver10 = dataMap.getBoolean('isOver10');
-	var atsCount = dataMap.getInt('atsCount');
-	var atsWarnOn0 = dataMap.getBoolean('atsWarnOn0');
-	var atsWarnOn1 = dataMap.getBoolean('atsWarnOn1');
-	var isPushHorn = dataMap.getBoolean("isPushHorn");
-
-	//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
-
-
 	if(isControlCar){
+		
+		var isOver5 = dataMap.getBoolean('isOver5');
+		var isOver10 = dataMap.getBoolean('isOver10');
+		var isPushHorn = dataMap.getBoolean("isPushHorn");
+		//var atsCount = dataMap.getInt('atsCount');
+		//var atsWarnOn0 = dataMap.getBoolean('atsWarnOn0');
+		//var atsWarnOn1 = dataMap.getBoolean('atsWarnOn1');
+	
+		//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
+
+
 
 		//ATS超過時音声
 		if(isOver5){
@@ -48,7 +49,7 @@ function onUpdate(su) {
 		else{
 			su.stopSound('sound_krw', 'train.Pattern_Offing');
 		}
-		*/
+		
 		
 		//ATSロング警報
 		if(atsWarnOn0){
@@ -65,7 +66,7 @@ function onUpdate(su) {
 
 	   else{
 		   su.stopSound('sound_krw', 'train.Pattern_ATS');
-		}
+		} */
 
 
 /*		if (atsCount != signal) { //dataMapの削減の為コメントアウト
@@ -202,6 +203,7 @@ function onUpdate(su) {
 			su.stopSound('sound_krw', 'train.Switch_ATC');
 		}
 
+		//警笛長押し
 		if(isPushHorn){
 			su.playSound('sound_krw', 'train.800Horn1', 1, 1, false);
 			su.stopSound('sound_krw', 'train.800Horn2');
