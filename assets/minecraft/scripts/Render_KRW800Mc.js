@@ -1,4 +1,4 @@
-//Render_KRW800Mc.js  by unlock [è¤‡è£½/ã‚³ãƒ”ãƒš/è»¢è¼‰ã‚’ç¦ãšã‚‹]
+//Render_KRW800Mc.js  by unlock [•¡»/ƒRƒsƒy/“]Ú‚ğ‹Ö‚¸‚é]
 
 //Please do not duplicate or copy.
 
@@ -25,9 +25,9 @@ importPackage(Packages.jp.kaiz.atsassistmod.api);
 
 //###################################################################
 
-//doorOpn(Cls)Secï¼šãƒ‰ã‚¢ã‚’é–‹ã(é–‰ã˜ã‚‹)ã®ã«å¿…è¦ãªç§’æ•°
-//doorOpn(Cls)Spdï¼šãƒ‰ã‚¢ã‚’é–‹ã(é–‰ã˜ã‚‹)ã¨ãã®æ‰‹é †
-//[ç§’æ•°,å‹•ã‹ã™è·é›¢(ï¾’ï½°ï¾„ï¾™åŸºæº–(ï¾’ï¾€ï½¾ï½ºä¸Šã®æ•°å€¤/100))]
+//doorOpn(Cls)SecFƒhƒA‚ğŠJ‚­(•Â‚¶‚é)‚Ì‚É•K—v‚È•b”
+//doorOpn(Cls)SpdFƒhƒA‚ğŠJ‚­(•Â‚¶‚é)‚Æ‚«‚Ìè‡
+//[•b”,“®‚©‚·‹——£(Ò°ÄÙŠî€(ÒÀ¾ºã‚Ì”’l/100))]
 
 var doorOpnSec = 2.3;
 var doorOpnSpd = [
@@ -49,8 +49,8 @@ var doorClsSpd = [
 	[0.09, 0.0]
 ];
 
-//é§†å‹•è·é›¢ï¼š[ 0.65(65) ]
-//ä½¿ç”¨éŸ³å£°ï¼š[  ]
+//‹ì“®‹——£F[ 0.65(65) ]
+//g—p‰¹ºF[  ]
 
 //###################################################################
 
@@ -75,52 +75,52 @@ var shouldUpdate;
 
 function init(par1, par2) {
 
-	//å‰é¢ å¤–è£…
-	body1 = renderer.registerParts(new Parts("å‰é¢", "å‰é¢2", "å‰é¢3", "4Q", "å¹•å½±", "å‰é¢ã‚¹ãƒ†ãƒƒãƒ—", "å°¾ç¯æ ", "æ‰‹ã™ã‚Š", "å‰ç…§ç¯", "é£¾ã‚Šå¸¯", "å‰é¢çª“æŸ±",
-		"å‰é¢çª“Hã‚´ãƒ "));
+	//‘O–Ê ŠO‘•
+	body1 = renderer.registerParts(new Parts("‘O–Ê", "‘O–Ê2", "‘O–Ê3", "4Q", "–‹‰e", "‘O–ÊƒXƒeƒbƒv", "”ö“”˜g", "è‚·‚è", "‘OÆ“”", "ü‚è‘Ñ", "‘O–Ê‘‹’Œ",
+		"‘O–Ê‘‹HƒSƒ€"));
 
-	//å¤–è£…
-	body2 = renderer.registerParts(new Parts("å´é¢", "è»Šå´ç¯", "ä¹—å‹™å“¡æ‰‰å¤–", "é›¨æ¨‹", "æˆ¸è¢‹çª“éƒ¨ã‚·ãƒ£ãƒ‰ã‚¦å‡¦ç†", "å´é¢Hã‚´ãƒ ", "é–“å¤–", "çª“æ å¤–",
-		"å´é¢çª“å¤–", "ãƒ‰ã‚¢ä¸‹", "å±‹æ ¹", "å†·æˆ¿", "ã‚¢ãƒ³ãƒ†ãƒŠ", "ãƒ‘ãƒ³ã‚¿åŸºå°", "å¦»é¢å¤–", "è²«é€šæ‰‰å¤–", "è²«é€šå¹Œ"));
+	//ŠO‘•
+	body2 = renderer.registerParts(new Parts("‘¤–Ê", "Ô‘¤“”", "æ–±ˆõ”àŠO", "‰J”ó", "ŒË‘Ü‘‹•”ƒVƒƒƒhƒEˆ—", "‘¤–ÊHƒSƒ€", "ŠÔŠO", "‘‹˜gŠO",
+		"‘¤–Ê‘‹ŠO", "ƒhƒA‰º", "‰®ª", "—â–[", "ƒAƒ“ƒeƒi", "ƒpƒ“ƒ^Šî‘ä", "È–ÊŠO", "ŠÑ’Ê”àŠO", "ŠÑ’Ê–y"));
 
-	//å‰é¢ å†…è£… (é‹è»¢å®¤)
-	cab_body = renderer.registerParts(new Parts("ä¹—å‹™å“¡å®¤ä»•åˆ‡ã‚Š_ä¹—å‹™å“¡å®¤", "å‰é¢å†…å´", "Hã‚´ãƒ ä¹—å‹™å“¡å®¤å´", "ä¹—å‹™å“¡å®¤åºŠ", "ä¹—å‹™å“¡å®¤å†…å´", "ä¹—å‹™å“¡æ‰‰å†…", "ä¹—å‹™å“¡å®¤å¤©äº•",
-		"ä¹—å‹™å“¡å®¤æ©Ÿå™¨é¡_ãƒŸãƒ©ãƒ¼", "ä¹—å‹™å“¡å®¤æ©Ÿå™¨é¡",
-		"é‹è»¢å°ç­ä½“", "ãƒ¡ãƒ¼ã‚¿ãƒ¼"));
+	//‘O–Ê “à‘• (‰^“]º)
+	cab_body = renderer.registerParts(new Parts("æ–±ˆõºdØ‚è_æ–±ˆõº", "‘O–Ê“à‘¤", "HƒSƒ€æ–±ˆõº‘¤", "æ–±ˆõº°", "æ–±ˆõº“à‘¤", "æ–±ˆõ”à“à", "æ–±ˆõº“Vˆä",
+		"æ–±ˆõº‹@Ší—Ş_ƒ~ƒ‰[", "æ–±ˆõº‹@Ší—Ş",
+		"‰^“]‘äâ‘Ì", "ƒ[ƒ^["));
 
-	//çª“ã‚¬ãƒ©ã‚¹
-	bodyGlass = renderer.registerParts(new Parts("æˆ¸è¢‹çª“", "å´é¢çª“", "è²«é€šçª“"));
-	cabGlass = renderer.registerParts(new Parts("å‰é¢çª“"));
+	//‘‹ƒKƒ‰ƒX
+	bodyGlass = renderer.registerParts(new Parts("ŒË‘Ü‘‹", "‘¤–Ê‘‹", "ŠÑ’Ê‘‹"));
+	cabGlass = renderer.registerParts(new Parts("‘O–Ê‘‹"));
 
-	//è»Šå´ç¯
+	//Ô‘¤“”
 	doorLampL_ON = renderer.registerParts(new Parts("L_On"));
 	doorLampL_OFF = renderer.registerParts(new Parts("L_Off"));
 	doorLampR_ON = renderer.registerParts(new Parts("R_On"));
 	doorLampR_OFF = renderer.registerParts(new Parts("R_Off"));
 
-	//ãƒ‘ãƒ³ã‚¿ã‚°ãƒ©ãƒ•
-	pantaUp = renderer.registerParts(new Parts("ãƒ‘ãƒ³ã‚¿ä¸Šæ˜‡"));
-	pantaDawn = renderer.registerParts(new Parts("ãƒ‘ãƒ³ã‚¿ä¸‹é™"));
+	//ƒpƒ“ƒ^ƒOƒ‰ƒt
+	pantaUp = renderer.registerParts(new Parts("ƒpƒ“ƒ^ã¸"));
+	pantaDawn = renderer.registerParts(new Parts("ƒpƒ“ƒ^‰º~"));
 
-	//é‹è»¢å°æˆ¸é–‰ã‚ç¯
-	cabDoorLampON = renderer.registerParts(new Parts("æˆ¸é–‰ç‚¹"));
-	cabDoorLampOFF = renderer.registerParts(new Parts("æˆ¸é–‰æ»…"));
+	//‰^“]‘äŒË•Â‚ß“”
+	cabDoorLampON = renderer.registerParts(new Parts("ŒË•Â“_"));
+	cabDoorLampOFF = renderer.registerParts(new Parts("ŒË•Â–Å"));
 
-	//ãƒã‚¹ã‚³ãƒ³é¡
-	mcH = renderer.registerParts(new Parts("ãƒã‚¹ã‚³ãƒ³"));
-	brH = renderer.registerParts(new Parts("ãƒ–ãƒ¬ãƒ¼ã‚­ãƒãƒ³ãƒ‰ãƒ«"));
-	revH = renderer.registerParts(new Parts("ãƒ¬ãƒãƒ¼ã‚µãƒ¼"));
+	//ƒ}ƒXƒRƒ“—Ş
+	mcH = renderer.registerParts(new Parts("ƒ}ƒXƒRƒ“"));
+	brH = renderer.registerParts(new Parts("ƒuƒŒ[ƒLƒnƒ“ƒhƒ‹"));
+	revH = renderer.registerParts(new Parts("ƒŒƒo[ƒT["));
 
-	//ãƒ¡ãƒ¼ã‚¿ãƒ¼é¡
-	needleSpd = renderer.registerParts(new Parts("é€Ÿåº¦è¨ˆé‡"));
-	needlekV = renderer.registerParts(new Parts("é›»åœ§è¨ˆé‡"));
+	//ƒ[ƒ^[—Ş
+	needleSpd = renderer.registerParts(new Parts("‘¬“xŒvj"));
+	needlekV = renderer.registerParts(new Parts("“dˆ³Œvj"));
 
-	//è­¦ç¬›ãƒšãƒ€ãƒ«
-	hornPedalON = renderer.registerParts(new Parts("è­¦ç¬›ãƒšãƒ€ãƒ«_On"));
-	hornPedalOFF = renderer.registerParts(new Parts("è­¦ç¬›ãƒšãƒ€ãƒ«_Off"));
+	//Œx“Jƒyƒ_ƒ‹
+	hornPedalON = renderer.registerParts(new Parts("Œx“Jƒyƒ_ƒ‹_On"));
+	hornPedalOFF = renderer.registerParts(new Parts("Œx“Jƒyƒ_ƒ‹_Off"));
 
-	//ATSè¡¨ç¤ºæ©Ÿ
-	atsPanel = renderer.registerParts(new Parts("ATSè¡¨ç¤ºå™¨", "ä¸Š", "ä¸‹"));
+	//ATS•\¦‹@
+	atsPanel = renderer.registerParts(new Parts("ATS•\¦Ší", "ã", "‰º"));
 	ats_12x = renderer.registerParts(new Parts("12"));
 	ats_11x = renderer.registerParts(new Parts("11"));
 	ats_10x = renderer.registerParts(new Parts("10"));
@@ -135,40 +135,40 @@ function init(par1, par2) {
 	ats_1x = renderer.registerParts(new Parts("1"));
 	ats_x0 = renderer.registerParts(new Parts("_0"));
 	ats_x5 = renderer.registerParts(new Parts("_5"));
-	atsON = renderer.registerParts(new Parts("å‹•ä½œ_ç‚¹"));
-	atsOFF = renderer.registerParts(new Parts("å‹•ä½œ_æ»…"));
+	atsON = renderer.registerParts(new Parts("“®ì_“_"));
+	atsOFF = renderer.registerParts(new Parts("“®ì_–Å"));
 
-	//å†…è£…
-	interior = renderer.registerParts(new Parts("é–“", "çª“æ å†…", "å´é¢çª“å†…", "å†…å´", "æ é¡", "åº§å¸­", "ãƒãƒ¼ãƒ«",
-		"ãƒ€ã‚¯ãƒˆ", "ä»•åˆ‡ã‚Šå®¢å®¤å´", "å¦»é¢å†…", "ç¦ç…™", "è²«é€šæ‰‰å†…", "å–ã£æ‰‹", "å¤©äº•", "åºŠ", "ä¹—å‹™å“¡å®¤ä»•åˆ‡ã‚Š_å®¢å®¤", "è›å…‰ç¯", "åŠã‚Šé©", "ã‚¹ãƒ”ãƒ¼ã‚«ãƒ¼"));
+	//“à‘•
+	interior = renderer.registerParts(new Parts("ŠÔ", "‘‹˜g“à", "‘¤–Ê‘‹“à", "“à‘¤", "˜g—Ş", "ÀÈ", "ƒ|[ƒ‹",
+		"ƒ_ƒNƒg", "dØ‚è‹qº‘¤", "È–Ê“à", "‹Ö‰Œ", "ŠÑ’Ê”à“à", "æ‚Áè", "“Vˆä", "°", "æ–±ˆõºdØ‚è_‹qº", "ŒuŒõ“”", "’İ‚èŠv", "ƒXƒs[ƒJ["));
 
-	//åºŠä¸‹
-	body3 = renderer.registerParts(new Parts("åºŠä¸‹", "åº•", "å½±", "é…ç®¡", "æ¢¯å­", "é€£çµå™¨", "ã‚¸ãƒ£ãƒ³ãƒ‘ç·š", "ATSè»Šä¸Šå­"));
+	//°‰º
+	body3 = renderer.registerParts(new Parts("°‰º", "’ê", "‰e", "”zŠÇ", "’òq", "˜AŒ‹Ší", "ƒWƒƒƒ“ƒpü", "ATSÔãq"));
 
-	//å‰ç…§ç¯
-	headlighton = renderer.registerParts(new Parts("å‰ç…§ç¯ç‚¹"));
-	headlightoff = renderer.registerParts(new Parts("å‰ç…§ç¯æ»…"));
+	//‘OÆ“”
+	headlighton = renderer.registerParts(new Parts("‘OÆ“”“_"));
+	headlightoff = renderer.registerParts(new Parts("‘OÆ“”–Å"));
 
-	//å°¾ç¯
-	taillighton = renderer.registerParts(new Parts("å°¾ç¯ç‚¹"));
-	taillightoff = renderer.registerParts(new Parts("å°¾ç¯æ»…"));
+	//”ö“”
+	taillighton = renderer.registerParts(new Parts("”ö“”“_"));
+	taillightoff = renderer.registerParts(new Parts("”ö“”–Å"));
 
-	//ãƒ‰ã‚¢å¤–
+	//ƒhƒAŠO
 	doorLFo = renderer.registerParts(new Parts("door_LF"));
 	doorLBo = renderer.registerParts(new Parts("door_LB"));
 	doorRFo = renderer.registerParts(new Parts("door_RF"));
 	doorRBo = renderer.registerParts(new Parts("door_RB"));
 
-	//ãƒ‰ã‚¢ä¸­
+	//ƒhƒA’†
 	doorLFi = renderer.registerParts(new Parts("door_LFN"));
 	doorLBi = renderer.registerParts(new Parts("door_LBN"));
 	doorRFi = renderer.registerParts(new Parts("door_RFN"));
 	doorRBi = renderer.registerParts(new Parts("door_RBN"));
 
-	//å°è»Š
-	bogieF = renderer.registerParts(new Parts("bogieF")); //å‰å°è»Š
-	bogieB = renderer.registerParts(new Parts("bogieB")); //å¾Œå°è»Š
-	wheelF1 = renderer.registerParts(new Parts("wheelF1")); //è»Šè¼ª
+	//‘äÔ
+	bogieF = renderer.registerParts(new Parts("bogieF")); //‘O‘äÔ
+	bogieB = renderer.registerParts(new Parts("bogieB")); //Œã‘äÔ
+	wheelF1 = renderer.registerParts(new Parts("wheelF1")); //Ô—Ö
 	wheelF2 = renderer.registerParts(new Parts("wheelF2"));
 	wheelB1 = renderer.registerParts(new Parts("wheelB1"));
 	wheelB2 = renderer.registerParts(new Parts("wheelB2"));
@@ -287,7 +287,7 @@ var isBreaking = new HashMap();
 
 function renderATS(entity) {
 
-	atsPanel.render(renderer);//ç­ä½“
+	atsPanel.render(renderer);//â‘Ì
 
 	var dataMap = entity.getResourceState().getDataMap();
 	var Signal = entity.getSignal();
@@ -461,7 +461,7 @@ function atsConfirmation(entity) {
 	var dataMap = entity.getResourceState().getDataMap();
 	var notch = entity.getNotch();
 
-	/*if (riddenByEntity === NGTUtil.getClientPlayer()) { //ATSç¢ºèª ã‚­ãƒ¼å…¥åŠ›ã§å‹•ã‹ãªã„ã®ã§æœªå®Ÿè£…
+	/*if (riddenByEntity === NGTUtil.getClientPlayer()) { //ATSŠm”F ƒL[“ü—Í‚Å“®‚©‚È‚¢‚Ì‚Å–¢À‘•
 		if (Keyboard.isKeyDown(Keyboard.KEY_U)) {
 			dataMap.setBoolean('isATSRun', true, 1);
 		}
@@ -469,7 +469,7 @@ function atsConfirmation(entity) {
 		dataMap.setBoolean('isATSRun', false, 1);
 	} */
 /*
-	if (notch < 0) { //ãƒãƒƒãƒãŒ0æœªæº€ã®æ™‚
+	if (notch < 0) { //ƒmƒbƒ`‚ª0–¢–‚Ì
 		dataMap.setBoolean('isATSRun', true, 1);
 	} else {
 		dataMap.setBoolean('isATSRun', false, 1);
@@ -480,7 +480,7 @@ function atsConfirmation(entity) {
 /*
 function atsTimer(entity) {
 	var dataMap = entity.getResourceState().getDataMap();
-	var delaySeconds = 5; //ã“ã“ã«ç§’æ•°
+	var delaySeconds = 5; //‚±‚±‚É•b”
 
 	var timerCount = dataMap.getInt('timerCount');
 
@@ -630,23 +630,23 @@ function kitadenATS(entity) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function sendHornKey(entity) {
-	var dataMap = entity.getResourceState().getDataMap(); //dataMapå–å¾—
+	var dataMap = entity.getResourceState().getDataMap(); //dataMapæ“¾
 	riddenByEntity = entity.field_70153_n;
 
-    //èª°ã‹ä¹—ã£ã¦ã„ã‚‹ã¨ã
+    //’N‚©æ‚Á‚Ä‚¢‚é‚Æ‚«
     if (riddenByEntity === NGTUtil.getClientPlayer()) {
 		dataMap.setBoolean('isPushHorn', Keyboard.isKeyDown(Keyboard.KEY_P), 1);
 		
     } else if (riddenByEntity == null) {
-        //èª°ã‚‚ä¹—ã£ã¦ã„ãªã„ã¨ã
+        //’N‚àæ‚Á‚Ä‚¢‚È‚¢‚Æ‚«
         dataMap.setBoolean('isPushHorn', false, 1);
     }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//ãƒ‰ã‚¢ã®é–‹é–‰ã‚’åˆ¤å®šã—ã€doorOpnSecã§æŒ‡å®šã•ã‚ŒãŸç§’æ•°å†…ã«doorOpnSpdã«ã¦æŒ‡å®šã•ã‚ŒãŸã‚¹ãƒ†ãƒƒãƒ—ã®é †ã«ãƒ‰ã‚¢ã‚’ç§»å‹•ã—ã¾ã™
-//ã†ã¾ãã‚„ã‚Œã°ã€ä½•ã‹ç‰©ã‚’å‹•ã‹ã—ãŸã„ã¨ãã«æµç”¨ã§ãã¾ã™
+//ƒhƒA‚ÌŠJ•Â‚ğ”»’è‚µAdoorOpnSec‚Åw’è‚³‚ê‚½•b”“à‚ÉdoorOpnSpd‚É‚Äw’è‚³‚ê‚½ƒXƒeƒbƒv‚Ì‡‚ÉƒhƒA‚ğˆÚ“®‚µ‚Ü‚·
+//‚¤‚Ü‚­‚â‚ê‚ÎA‰½‚©•¨‚ğ“®‚©‚µ‚½‚¢‚Æ‚«‚É—¬—p‚Å‚«‚Ü‚·
 
 function updateDoors(entity) {
 	if (entityID == -1) return;
@@ -662,8 +662,8 @@ function updateDoors(entity) {
 			doorState[i] = 3;
 		}
 
-		//doorState[i]ãŒ1(ãƒ‰ã‚¢ã‚’é–‹ã‘ã¦ã‚‹é€”ä¸­)ã®å ´åˆdoorOpnSpdã‚’ã€doorState[i]ãŒ3(ãƒ‰ã‚¢ã‚’é–‰ã‚ã¦ã‚‹é€”ä¸­)ã®å ´åˆdoorClsSpdã‚’spdã«ä»£å…¥ã—ã¾ã™ã€‚
-		//ã©ã¡ã‚‰ã§ã‚‚ãªã„å ´åˆ ã¯ã€if(spd != -1)ãƒ–ãƒ­ãƒƒã‚¯å†…ã®ãƒ‰ã‚¢ã‚’ç§»å‹•ã™ã‚‹å‡¦ç†ã‚’ã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹ãŸã‚-1ã‚’ä»£å…¥ã—ã¾ã™ã€‚
+		//doorState[i]‚ª1(ƒhƒA‚ğŠJ‚¯‚Ä‚é“r’†)‚Ìê‡doorOpnSpd‚ğAdoorState[i]‚ª3(ƒhƒA‚ğ•Â‚ß‚Ä‚é“r’†)‚Ìê‡doorClsSpd‚ğspd‚É‘ã“ü‚µ‚Ü‚·B
+		//‚Ç‚¿‚ç‚Å‚à‚È‚¢ê‡ ‚ÍAif(spd != -1)ƒuƒƒbƒN“à‚ÌƒhƒA‚ğˆÚ“®‚·‚éˆ—‚ğƒXƒLƒbƒv‚·‚é‚½‚ß-1‚ğ‘ã“ü‚µ‚Ü‚·B
 		var spd = doorState[i] == 1 ? doorOpnSpd : (doorState[i] == 3 ? doorClsSpd : -1);
 		if (spd != -1) {
 			var altick = 0;
@@ -681,7 +681,7 @@ function updateDoors(entity) {
 				var opnSpeed = spd[j][0];
 				var movement = spd[j][1];
 				//20 ticks per second
-				//20tickæ¯ç§’
+				//20tick–ˆ•b
 				if (movingTick[i] <= (altick + (opnSpeed * 20))) {
 					if (!shouldUpdate) break;
 
@@ -778,31 +778,31 @@ function renderDoorLamp(entity) {
 
 function renderController(entity, onUpdateTick) {
 
-	var dataMap = entity.getResourceState().getDataMap(); //dataMapå–å¾—
-	var notch = entity.getNotch(); //ãƒãƒƒãƒå–å¾—
-	var direction = entity.getTrainStateData(10); //ãƒ¬ãƒãƒ¼ã‚µå–å¾—
+	var dataMap = entity.getResourceState().getDataMap(); //dataMapæ“¾
+	var notch = entity.getNotch(); //ƒmƒbƒ`æ“¾
+	var direction = entity.getTrainStateData(10); //ƒŒƒo[ƒTæ“¾
 	var isControlCar = entity.isControlCar();
 
-	roMc = dataMap.getDouble("roMcData"); //ãƒ‡ãƒ¼ã‚¿ä¿æŒ
+	roMc = dataMap.getDouble("roMcData"); //ƒf[ƒ^•Û
 	roBr = dataMap.getDouble("roBrData"); //
 	roRev = dataMap.getDouble("roRevData"); //
 
-	var mcAngle = 16.0; //ãƒã‚¹ã‚³ãƒ³å‹•ä½œè§’
-	var brAngle = 15.0; //ãƒ–ãƒ¬ãƒ¼ã‚­å‹•ä½œè§’ 0Â°ã‹ã‚‰20Â°
-	var revAngle = 40.0; //ãƒ¬ãƒãƒ¼ã‚µå‹•ä½œè§’
+	var mcAngle = 16.0; //ƒ}ƒXƒRƒ““®ìŠp
+	var brAngle = 15.0; //ƒuƒŒ[ƒL“®ìŠp 0‹‚©‚ç20‹
+	var revAngle = 40.0; //ƒŒƒo[ƒT“®ìŠp
 
 	if (onUpdateTick) {
 
 		//-----------------------------------------------------------------------
 
-		//ãƒã‚¹ã‚³ãƒ³
-		if (notch >= 0) { //ãƒãƒƒãƒãŒ0ä»¥ä¸Šãªã‚‰
-			var roMcAngle = notch * -mcAngle; //ãƒã‚¹ã‚³ãƒ³å‹•ä½œè§’ =ãƒãƒƒãƒ x -20Â°
+		//ƒ}ƒXƒRƒ“
+		if (notch >= 0) { //ƒmƒbƒ`‚ª0ˆÈã‚È‚ç
+			var roMcAngle = notch * -mcAngle; //ƒ}ƒXƒRƒ““®ìŠp =ƒmƒbƒ` x -20‹
 		} else {
-			var roMcAngle = 0; //ãƒ–ãƒ¬ãƒ¼ã‚­å‹•ä½œè§’ = 0
+			var roMcAngle = 0; //ƒuƒŒ[ƒL“®ìŠp = 0
 		}
 
-		//å‹•ä½œè£œé–“
+		//“®ì•âŠÔ
 		if (roMc > roMcAngle) {
 			roMc = roMc - (mcAngle / 2);
 		} else if (roMc < roMcAngle) {
@@ -811,14 +811,14 @@ function renderController(entity, onUpdateTick) {
 
 		//-----------------------------------------------------------------------
 
-		//ãƒ–ãƒ¬ãƒ¼ã‚­
-		if (notch <= 0) { //ãƒãƒƒãƒãŒ0ä»¥ä¸‹ãªã‚‰
-			var roBrAngle = notch * -brAngle; //ãƒã‚¹ã‚³ãƒ³å‹•ä½œè§’ =ãƒãƒƒãƒ x -13Â°
+		//ƒuƒŒ[ƒL
+		if (notch <= 0) { //ƒmƒbƒ`‚ª0ˆÈ‰º‚È‚ç
+			var roBrAngle = notch * -brAngle; //ƒ}ƒXƒRƒ““®ìŠp =ƒmƒbƒ` x -13‹
 		} else {
-			var roBrAngle = 0; //ãƒ–ãƒ¬ãƒ¼ã‚­å‹•ä½œè§’ = 0
+			var roBrAngle = 0; //ƒuƒŒ[ƒL“®ìŠp = 0
 		}
 
-		//å‹•ä½œè£œé–“
+		//“®ì•âŠÔ
 		if (roBr > roBrAngle) {
 			roBr = roBr - (brAngle / 2);
 		} else if (roBr < roBrAngle) {
@@ -827,7 +827,7 @@ function renderController(entity, onUpdateTick) {
 
 		//-----------------------------------------------------------------------
 
-		//ãƒ¬ãƒãƒ¼ã‚µ
+		//ƒŒƒo[ƒT
 		if(direction == 0) {
 			var roRevAngle = revAngle;
 		} else if(direction == 1) {
@@ -836,7 +836,7 @@ function renderController(entity, onUpdateTick) {
 			var roRevAngle = -revAngle;
 		}
 
-		//å‹•ä½œè£œé–“
+		//“®ì•âŠÔ
 		if (roRev > roRevAngle) {
 			roRev = roRev - (revAngle / 2);
 		} else if (roRev < roRevAngle) {
@@ -847,29 +847,29 @@ function renderController(entity, onUpdateTick) {
 
 	}
 
-	dataMap.setDouble("roMcData", roMc, false); //ãƒ‡ãƒ¼ã‚¿ä¿æŒ
+	dataMap.setDouble("roMcData", roMc, false); //ƒf[ƒ^•Û
 	dataMap.setDouble("roBrData", roBr, false); //
 	dataMap.setDouble("roRevData", roRev, false); //
 
 
-		//ãƒã‚¹ã‚³ãƒ³
+		//ƒ}ƒXƒRƒ“
 	GL11.glPushMatrix();
-	renderer.rotate(roMc, 'X', 0.0, 0.8499, 9.196); //å›è»¢è»¸
+	renderer.rotate(roMc, 'X', 0.0, 0.8499, 9.196); //‰ñ“]²
 	mcH.render(renderer);
 	GL11.glPopMatrix();
 
 
 	if(isControlCar) {
-		//ãƒ–ãƒ¬ãƒ¼ã‚­
+		//ƒuƒŒ[ƒL
 		GL11.glPushMatrix();
-		renderer.rotate(roBr, 'Y', 0.3651, 0.0, 9.2528); //å›è»¢è»¸
+		renderer.rotate(roBr, 'Y', 0.3651, 0.0, 9.2528); //‰ñ“]²
 		brH.render(renderer);
 		GL11.glPopMatrix();
 	}
 
-	//ãƒ¬ãƒãƒ¼ã‚µ
+	//ƒŒƒo[ƒT
 	GL11.glPushMatrix();
-	renderer.rotate(roRev, 'X', 0.0000, 0.8993, 9.3183); //å›è»¢è»¸
+	renderer.rotate(roRev, 'X', 0.0000, 0.8993, 9.3183); //‰ñ“]²
 	revH.render(renderer);
 	GL11.glPopMatrix();
 
@@ -885,13 +885,13 @@ function renderCab(entity, onUpdateTick) {
 	var pantaState = entity.getTrainStateData(6);
 	var speed = entity.getSpeed() * 72;
 
-	//å›è»¢è»¸è¨ˆç®—
-	var vecY = createVector3f(0.776, 1.0136, 9.4613, 0.776, 1.1342, 9.4913); //ãƒ¡ãƒ¼ã‚¿ãƒ¼å³ä¸‹ã®xyzåº§æ¨™, å³ä¸Šã®xyzåº§æ¨™
-	var vecZ = createVector3f(0.776, 1.0136, 9.4613, 0.8967, 1.0136, 9.4613); //ãƒ¡ãƒ¼ã‚¿ãƒ¼å³ä¸‹ã®xyzåº§æ¨™, å·¦ä¸‹ã®xyzåº§æ¨™
+	//‰ñ“]²ŒvZ
+	var vecY = createVector3f(0.776, 1.0136, 9.4613, 0.776, 1.1342, 9.4913); //ƒ[ƒ^[‰E‰º‚ÌxyzÀ•W, ‰Eã‚ÌxyzÀ•W
+	var vecZ = createVector3f(0.776, 1.0136, 9.4613, 0.8967, 1.0136, 9.4613); //ƒ[ƒ^[‰E‰º‚ÌxyzÀ•W, ¶‰º‚ÌxyzÀ•W
 	var axisVec = Vector3f.cross(vecY, vecZ, null).normalise(null);
 
 	var roSp = 0 + 241.8 / 120 * speed;
-	//å›è»¢å¤‰æ•° = åˆæœŸä½ç½®ã‹ã‚‰ç›®ç››ã‚Š0kmã®ä½ç½®ã¾ã§ã®è§’åº¦ + 0kmã‹ã‚‰ç›®ç››ã‚Šæœ€å¤§ã¾ã§ã®è§’åº¦ / ç›®ç››ã‚Šæœ€å¤§ã®é€Ÿåº¦ * speed
+	//‰ñ“]•Ï” = ‰ŠúˆÊ’u‚©‚ç–Ú·‚è0km‚ÌˆÊ’u‚Ü‚Å‚ÌŠp“x + 0km‚©‚ç–Ú·‚èÅ‘å‚Ü‚Å‚ÌŠp“x / –Ú·‚èÅ‘å‚Ì‘¬“x * speed
 
 	if(pantaState == 1) {
 		setVoltage = 188;
@@ -915,31 +915,31 @@ function renderCab(entity, onUpdateTick) {
 
 	dataMap.setDouble("roVlt", roVlt, false);
 
-	if (!isControlCar && interiorLightState > 0) { //å®¤å†…ç¯ãŒONã§ã‚ã‚‹å ´åˆ
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã™ã‚‹
+	if (!isControlCar && interiorLightState > 0) { //º“à“”‚ªON‚Å‚ ‚éê‡
+		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //º“à“”ƒ‚[ƒh‚ğ—LŒø‚É‚·‚é
 			GLHelper.setLightmapMaxBrightness();
 	}
 
-	//é€Ÿåº¦è¨ˆ
+	//‘¬“xŒv
 	renderRotatePartFromPos(needleSpd, -roSp, 0.8363, 1.0739, 9.4778, axisVec.getX(), axisVec.getY(), axisVec.getZ());
-	//(ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ, å›è»¢å¤‰æ•°, åº§æ¨™x, åº§æ¨™y, åº§æ¨™z, axisVec.getX(), axisVec.getY(), axisVec.getZ())
+	//(ƒIƒuƒWƒFƒNƒg, ‰ñ“]•Ï”, À•Wx, À•Wy, À•Wz, axisVec.getX(), axisVec.getY(), axisVec.getZ())
 
-	//é›»åœ§è¨ˆ
+	//“dˆ³Œv
 	renderRotatePartFromPos(needlekV, -roVlt, 0.3787, 1.0739, 9.4778, axisVec.getX(), axisVec.getY(), axisVec.getZ());
 
-	//è­¦ç¬›ãƒšãƒ€ãƒ«
+	//Œx“Jƒyƒ_ƒ‹
 	if (Keyboard.isKeyDown(Keyboard.KEY_P)) {
 		hornPedalON.render(renderer);
 	} else {
 		hornPedalOFF.render(renderer);
 	}
 
-	cab_body.render(renderer); //â†é€†è»¢ãƒãƒ³ãƒ‰ãƒ«ãŒå‰ä»¥å¤–ã®å ´åˆã«ç™ºå…‰ã•ã›ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®š
+	cab_body.render(renderer); //©‹t“]ƒnƒ“ƒhƒ‹‚ª‘OˆÈŠO‚Ìê‡‚É”­Œõ‚³‚¹‚éƒIƒuƒWƒFƒNƒg‚ğw’è
 	renderController(entity, onUpdateTick);
 	renderATS(entity);
 
 	if (interiorLightState > 0 && !isControlCar) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //º“à“”ƒ‚[ƒh‚ğ–³Œø‚É‚·‚é
 	}
 
 }
@@ -951,20 +951,20 @@ function renderBodyGlass(entity, pass) {
 	var interiorLightState = entity.getTrainStateData(11);
 
 	if(pass == 1 && interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã™ã‚‹
+		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //º“à“”ƒ‚[ƒh‚ğ—LŒø‚É‚·‚é
 		GLHelper.setLightmapMaxBrightness();
 	}
 
 	bodyGlass.render(renderer);
 
 	if(pass == 1 && interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //º“à“”ƒ‚[ƒh‚ğ–³Œø‚É‚·‚é
 	}
 
 	cabGlass.render(renderer);
 
 	if(pass == 1 && interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);//å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);//º“à“”ƒ‚[ƒh‚ğ–³Œø‚É‚·‚é
 	}
 
 }
@@ -978,14 +978,14 @@ function renderCabGlass(entity, pass) {
 
 	if(!isControlCar) {
 		if(pass >= 2 && interiorLightState > 0) {
-			NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã™ã‚‹
+			NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //º“à“”ƒ‚[ƒh‚ğ—LŒø‚É‚·‚é
 			GLHelper.setLightmapMaxBrightness();
 		}
 
 		cabGlass.render(renderer);
 
 		if(pass >= 2 && interiorLightState > 0) {
-			NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);//å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+			NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);//º“à“”ƒ‚[ƒh‚ğ–³Œø‚É‚·‚é
 		}
 	}
 
@@ -997,18 +997,18 @@ function renderInterior(entity) {
 
 	var interiorLightState = entity.getTrainStateData(11);
 
-	if (interiorLightState > 0) { //å®¤å†…ç¯ãŒONã§ã‚ã‚‹å ´åˆ
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’æœ‰åŠ¹ã«ã™ã‚‹
+	if (interiorLightState > 0) { //º“à“”‚ªON‚Å‚ ‚éê‡
+		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //º“à“”ƒ‚[ƒh‚ğ—LŒø‚É‚·‚é
 		GLHelper.setLightmapMaxBrightness();
 	}
 
 	GL11.glPushMatrix();
 
-	interior.render(renderer); //ç™ºå…‰ã•ã›ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®š(é–¢æ•°ã‚‚å¯)
+	interior.render(renderer); //”­Œõ‚³‚¹‚éƒIƒuƒWƒFƒNƒg‚ğw’è(ŠÖ”‚à‰Â)
 	renderDoor_i(entity);
 
 	if (interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //å®¤å†…ç¯ãƒ¢ãƒ¼ãƒ‰ã‚’ç„¡åŠ¹ã«ã™ã‚‹
+		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //º“à“”ƒ‚[ƒh‚ğ–³Œø‚É‚·‚é
 	}
 
 	GL11.glPopMatrix();
@@ -1031,11 +1031,11 @@ function renderBogie(entity) {
 	var bogiePitchF = trainPitch - entityBogieF.field_70125_A;
 	var bogiePitchB = trainPitch - entityBogieB.field_70125_A * -1;
 
-	var bogiePosZ = [6.5, -6.5]; //Zè»¸å‰ã‹ã‚‰bogiePosZ[0],[1]
-	var wheelPosY = -0.527; //è»Šè¼ªå›è»¢è»¸Y
-	var wheelPosZ = [7.55, 5.45, -5.45, -7.55]; //Zè»¸å‰ã‹ã‚‰wheelPosZ[0],[1],[2],[3]
+	var bogiePosZ = [6.5, -6.5]; //Z²‘O‚©‚çbogiePosZ[0],[1]
+	var wheelPosY = -0.527; //Ô—Ö‰ñ“]²Y
+	var wheelPosZ = [7.55, 5.45, -5.45, -7.55]; //Z²‘O‚©‚çwheelPosZ[0],[1],[2],[3]
 
-	//å‰å°è»Š
+	//‘O‘äÔ
 	GL11.glPushMatrix();
 	renderer.rotate(bogieYawF, 'Y', 0.0, 0.0, bogiePosZ[0]);
 	renderer.rotate(bogiePitchF, 'X', 0.0, 0.0, bogiePosZ[0]);
@@ -1050,7 +1050,7 @@ function renderBogie(entity) {
 	GL11.glPopMatrix();
 	GL11.glPopMatrix();
 
-	//å¾Œå°è»Š
+	//Œã‘äÔ
 	GL11.glPushMatrix();
 	renderer.rotate(bogieYawB, 'Y', 0.0, 0.0, bogiePosZ[1]);
 	renderer.rotate(bogiePitchB, 'X', 0.0, 0.0, bogiePosZ[1]);
@@ -1076,27 +1076,27 @@ function renderOtherParts(entity) {
 	var doorClsL = entity.doorMoveL / 60;
 	var doorClsR = entity.doorMoveR / 60;
 
-	//å‰ç…§ç¯
-	if (trainDir == 0) { //é€²è¡Œ
+	//‘OÆ“”
+	if (trainDir == 0) { //is
 		GL11.glPushMatrix();
 		headlighton.render(renderer);
 		taillightoff.render(renderer);
 		GL11.glPopMatrix();
-	} else { //å¾Œé€€
+	} else { //Œã‘Ş
 		GL11.glPushMatrix();
 		headlightoff.render(renderer);
 		taillighton.render(renderer);
 		GL11.glPopMatrix();
 	}
 
-	//é‹è»¢å°æˆ¸é–‰ã‚ç¯
-	if(doorClsL > 0 || doorClsR > 0) { //å³ã‹å·¦ã©ã¡ã‚‰ã‹ã®ãƒ‰ã‚¢ãŒé–‹ã„ã¦ã„ã‚‹ã¨ã
+	//‰^“]‘äŒË•Â‚ß“”
+	if(doorClsL > 0 || doorClsR > 0) { //‰E‚©¶‚Ç‚¿‚ç‚©‚ÌƒhƒA‚ªŠJ‚¢‚Ä‚¢‚é‚Æ‚«
 		cabDoorLampOFF.render(renderer);
-	} else { //ã©ã¡ã‚‰ã‚‚é–‰ã˜ã¦ã„ã‚‹ã¨ã
+	} else { //‚Ç‚¿‚ç‚à•Â‚¶‚Ä‚¢‚é‚Æ‚«
 		cabDoorLampON.render(renderer);
 	}
 
-	//ãƒ‘ãƒ³ã‚¿ã‚°ãƒ©ãƒ•
+	//ƒpƒ“ƒ^ƒOƒ‰ƒt
 	if(pantaState == 0) {
 		pantaDawn.render(renderer);
 	} else {
