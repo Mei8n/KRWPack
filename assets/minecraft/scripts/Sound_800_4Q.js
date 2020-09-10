@@ -225,31 +225,48 @@ var CompressorEndName = "RTMLib.CP.CPend16";
 
 PlayCompressor(su,CompressorName,CompressorActiveName,CompressorEndName);
 var speed = su.getSpeed(),
-		notch = su.getNotch();
+	notch = su.getNotch();
 
+	//EB_Air
+	if(notch === -8) {
+		su.playSound('sound_krw', 'train.800EB', 1.0, 1.0, false);
+	}
 
+	else {
+		su.stopSound('sound_krw', 'train.800EB');
+	}
 
-			//Breaker_On
-			if(speed>0&&speed<60&& notch > 0){
-				var pitBreaker_On = 1.0,
-						volBreaker_On = 1.0;
-				su.playSound('sound_krw', 'train.800BcOn', volBreaker_On, pitBreaker_On, false);
-			}
-			else{
-				su.stopSound('sound_krw', 'train.800BcOn');
-			}
+	//Breaker_On
+	if(speed>0&&speed<60&& notch > 0) {
+		su.playSound('sound_krw', 'train.800BcOn', 1.0, 1.0, false);
+	}
+	else{
+		su.stopSound('sound_krw', 'train.800BcOn');
+	}
 
-			//Breaker_Off
-			if(speed>0&&speed<60&& notch === 0){
-				var pitBreaker_Off = 1.0,
-						volBreaker_Off = 1.0;
-				su.playSound('sound_krw', 'train.800BcOff', volBreaker_Off, pitBreaker_Off, false);
-			}
-			else{
-				su.stopSound('sound_krw', 'train.800BcOff');
-			}
+	//Breaker_Off
+	if(speed>0&&speed<60&& notch === 0) {
+		su.playSound('sound_krw', 'train.800BcOff', 1.0, 1.0, false);
+	}
+	else{
+		su.stopSound('sound_krw', 'train.800BcOff');
+	}
 
+	//Shock_On
+	if(speed>0&&speed<90&& notch > 0) {
+		su.playSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Uniton', 1.0, 1.0, false);
+	}
+	else{
+		su.stopSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Uniton');
+	}
 
+	//Shock_Off
+	if(speed>0&&speed<90&& notch === 0) {
+		su.playSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Unitoff', 1.0, 1.0, false);
+	}
+	else{
+		su.stopSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Unitoff');
+	}
 
 	if(speed>0.1){
 		if(notch!=0){

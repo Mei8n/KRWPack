@@ -225,7 +225,32 @@ var CompressorEndName = "RTMLib.CP.CPend16";
 
 PlayCompressor(su,CompressorName,CompressorActiveName,CompressorEndName);
 var speed = su.getSpeed(),
-		notch = su.getNotch();
+	notch = su.getNotch();
+
+	//EB_Air
+	if(notch === -8) {
+		su.playSound('sound_krw', 'train.800EB', 1.0, 1.0, false);
+	}
+
+	else {
+		su.stopSound('sound_krw', 'train.800EB');
+	}
+
+	//Shock_On
+	if(speed>0&&speed<90&& notch > 0) {
+		su.playSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Uniton', 1.0, 1.0, false);
+	}
+	else{
+		su.stopSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Uniton');
+	}
+
+	//Shock_Off
+	if(speed>0&&speed<90&& notch === 0) {
+		su.playSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Unitoff', 1.0, 1.0, false);
+	}
+	else{
+		su.stopSound('sound_mhnlib', 'RTMLib.Sounds.201_Shock_Unitoff');
+	}
 
 	if(speed>0.1){
 			//Loop
