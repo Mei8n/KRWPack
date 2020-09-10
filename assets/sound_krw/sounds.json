@@ -27,6 +27,13 @@
     ]
  },
 
+  "train.800EB": {
+    "category": "neutral",
+    "sounds": [
+      "train/800EB"
+    ]
+ },
+
   "train.ch0": {
     "category": "neutral",
     "sounds": [
