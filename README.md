@@ -8,7 +8,7 @@
 [![LatestRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack)](https://github.com/Mei8n/KRWPack/releases/latest)
 [![LatestPreRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack?include_prereleases)](https://github.com/Mei8n/KRWPack/releases)
 
-Ver:0.41 現在更新中 800系が完成したらVer1.0リリースします
+Ver:1.0
 
 ## Download
 
@@ -19,11 +19,6 @@ Latest Pre-Release [Download](https://github.com/Mei8n/KRWPack/releases)
 
 Hキー(仮) 保安電源投入\
 Jキー(仮) 保安電源切(構内走行時、無閉塞運転時等に使用)
-
-Signal 22 ATS投入\
-Signal 23 ATC投入
-上記2つは走行中/停車中の切り替えで使用
-
 
 ### ATS-MK
 曲線制限+5km/h以内 ブレーキ無し、予告鳴動\
