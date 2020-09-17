@@ -118,6 +118,8 @@
 "trainDistance": 10.0,
 "muteJointSound": true,
 "notDisplayCab": true,
+"accelerateion": 0.00145824,
+"maxSpeed": [0.347222, 0.625, 1.041666, 1.388888, 1.666666],
 "doCulling": true
 
 }
