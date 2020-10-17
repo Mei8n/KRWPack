@@ -10,6 +10,8 @@ function onUpdate(su) {
 	var signal = su.getEntity().getSignal();
 	var isControlCar = su.getEntity().isControlCar();
 	var dataMap = entity.getResourceState().getDataMap();
+	var speed = su.getSpeed();
+	var notch = su.getNotch();
 
 	if(isControlCar){
 		
@@ -188,21 +190,6 @@ function onUpdate(su) {
 			su.stopSound('sound_krw', 'train.ATS_ORP');
 		}
 
-
-		//ATS･ATC切り替え音声
-		if(signal == 22){
-			su.playSound('sound_krw', 'train.Switch_ATS', 1, 1, false);
-		}
-
-		else if(signal == 23){
-			su.playSound('sound_krw', 'train.Switch_ATC', 1, 1, false);
-		}
-
-		else{
-			su.stopSound('sound_krw', 'train.Switch_ATS');
-			su.stopSound('sound_krw', 'train.Switch_ATC');
-		}
-
 		//警笛長押し
 		if(isPushHorn){
 			su.playSound('sound_krw', 'train.800Horn1', 1, 1, false);
@@ -224,8 +211,6 @@ var CompressorEndName = "RTMLib.CP.CPend16";
 //↑コンプレッサー音の指定↑
 
 PlayCompressor(su,CompressorName,CompressorActiveName,CompressorEndName);
-var speed = su.getSpeed(),
-	notch = su.getNotch();
 
 	//EB_Air
 	if(notch === -8) {
