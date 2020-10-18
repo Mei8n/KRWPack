@@ -18,11 +18,6 @@ function onUpdate(su) {
 		var isOver5 = dataMap.getBoolean('isOver5');
 		var isOver10 = dataMap.getBoolean('isOver10');
 		var isPushHorn = dataMap.getBoolean("isPushHorn");
-		//var atsCount = dataMap.getInt('atsCount');
-		//var atsWarnOn0 = dataMap.getBoolean('atsWarnOn0');
-		//var atsWarnOn1 = dataMap.getBoolean('atsWarnOn1');
-	
-		//var isTrainProtection = dataMap.getBoolean('isTrainProtection');
 
 
 
@@ -42,44 +37,6 @@ function onUpdate(su) {
 		else{
 			su.stopSound('sound_krw', 'train.Pattern_Emr');
 		}
-
-		//保安装置未投入音声 未実装
-		/*
-		if(!isTrainProtection){
-			su.playSound('sound_krw', 'train.Pattern_Offing', 1, 1);
-		}
-		else{
-			su.stopSound('sound_krw', 'train.Pattern_Offing');
-		}
-		
-		
-		//ATSロング警報
-		if(atsWarnOn0){
-			su.playSound('sound_krw', 'train.Pattern_Emr2', 1, 1);
-		}
-
-	   else{
-		   su.stopSound('sound_krw', 'train.Pattern_Emr2');
-		}
-
-	   if(atsWarnOn1){
-		   su.playSound('sound_krw', 'train.Pattern_ATS', 1, 1);
-		}
-
-	   else{
-		   su.stopSound('sound_krw', 'train.Pattern_ATS');
-		} */
-
-
-/*		if (atsCount != signal) { //dataMapの削減の為コメントアウト
-			if (signal >= 10 && signal <= 21) {
-				su.stopSound('sound_krw', 'train.Pattern_Action');
-				ControlTrain.logger("PlaySound")
-				su.playSound('sound_krw', 'train.Pattern_Action', 1, 1, false);
-			}
-
-			dataMap.setInt("atsCount", signal, 1);
-		}*/
 
 		if(signal == 10){
 			su.playSound('sound_krw', 'train.Pattern_Action10', 1, 1, false);
