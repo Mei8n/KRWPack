@@ -231,6 +231,64 @@
     "sounds": [
       "train/ATS_Stopping"
     ]
+ },
+
+
+
+  "train.ED60BlowerLoop": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60BlowerLoop"
+    ]
+ },
+
+  "train.ED60BlowerOn": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60BlowerOn"
+    ]
+ },
+
+  "train.ED60Brake": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60Brake"
+    ]
+ },
+
+  "train.ED60EB": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60EB"
+    ]
+ },
+
+  "train.ED60Horn1": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60Horn1"
+    ]
+ },
+
+  "train.ED60PantaDown": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60PantaDown"
+    ]
+ },
+
+  "train.ED60PantaUp": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60PantaUp"
+    ]
+ },
+
+  "train.ED60Stop": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60Stop"
+    ]
  }
 
 }
