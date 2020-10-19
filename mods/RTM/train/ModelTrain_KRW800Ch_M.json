@@ -60,6 +60,7 @@
 "notDisplayCab": true,
 "accelerateion": 0.00159712,
 "maxSpeed": [0.347222, 0.625, 1.041666, 1.388888, 1.666666],
+"tags": "KRW krw",
 "doCulling": true
 
 }
