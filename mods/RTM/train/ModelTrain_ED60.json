@@ -1,0 +1,50 @@
+{
+
+"trainName": "KRWED60",
+
+"trainType": "EC",
+
+"trainModel2": { "modelFile": "ED60.mqo",
+				"textures": [["mat1", "textures/train/ED60/ED60.png", "AlphaBlend,Light"],
+					     ["mat2", "textures/train/ED60/ED60Cab.png", "AlphaBlend"]]},
+
+
+"bogieModel2": { "modelFile": "ModelBogie.class",
+			 "textures": [["default", "textures/train/tp.png" ]]},
+
+"buttonTexture": "textures/train/ED60/button_ED60.png",
+
+
+
+"smoothing": true,
+"sound_BrakeRelease": "sound_krw:train.ED60Brake",
+"sound_Announcement": [
+			["電鈴", "sound_mhnlib:RTMLib.Sounds.Mhn_Bell_4"],
+			["連絡ブザ", "sound_mhnlib:RTMLib.Sounds.Mhn_buzzer_10"]],
+
+"soundScriptPath": "scripts/Sound_ED60.js",
+
+
+
+"seatPos": [[12, 0, 90, 2], [12, 0, 70, 2], [12, 0, 50, 2], [12, 0, 10, 2],
+	[12, 0, -140, 2], [12, 0, -110, 2], [12, 0, -90, 2], [12, 0, -70, 2], [12, 0, -30, 2], [12, 0, -10, 2],
+	[-12, 0, 90, 2], [-12, 0, 70, 2], [-12, 0, 50, 2], [-12, 0, 10, 2],
+	[-12, 0, -140, 2], [-12, 0, -110, 2], [-12, 0, -90, 2], [-12, 0, -70, 2], [-12, 0, -30, 2], [-12, 0, -10, 2]],
+
+"renderLight": true,
+"playerPos": [[0.81, 0.5, 6.1], [-0.81, 0.5, -6.1]],
+"bogiePos": [[0.0, 0.0, 3.9], [0.0, 0.0, -3.9]],
+"trainDistance": 7.56,
+"muteJointSound": true,
+"notDisplayCab": true,
+"accelerateions": [0.00006944, 0.0001736, 0.0003472, 0.0005208, 0.0006944, 0.0006944, 0.0006944, 0.0010416, 0.0010416, 0.0013888, 0.0013888, 0.0013888, 0.0013888, 0.001736],
+"maxSpeed": [0.34722222, 0.41666666, 0.55555555, 0.625, 0.69444444, 0.76388888, 0.83333333, 0.90277777, 0.97222222, 1.11111111, 1.25, 1.38888888, 1.5277777777, 1.66666666],
+"tags": "KRW krw",
+
+"customButtons": [
+        ["ブロワー停止", "ブロワー起動"]
+],
+
+"doCulling": true
+
+}
