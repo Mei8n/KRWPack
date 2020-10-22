@@ -270,6 +270,13 @@
     ]
  },
 
+  "train.ED60Horn2": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60Horn2"
+    ]
+ },
+
   "train.ED60PantaDown": {
     "category": "neutral",
     "sounds": [
@@ -288,6 +295,48 @@
     "category": "neutral",
     "sounds": [
       "train/ED60Stop"
+    ]
+ },
+
+  "train.ED60CP_On": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60CP_On"
+    ]
+ },
+
+  "train.ED60CP_Loop": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60CP_Loop"
+    ]
+ },
+
+  "train.ED60CP_Off": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60CP_Off"
+    ]
+ },
+
+  "train.ED60Squeak": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60Squeak"
+    ]
+ },
+
+  "train.ED60BreakerOn": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60BreakerOn"
+    ]
+ },
+
+  "train.ED60BreakerOff": {
+    "category": "neutral",
+    "sounds": [
+      "train/ED60BreakerOff"
     ]
  }
 
