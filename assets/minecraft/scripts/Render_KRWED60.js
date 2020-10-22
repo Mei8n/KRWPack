@@ -1,3 +1,4 @@
+
 //Render_KRWED60.js  by unlock [複製/コピペ/転載を禁ずる]
 
 //Don't duplicate or copy.
@@ -11,10 +12,7 @@ var renderClass = "jp.ngt.rtm.render.VehiclePartsRenderer";
 importPackage(Packages.org.lwjgl.opengl);
 importPackage(Packages.jp.ngt.rtm.render);
 
-importPackage(Packages.jp.ngt.rtm.util);
 importPackage(Packages.jp.ngt.ngtlib.util);
-importPackage(Packages.jp.ngt.ngtlib.renderer);
-importPackage(Packages.jp.ngt.ngtlib.io);
 importPackage(Packages.jp.ngt.ngtlib.math);
 importPackage(Packages.org.lwjgl.input);
 importPackage(Packages.org.lwjgl.util.vector);
@@ -23,68 +21,77 @@ importPackage(Packages.jp.kaiz.atsassistmod.api);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//###################################################################
-
-var entityID = 0;
-var prevTickID = 0;
-
-var doorMovementID = 1;
-var doorStateID = 2;
-var doorMovingTickID = 3;
-var doorTargetMovementID = 4;
-var countupID = 5;
-
-var doorMovement;
-
-var doorState;
-
-var doorStateInTrain;
-
-var shouldUpdate;
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 function init(par1, par2) {
 
-	//前面 外装
-	body1 = renderer.registerParts(new Parts("車体", "車番プレート2", "貫通扉", "貫通扉Hゴム", "前面ステップ", "前照灯", "尾灯", "手すり", "乗務員扉", "前面窓Hゴム", "側面窓Hゴム", 
-		"屋根", "ホイッスル", "タイフォン", "クーラー", "パンタ基台", "底", "床下1", "床下2", "スカート1", "スカート2", "連結器", "開放テコ", "配管", 
-		"内側", "運転台", "メーター"));
+	//車体1
+	body0 = renderer.registerParts(new Parts("車体", "貫通扉", "乗務員扉"));
 
-	//外装
-	body2 = renderer.registerParts(new Parts("側面", "車側灯", "乗務員扉外", "雨樋", "戸袋窓部シャドウ処理", "側面Hゴム", "間外", "窓枠外",
-		"側面窓外", "ドア下", "屋根", "冷房", "アンテナ", "パンタ基台", "妻面外", "貫通扉外", "貫通幌"));
+	//車体?????
+	bodyR0 = renderer.registerParts(new Parts("レインボ車体", "レインボ貫通扉", "レインボ乗務員扉"));
 
-	//前面 内装 (運転室)
-	cab_body = renderer.registerParts(new Parts("乗務員室仕切り_乗務員室", "前面内側", "Hゴム乗務員室側", "乗務員室床", "乗務員室内側", "乗務員扉内", "乗務員室天井",
-		"乗務員室機器類_ミラー", "乗務員室機器類",
-		"運転台筐体", "メーター"));
+	//車体2
+	body1 = renderer.registerParts(new Parts("車番プレート", "貫通扉Hゴム", "貫通扉窓", "前面ステップ", "前照灯", "尾灯", "運転台周り窓", "窓", "手すり", "前面窓Hゴム", "側面窓Hゴム"));
 
-	//窓ガラス
-	bodyGlass = renderer.registerParts(new Parts("窓"));
-	cabGlass = renderer.registerParts(new Parts("運転台周り窓", "貫通扉窓"));
+	//屋根
+	body2 = renderer.registerParts(new Parts("屋根", "ホイッスル", "タイフォン", "クーラー", "パンタ基台", "屋根上"));
+
+	//底
+	body3 = renderer.registerParts(new Parts("底", "床下1", "床下2", "ステップ", "スカート1", "スカート2", "開放テコ", "配管", "配管2", "疑似影"));
+
+	//連結器
+	coupler1 = renderer.registerParts(new Parts("自動連結器"));
+	coupler2 = renderer.registerParts(new Parts("密着連結器"));
+
+	//内側
+	interior = renderer.registerParts(new Parts("内側", "運転台", "メーター", "運転台機器類", "ブレーキ", "マスコン"));
+
+	//車番
+	number00 = renderer.registerParts(new Parts("車番00"));
+	number10 = renderer.registerParts(new Parts("車番10"));
+	number20 = renderer.registerParts(new Parts("車番20"));
+	number30 = renderer.registerParts(new Parts("車番30"));
+	number40 = renderer.registerParts(new Parts("車番40"));
+	number50 = renderer.registerParts(new Parts("車番50"));
+	number60 = renderer.registerParts(new Parts("車番60"));
+	number70 = renderer.registerParts(new Parts("車番70"));
+	number80 = renderer.registerParts(new Parts("車番80"));
+	number90 = renderer.registerParts(new Parts("車番90"));
+
+	number0 = renderer.registerParts(new Parts("車番0"));
+	number1 = renderer.registerParts(new Parts("車番1"));
+	number2 = renderer.registerParts(new Parts("車番2"));
+	number3 = renderer.registerParts(new Parts("車番3"));
+	number4 = renderer.registerParts(new Parts("車番4"));
+	number5 = renderer.registerParts(new Parts("車番5"));
+	number6 = renderer.registerParts(new Parts("車番6"));
+	number7 = renderer.registerParts(new Parts("車番7"));
+	number8 = renderer.registerParts(new Parts("車番8"));
+	number9 = renderer.registerParts(new Parts("車番9"));
 
 	//パンタグラフ
-	pantaUp = renderer.registerParts(new Parts("パンタ上昇"));
-	pantaDawn = renderer.registerParts(new Parts("パンタ下降"));
+	pantaUpF = renderer.registerParts(new Parts("パンタ上昇前"));
+	pantaUpB = renderer.registerParts(new Parts("パンタ上昇後"));
+	pantaDownF = renderer.registerParts(new Parts("パンタ下降前"));
+	pantaDownB = renderer.registerParts(new Parts("パンタ下降後"));
 
 	//マスコン類
-	mcH = renderer.registerParts(new Parts("マスコン"));
-	brH = renderer.registerParts(new Parts("ブレーキハンドル"));
-	revH = renderer.registerParts(new Parts("レバーサー"));
+	mcHF = renderer.registerParts(new Parts("マスコンハンドル前"));
+	mcHB = renderer.registerParts(new Parts("マスコンハンドル後"));
+	brHF = renderer.registerParts(new Parts("ブレーキハンドル前"));
+	brHB = renderer.registerParts(new Parts("ブレーキハンドル後"));
+	revHF = renderer.registerParts(new Parts("レバーサー前"));
+	revHB = renderer.registerParts(new Parts("レバーサー後"));
 
 	//メーター類
-	needleSpd = renderer.registerParts(new Parts("速度計針"));
-	needlekV = renderer.registerParts(new Parts("電圧計針"));
-	needlekPaB = renderer.registerParts(new Parts("圧力計針黒"));
-	needlekPaR = renderer.registerParts(new Parts("圧力計針赤"));
-
-	//警笛ペダル
-	hornPedalON = renderer.registerParts(new Parts("警笛ペダル_On"));
-	hornPedalOFF = renderer.registerParts(new Parts("警笛ペダル_Off"));
+	needleSpdF = renderer.registerParts(new Parts("速度計針前"));
+	needleSpdB = renderer.registerParts(new Parts("速度計針後"));
+	needlekPaBF = renderer.registerParts(new Parts("圧力計針黒前"));
+	needlekPaBB = renderer.registerParts(new Parts("圧力計針黒後"));
+	needlekPaRF = renderer.registerParts(new Parts("圧力計針赤前"));
+	needlekPaRB = renderer.registerParts(new Parts("圧力計針赤後"));
 
 	//ATS表示機
-	atsPanel = renderer.registerParts(new Parts("ATS表示器", "上", "下"));
+	atsPanel = renderer.registerParts(new Parts("ATS筐体", "上", "下"));
 	ats_12x = renderer.registerParts(new Parts("12"));
 	ats_11x = renderer.registerParts(new Parts("11"));
 	ats_10x = renderer.registerParts(new Parts("10"));
@@ -102,40 +109,27 @@ function init(par1, par2) {
 	atsON = renderer.registerParts(new Parts("動作_点"));
 	atsOFF = renderer.registerParts(new Parts("動作_滅"));
 
-	//内装
-	interior = renderer.registerParts(new Parts("間", "窓枠内", "側面窓内", "内側", "枠類", "座席", "ポール",
-		"ダクト", "仕切り客室側", "妻面内", "禁煙", "貫通扉内", "取っ手", "天井", "床", "乗務員室仕切り_客室", "蛍光灯", "吊り革", "スピーカー"));
-
-	//床下
-	body3 = renderer.registerParts(new Parts("床下", "底", "影", "配管", "梯子", "連結器", "ジャンパ線", "ATS車上子"));
-
 	//前照灯
-	headlighton = renderer.registerParts(new Parts("前照灯点"));
-	headlightoff = renderer.registerParts(new Parts("前照灯滅"));
+	headlightOnF = renderer.registerParts(new Parts("前照灯点前"));
+	headlightOnB = renderer.registerParts(new Parts("前照灯点後"));
+	headlightOffF = renderer.registerParts(new Parts("前照灯滅前"));
+	headlightOffB = renderer.registerParts(new Parts("前照灯滅後"));
 
 	//尾灯
-	taillighton = renderer.registerParts(new Parts("尾灯点"));
-	taillightoff = renderer.registerParts(new Parts("尾灯滅"));
-
-	//ドア外
-	doorLFo = renderer.registerParts(new Parts("door_LF"));
-	doorLBo = renderer.registerParts(new Parts("door_LB"));
-	doorRFo = renderer.registerParts(new Parts("door_RF"));
-	doorRBo = renderer.registerParts(new Parts("door_RB"));
-
-	//ドア中
-	doorLFi = renderer.registerParts(new Parts("door_LFN"));
-	doorLBi = renderer.registerParts(new Parts("door_LBN"));
-	doorRFi = renderer.registerParts(new Parts("door_RFN"));
-	doorRBi = renderer.registerParts(new Parts("door_RBN"));
+	taillightOnF = renderer.registerParts(new Parts("尾灯点前"));
+	taillightOnB = renderer.registerParts(new Parts("尾灯点後"));
+	taillightOffF = renderer.registerParts(new Parts("尾灯滅前"));
+	taillightOffB = renderer.registerParts(new Parts("尾灯滅後"));
+	shuntinglightOnF = renderer.registerParts(new Parts("入換灯点前"));
+	shuntinglightOnB = renderer.registerParts(new Parts("入換灯点後"));
 
 	//台車
-	bogieF = renderer.registerParts(new Parts("bogieF")); //前台車
-	bogieB = renderer.registerParts(new Parts("bogieB")); //後台車
-	wheelF1 = renderer.registerParts(new Parts("wheelF1")); //車輪
-	wheelF2 = renderer.registerParts(new Parts("wheelF2"));
-	wheelB1 = renderer.registerParts(new Parts("wheelB1"));
-	wheelB2 = renderer.registerParts(new Parts("wheelB2"));
+	bogieF = renderer.registerParts(new Parts("台車F1", "台車F2")); //前台車
+	bogieB = renderer.registerParts(new Parts("台車R1", "台車R2")); //後台車
+	wheelF1 = renderer.registerParts(new Parts("車輪FF")); //車輪
+	wheelF2 = renderer.registerParts(new Parts("車輪FR"));
+	wheelB1 = renderer.registerParts(new Parts("車輪RF"));
+	wheelB2 = renderer.registerParts(new Parts("車輪RR"));
 
 }
 
@@ -143,26 +137,18 @@ function init(par1, par2) {
 
 function renderPreview(pass) {
 
-	if (pass == 0) {
+	if (pass <= 1) {
+		body0.render(renderer);
 		body1.render(renderer);
 		body2.render(renderer);
-		cab_body.render(renderer);
-		doorLampL_OFF.render(renderer);
-		doorLampR_OFF.render(renderer);
-		pantaUp.render(renderer);
-		atsPanel.render(renderer);
-		interior.render(renderer);
 		body3.render(renderer);
-		headlightoff.render(renderer);
-		taillightoff.render(renderer);
-		doorLFo.render(renderer);
-		doorLBo.render(renderer);
-		doorRFo.render(renderer);
-		doorRBo.render(renderer);
-		doorLFi.render(renderer);
-		doorLBi.render(renderer);
-		doorRFi.render(renderer);
-		doorRBi.render(renderer);
+		interior.render(renderer);
+		pantaUpF.render(renderer);
+		pantaUpB.render(renderer);
+		atsPanel.render(renderer);
+		brHF.render(renderer);
+		headlightOffF.render(renderer);
+		taillightOffF.render(renderer);
 		bogieF.render(renderer);
 		bogieB.render(renderer);
 		wheelF1.render(renderer);
@@ -175,18 +161,19 @@ function renderPreview(pass) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function updateTick(entity) {
+function updateTick(entity, pass) {
 
 	if(entity == null) return false;
 
 	var dataMap = entity.getResourceState().getDataMap();
 	var tick = renderer.getTick(entity);
+	var matID = renderer.currentMatId;
 
 	var prevTick = dataMap.getInt("prevTick");
 
 	dataMap.setInt("prevTick", tick, false);
 
-	if (tick != prevTick) return true;
+	if(tick != prevTick && pass == 0 && matID == 0) return true; //1フレームで一回実行される
 
 	return false;
 
@@ -194,25 +181,7 @@ function updateTick(entity) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function xorshift(seed) {
-
-	var minDigits = 5;
-
-	if (seed === 0) seed = 76314;
-
-	seed = seed ^ seed << 13;
-	seed = seed ^ seed >> 17;
-	seed = seed ^ seed << 15;
-
-	if (String(seed).length < minDigits) seed = xorshift(seed + 1);
-
-	return seed;
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderRotatePartFromPos(part, rotate, x, y, z, vecX, vecY, vecZ) {
+function renderRotatePart(part, rotate, x, y, z, vecX, vecY, vecZ) {
 	GL11.glPushMatrix();
 	GL11.glTranslatef(x, y, z);
 	GL11.glRotatef(rotate, vecX, vecY, vecZ);
@@ -232,26 +201,10 @@ function createVector3f(x1, y1, z1, x2, y2, z2) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function getArrayFromData(ID, amount) {
-
-	var ret = renderer.getData(ID);
-	if (ret == 0) {
-		ret = [];
-		for (var i = 0; i < amount; i++) {
-			ret[ret.length] = 0;
-		}
-	}
-	return ret;
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 var HashMap = Java.type("java.util.HashMap");
 var isBreaking = new HashMap();
 
 function renderATS(entity) {
-
-	atsPanel.render(renderer);//筐体
 
 	var dataMap = entity.getResourceState().getDataMap();
 	var Signal = entity.getSignal();
@@ -418,6 +371,106 @@ function renderATS(entity) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function　renderRainbow(entity) {
+
+	if(entity == null) return;
+
+	var dataMap = entity.getResourceState().getDataMap();
+	var nc10 = dataMap.getInt("Button9");
+	var nc01 = dataMap.getInt("Button10");
+
+	if (nc10 == 9 && nc01 == 9) {
+		bodyR0.render(renderer);
+	}
+	else {
+		body0.render(renderer);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+function renderNumber(entity) {
+
+	if(entity == null) return;
+
+	var dataMap = entity.getResourceState().getDataMap();
+	var nc10 = dataMap.getInt("Button9");
+	var nc01 = dataMap.getInt("Button10");
+
+	switch (nc10) {
+		case 0: number00.render(renderer);
+			break;
+			
+		case 1: number10.render(renderer);
+			break;
+
+		case 2: number20.render(renderer);
+			break;
+
+		case 3: number30.render(renderer);
+			break;
+			
+		case 4: number40.render(renderer);
+			break;
+
+		case 5: number50.render(renderer);
+			break;
+
+		case 6: number60.render(renderer);
+			break;
+			
+		case 7: number70.render(renderer);
+			break;
+
+		case 8: number80.render(renderer);
+			break;
+
+		case 9: number90.render(renderer);
+			break;
+
+		default:
+			break;
+	}
+
+	switch (nc01) {
+		case 0: number0.render(renderer);
+			break;
+			
+		case 1: number1.render(renderer);
+			break;
+
+		case 2: number2.render(renderer);
+			break;
+
+		case 3: number3.render(renderer);
+			break;
+			
+		case 4: number4.render(renderer);
+			break;
+
+		case 5: number5.render(renderer);
+			break;
+
+		case 6: number6.render(renderer);
+			break;
+			
+		case 7: number7.render(renderer);
+			break;
+
+		case 8: number8.render(renderer);
+			break;
+
+		case 9: number9.render(renderer);
+			break;
+
+		default:
+			break;
+	}
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 function atsConfirmation(entity) {
 
@@ -475,7 +528,7 @@ function atsTimer(entity) {
 */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function longATSAlert(entity, pass) {
+function longATSAlert(entity) {
 	
 	if (!entity.isControlCar()) {
 		return;
@@ -609,82 +662,24 @@ function sendHornKey(entity) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function renderDoor_i(entity) {
-
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0, doorMovement[0]);
-	doorLFi.render(renderer);
-	GL11.glTranslatef(0, 0, -(doorMovement[0] * 2));
-	doorLBi.render(renderer);
-	GL11.glPopMatrix();
-
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0, doorMovement[1]);
-	doorRFi.render(renderer);
-	GL11.glTranslatef(0, 0, -(doorMovement[1] * 2));
-	doorRBi.render(renderer);
-	GL11.glPopMatrix();
-
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderDoor_o(entity) {
-
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0, doorMovement[0]);
-	doorLFo.render(renderer);
-	GL11.glTranslatef(0, 0, -(doorMovement[0] * 2));
-	doorLBo.render(renderer);
-	GL11.glPopMatrix();
-
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0, doorMovement[1]);
-	doorRFo.render(renderer);
-	GL11.glTranslatef(0, 0, -(doorMovement[1] * 2));
-	doorRBo.render(renderer);
-	GL11.glPopMatrix();
-
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderDoorLamp(entity) {
-
-	if (entity == null) return;
-
-	var random = String(Math.abs(xorshift(entity.func_145782_y()))).substr(0, 3) / 10000;
-
-	if (entity.doorMoveL / 60 > random) {
-		doorLampL_ON.render(renderer);
-	} else if (entity.doorMoveL / 60 < random) {
-		doorLampL_OFF.render(renderer);
-	}
-
-	if (entity.doorMoveR / 60 > random) {
-		doorLampR_ON.render(renderer);
-	} else if (entity.doorMoveR / 60 < random) {
-		doorLampR_OFF.render(renderer);
-	}
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 function renderController(entity, onUpdateTick) {
 
 	var dataMap = entity.getResourceState().getDataMap(); //dataMap取得
 	var notch = entity.getNotch(); //ノッチ取得
 	var direction = entity.getTrainStateData(10); //レバーサ取得
+	var trainDir = entity.getTrainStateData(0); //車両方向取得
 	var isControlCar = entity.isControlCar();
 
-	roMc = dataMap.getDouble("roMcData"); //データ保持
-	roBr = dataMap.getDouble("roBrData"); //
-	roRev = dataMap.getDouble("roRevData"); //
+	var roMc = dataMap.getDouble("roMcData"); //データ保持
+	var roBr = dataMap.getDouble("roBrData"); //
+	var roRev = dataMap.getDouble("roRevData"); //
 
-	var mcAngle = 16.0; //マスコン動作角
-	var brAngle = 15.0; //ブレーキ動作角 0°から20°
-	var revAngle = 40.0; //レバーサ動作角
+	var mcAngle = 6.0; //マスコン動作角 14段合計84°
+	var mcOffset = -42.0; //マスコンオフセット角
+	var brAngle = 10.0; //ブレーキ動作角 8段合計80°
+	var revAngle = 30.0; //レバーサ動作角 20°
+
+	//-----------------------------------------------------------------------------------------
 
 	if (onUpdateTick) {
 
@@ -746,167 +741,212 @@ function renderController(entity, onUpdateTick) {
 	dataMap.setDouble("roBrData", roBr, false); //
 	dataMap.setDouble("roRevData", roRev, false); //
 
+	//-----------------------------------------------------------------------------------------
+
+	if (trainDir == 0 && isControlCar) {
 
 		//マスコン
-	GL11.glPushMatrix();
-	renderer.rotate(roMc, 'X', 0.0, 0.8499, 9.196); //回転軸
-	mcH.render(renderer);
-	GL11.glPopMatrix();
+		GL11.glPushMatrix();
+			renderer.rotate(-roMc + mcOffset, 'Y', 0.3054, 0.0, 6.582); //回転軸
+			mcHF.render(renderer);
+		GL11.glPopMatrix();
 
+		GL11.glPushMatrix();
+			renderer.rotate(mcOffset, 'Y', -0.3054, 0.0, -6.582); //回転軸
+			mcHB.render(renderer);
+		GL11.glPopMatrix();
 
-	if(isControlCar) {
 		//ブレーキ
 		GL11.glPushMatrix();
-		renderer.rotate(roBr, 'Y', 0.3651, 0.0, 9.2528); //回転軸
-		brH.render(renderer);
+			renderer.rotate(roBr, 'Y', 1.1856, 0.0, 6.7088); //回転軸
+			brHF.render(renderer);
 		GL11.glPopMatrix();
-	}
 
-	//レバーサ
-	GL11.glPushMatrix();
-	renderer.rotate(roRev, 'X', 0.0000, 0.8993, 9.3183); //回転軸
-	revH.render(renderer);
-	GL11.glPopMatrix();
+		//レバーサ
+		GL11.glPushMatrix();
+			renderer.rotate(-roRev, 'Y', 0.4091, 0.8993, 6.5744); //回転軸
+			revHF.render(renderer);
+		GL11.glPopMatrix();
+
+		revHB.render(renderer);
+
+	} else if (trainDir == 1 && isControlCar) {
+
+		//マスコン
+		GL11.glPushMatrix();
+			renderer.rotate(mcOffset, 'Y', 0.3054, 0.0, 6.582); //回転軸
+			mcHF.render(renderer);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
+			renderer.rotate(-roMc + mcOffset, 'Y', -0.3054, 0.0, -6.582); //回転軸
+			mcHB.render(renderer);
+		GL11.glPopMatrix();
+
+		//ブレーキ
+		GL11.glPushMatrix();
+			renderer.rotate(roBr, 'Y', -1.1856, 0.0, -6.7088); //回転軸
+			brHB.render(renderer);
+		GL11.glPopMatrix();
+
+		//レバーサ
+		revHF.render(renderer);
+
+		GL11.glPushMatrix();
+			renderer.rotate(-roRev, 'Y', -0.4091, -0.8993, -6.5744); //回転軸
+			revHB.render(renderer);
+		GL11.glPopMatrix();
+
+	} else {
+
+		GL11.glPushMatrix();
+			renderer.rotate(mcOffset, 'Y', 0.3054, 0.0, 6.582); //回転軸
+			mcHF.render(renderer);
+		GL11.glPopMatrix();
+
+		GL11.glPushMatrix();
+			renderer.rotate(mcOffset, 'Y', -0.3054, 0.0, -6.582); //回転軸
+			mcHB.render(renderer);
+		GL11.glPopMatrix();
+
+		revHF.render(renderer);
+
+		revHB.render(renderer);
+
+	}
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function renderCab(entity, onUpdateTick) {
+function renderCab(entity) {
 
-	var dataMap = entity.getResourceState().getDataMap();
-	var isControlCar = entity.isControlCar();
-	var interiorLightState = entity.getTrainStateData(11);
-	var pantaState = entity.getTrainStateData(6);
 	var speed = entity.getSpeed() * 72;
+	var bc = entity.brakeCount / 144;
+	var mr = entity.brakeAirCount / 2880;
 
-	//回転軸計算
-	var vecY = createVector3f(0.776, 1.0136, 9.4613, 0.776, 1.1342, 9.4913); //メーター右下のxyz座標, 右上のxyz座標
-	var vecZ = createVector3f(0.776, 1.0136, 9.4613, 0.8967, 1.0136, 9.4613); //メーター右下のxyz座標, 左下のxyz座標
-	var axisVec = Vector3f.cross(vecY, vecZ, null).normalise(null);
-
-	var roSp = 0 + 241.8 / 120 * speed;
-	//回転変数 = 初期位置から目盛り0kmの位置までの角度 + 0kmから目盛り最大までの角度 / 目盛り最大の速度 * speed
-
-	if(pantaState == 1) {
-		setVoltage = 188;
-	} else {
-		setVoltage = 0;
-	}
-
-	var roVlt = dataMap.getDouble("roVlt");
-
-	if(onUpdateTick) {
-
-		if(roVlt < setVoltage) {
-			roVlt = roVlt++;
-		// } else if(roVlt == setVoltage) {
-		// 	roVlt = setVoltage;
-		} else if(roVlt > setVoltage) {
-			roVlt = roVlt--;
-		}
-
-	}
-
-	dataMap.setDouble("roVlt", roVlt, false);
-
-	if (!isControlCar && interiorLightState > 0) { //室内灯がONである場合
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //室内灯モードを有効にする
-			GLHelper.setLightmapMaxBrightness();
-	}
+	var roSp = -115 + 230 / 120 * speed; //回転変数 = 初期位置から目盛り0kmの位置までの角度 + 0kmから目盛り最大までの角度 / 目盛り最大の速度 * speed
+	var rotateNdlBC = -135 + 80 * bc; //圧力計黒 
+	var rotateNdlMR = -135 + 108 * mr; //圧力計赤
+	
 
 	//速度計
-	renderRotatePartFromPos(needleSpd, -roSp, 0.8363, 1.0739, 9.4778, axisVec.getX(), axisVec.getY(), axisVec.getZ());
-	//(オブジェクト, 回転変数, 座標x, 座標y, 座標z, axisVec.getX(), axisVec.getY(), axisVec.getZ())
-
-	//電圧計
-	renderRotatePartFromPos(needlekV, -roVlt, 0.3787, 1.0739, 9.4778, axisVec.getX(), axisVec.getY(), axisVec.getZ());
-
-	//警笛ペダル
-	if (Keyboard.isKeyDown(Keyboard.KEY_P)) {
-		hornPedalON.render(renderer);
-	} else {
-		hornPedalOFF.render(renderer);
-	}
-
-	cab_body.render(renderer); //←逆転ハンドルが前以外の場合に発光させるオブジェクトを指定
-	renderController(entity, onUpdateTick);
-	renderATS(entity);
-
-	if (interiorLightState > 0 && !isControlCar) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //室内灯モードを無効にする
-	}
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderBodyGlass(entity, pass) {
-
-	var interiorLightState = entity.getTrainStateData(11);
-
-	if(pass == 1 && interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //室内灯モードを有効にする
-		GLHelper.setLightmapMaxBrightness();
-	}
-
-	bodyGlass.render(renderer);
-
-	if(pass == 1 && interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //室内灯モードを無効にする
-	}
-
-	cabGlass.render(renderer);
-
-	if(pass == 1 && interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);//室内灯モードを無効にする
-	}
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderCabGlass(entity, pass) {
-
-	var isControlCar = entity.isControlCar();
-	var interiorLightState = entity.getTrainStateData(11);
-
-	if(!isControlCar) {
-		if(pass >= 2 && interiorLightState > 0) {
-			NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //室内灯モードを有効にする
-			GLHelper.setLightmapMaxBrightness();
-		}
-
-		cabGlass.render(renderer);
-
-		if(pass >= 2 && interiorLightState > 0) {
-			NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);//室内灯モードを無効にする
-		}
-	}
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderInterior(entity) {
-
-	var interiorLightState = entity.getTrainStateData(11);
-
-	if (interiorLightState > 0) { //室内灯がONである場合
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0); //室内灯モードを有効にする
-		GLHelper.setLightmapMaxBrightness();
-	}
+	GL11.glPushMatrix();
+		renderer.rotate(roSp, 'Z', 0.82, 1.485, 0.0);
+		needleSpdF.render(renderer);
+	GL11.glPopMatrix();
 
 	GL11.glPushMatrix();
+		renderer.rotate(-roSp, 'Z', -0.82, 1.485, 0.0);
+		needleSpdB.render(renderer);
+	GL11.glPopMatrix();
 
-	interior.render(renderer); //発光させるオブジェクトを指定(関数も可)
-	renderDoor_i(entity);
+	//圧力計黒
+	GL11.glPushMatrix();
+		renderer.rotate(rotateNdlBC, 'Z', 0.93, 1.485, 0.0);
+		needlekPaBF.render(renderer);
+	GL11.glPopMatrix();
 
-	if (interiorLightState > 0) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0); //室内灯モードを無効にする
+	GL11.glPushMatrix();
+		renderer.rotate(-rotateNdlBC, 'Z', -0.93, 1.485, 0.0);
+		needlekPaBB.render(renderer);
+	GL11.glPopMatrix();
+
+	//圧力計赤
+	GL11.glPushMatrix();
+		renderer.rotate(rotateNdlMR, 'Z', 0.93, 1.485, 0.0);
+		needlekPaRF.render(renderer);
+	GL11.glPopMatrix();
+
+	GL11.glPushMatrix();
+		renderer.rotate(-rotateNdlMR, 'Z', -0.93, 1.485, 0.0);
+		needlekPaRB.render(renderer);
+	GL11.glPopMatrix();
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function renderWiper(entity){
+
+	//うんこ
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function renderLight(entity) {
+
+	if(entity == null) return;
+
+	var dataMap = entity.getResourceState().getDataMap();
+	var headlightStateF = dataMap.getInt("Button2");
+	var taillightStateF = dataMap.getInt("Button3");
+	var headlightStateB = dataMap.getInt("Button4");
+	var taillightStateB = dataMap.getInt("Button5");
+
+	if(headlightStateF == 0) headlightOnF.render(renderer);
+	else headlightOffF.render(renderer);
+
+	if(taillightStateF == 0) {
+		taillightOnF.render(renderer);
+	} else if(taillightStateF == 1) {
+		shuntinglightOnF.render(renderer);
+	} else {
+		taillightOffF.render(renderer);
 	}
 
-	GL11.glPopMatrix();
+	if(headlightStateB == 0) headlightOnB.render(renderer);
+	else headlightOffB.render(renderer);
+	
+	if(taillightStateB == 0) {
+		taillightOnB.render(renderer);
+	} else if(taillightStateB == 1) {
+		shuntinglightOnB.render(renderer);
+	} else {
+		taillightOffB.render(renderer);
+	}
+	
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function renderPantograph(entity) {
+
+	if(entity == null) return;
+
+	var dataMap = entity.getResourceState().getDataMap();
+	var pantaState = entity.getTrainStateData(6);
+	var pantaStateF = dataMap.getInt("Button6");
+	var pantaStateB = dataMap.getInt("Button7");
+
+	if(pantaState == 1 && pantaStateF == 0) pantaUpF.render(renderer);
+	else pantaDownF.render(renderer);
+
+	if(pantaState == 1 && pantaStateB == 0) pantaUpB.render(renderer);
+	else pantaDownB.render(renderer);
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function renderCoupler(entity) {
+
+	if(entity == null) return;
+
+	var dataMap = entity.getResourceState().getDataMap();
+	var couplerState = dataMap.getInt("Button8");
+
+	if(couplerState == 0) {
+		coupler1.render(renderer);
+	} else if(couplerState == 1) {
+		coupler2.render(renderer);
+	}
+	else {
+		coupler1.render(renderer);
+	}
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -926,77 +966,39 @@ function renderBogie(entity) {
 	var bogiePitchF = trainPitch - entityBogieF.field_70125_A;
 	var bogiePitchB = trainPitch - entityBogieB.field_70125_A * -1;
 
-	var bogiePosZ = [6.5, -6.5]; //Z軸前からbogiePosZ[0],[1]
-	var wheelPosY = -0.527; //車輪回転軸Y
-	var wheelPosZ = [7.55, 5.45, -5.45, -7.55]; //Z軸前からwheelPosZ[0],[1],[2],[3]
+	var bogiePosZ = [3.9, -3.9]; //Z軸前からbogiePosZ[0],[1]
+	var wheelPosY = -0.4509; //車輪回転軸Y
+	var wheelPosZ = [5.2, 2.6, -2.6, -5.2]; //Z軸前からwheelPosZ[0],[1],[2],[3]
 
 	//前台車
 	GL11.glPushMatrix();
-	renderer.rotate(bogieYawF, 'Y', 0.0, 0.0, bogiePosZ[0]);
-	renderer.rotate(bogiePitchF, 'X', 0.0, 0.0, bogiePosZ[0]);
-	bogieF.render(renderer);
-	GL11.glPushMatrix();
-	renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[0]);
-	wheelF1.render(renderer);
-	GL11.glPopMatrix();
-	GL11.glPushMatrix();
-	renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[1]);
-	wheelF2.render(renderer);
-	GL11.glPopMatrix();
+		renderer.rotate(bogieYawF, 'Y', 0.0, 0.0, bogiePosZ[0]);
+		renderer.rotate(bogiePitchF, 'X', 0.0, 0.0, bogiePosZ[0]);
+		bogieF.render(renderer);
+		GL11.glPushMatrix();
+			renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[0]);
+			wheelF1.render(renderer);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[1]);
+			wheelF2.render(renderer);
+		GL11.glPopMatrix();
 	GL11.glPopMatrix();
 
 	//後台車
 	GL11.glPushMatrix();
-	renderer.rotate(bogieYawB, 'Y', 0.0, 0.0, bogiePosZ[1]);
-	renderer.rotate(bogiePitchB, 'X', 0.0, 0.0, bogiePosZ[1]);
-	bogieB.render(renderer);
-	GL11.glPushMatrix();
-	renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[2]);
-	wheelB1.render(renderer);
-	GL11.glPopMatrix();
-	GL11.glPushMatrix();
-	renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[3]);
-	wheelB2.render(renderer);
-	GL11.glPopMatrix();
-	GL11.glPopMatrix();
-
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function renderOtherParts(entity) {
-
-	var trainDir = entity.getTrainStateData(0);
-	var pantaState = entity.getTrainStateData(6);
-	var doorClsL = entity.doorMoveL / 60;
-	var doorClsR = entity.doorMoveR / 60;
-
-	//前照灯
-	if (trainDir == 0) { //進行
+		renderer.rotate(bogieYawB, 'Y', 0.0, 0.0, bogiePosZ[1]);
+		renderer.rotate(bogiePitchB, 'X', 0.0, 0.0, bogiePosZ[1]);
+		bogieB.render(renderer);
 		GL11.glPushMatrix();
-		headlighton.render(renderer);
-		taillightoff.render(renderer);
+			renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[2]);
+			wheelB1.render(renderer);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+			renderer.rotate(roWh, 'X', 0.0, wheelPosY, wheelPosZ[3]);
+			wheelB2.render(renderer);
 		GL11.glPopMatrix();
-	} else { //後退
-		GL11.glPushMatrix();
-		headlightoff.render(renderer);
-		taillighton.render(renderer);
-		GL11.glPopMatrix();
-	}
-
-	//運転台戸閉め灯
-	if(doorClsL > 0 || doorClsR > 0) { //右か左どちらかのドアが開いているとき
-		cabDoorLampOFF.render(renderer);
-	} else { //どちらも閉じているとき
-		cabDoorLampON.render(renderer);
-	}
-
-	//パンタグラフ
-	if(pantaState == 0) {
-		pantaDawn.render(renderer);
-	} else {
-		pantaUp.render(renderer);
-	}
+	GL11.glPopMatrix();
 
 }
 
@@ -1017,72 +1019,60 @@ function render(entity, pass, par3) {
 
 	var onUpdateTick = false;
 
-	if (pass == 0) onUpdateTick = updateTick(entity);
+	onUpdateTick = updateTick(entity, pass);
 
 	//-----------------------------------------------------------------------------------
 
 	GL11.glPushMatrix();
 
-	if (entity == null) {
-		entityID = -1;
-	} else {
-		entityID = entity.func_145782_y();
+	renderController(entity, onUpdateTick);
 
-		var prevTick = renderer.getData(entityID << prevTickID);
-		var currentTick = renderer.getTick(entity);
-		shouldUpdate = ((prevTick != currentTick) && (pass == 0));
-
-		if (shouldUpdate) renderer.setData(entityID << prevTickID, currentTick);
-
-		doorState = getArrayFromData(entityID << doorStateID, 2);
-		doorMovement = getArrayFromData(entityID << doorMovementID, 2);
-		doorStateInTrain = entity.getTrainStateData(4);
-
-	}
-
-	//-----------------------------------------------------------------------------------
-
-	if (pass >= 0) {
+	if(pass >= 0) {
 
 		body1.render(renderer);
 		body2.render(renderer);
 		body3.render(renderer);
+		interior.render(renderer);
 
-		longATSAlert(entity, pass);
+		atsPanel.render(renderer);
+
+		renderNumber(entity);
+		renderRainbow(entity);
+
+		renderATS(entity);
+		longATSAlert(entity);
 		kitadenATS(entity);
+
+		renderCab(entity);
+		renderLight(entity);
+		renderPantograph(entity);
+		renderCoupler(entity);
 		
 		renderBogie(entity);
-		renderOtherParts(entity);
 		sendHornKey(entity);
 
-		renderDoor_o(entity);
-		renderDoorLamp(entity);
-		renderCab(entity, onUpdateTick);
-		renderCabGlass(entity, pass);
-
 	}
-
-	//-----------------------------------------------------------------------------------
-
-	if (pass >= 2) {
-		NGTUtilClient.getMinecraft().field_71460_t.func_78483_a(0.0);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(1.0, 1.0, 1.0, 1.0);
-		GLHelper.setLightmapMaxBrightness();
-	}
-
-	renderInterior(entity);
-	renderBodyGlass(entity, pass);
-	
-	if (pass >= 2) {
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-		NGTUtilClient.getMinecraft().field_71460_t.func_78463_b(0.0);
-	}
-
-	//-----------------------------------------------------------------------------------
 
 	GL11.glPopMatrix();
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+
+カスタムボタン対照表
+
+Button0：ブロワー
+Button1：ワイパー
+Button2：1エンド側前照灯
+Button3：1エンド側尾灯/入換灯
+Button4：2エンド側前照灯
+Button5：2エンド側尾灯/入換灯
+Button6：1エンド側パンタ操作
+Button7：2エンド側パンタ操作
+Button8：連結器切り替え
+Button9：10の位
+Button10：1の位
+
+*/
