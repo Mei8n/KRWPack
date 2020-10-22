@@ -8,7 +8,7 @@
 [![LatestRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack)](https://github.com/Mei8n/KRWPack/releases/latest)
 [![LatestPreRelease](https://img.shields.io/github/v/release/Mei8n/KRWPack?include_prereleases)](https://github.com/Mei8n/KRWPack/releases)
 
-Ver:1.0
+Ver:1.1 ED60形(仮Ver.を追加)
 
 ## Download
 
