@@ -77,6 +77,91 @@
  },
 
 
+  "train.2000_0": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000_0"
+    ]
+ },
+
+  "train.2000_0d": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000_0d"
+    ]
+ },
+
+  "train.2000_1": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000_1"
+    ]
+ },
+
+  "train.2000_1d": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000_1d"
+    ]
+ },
+
+  "train.2000_2": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000_2"
+    ]
+ },
+
+  "train.2000Brake1": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000Brake1"
+    ]
+ },
+
+  "train.2000CPS": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000CPS"
+    ]
+ },
+
+  "train.2000CPE": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000CPE"
+    ]
+ },
+
+  "train.2000CPL": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000CPL"
+    ]
+ },
+
+  "train.2000DoorOpn": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000DoorOpn"
+    ]
+ },
+
+  "train.2000DoorCls": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000DoorCls"
+    ]
+ },
+
+  "train.2000Sq": {
+    "category": "neutral",
+    "sounds": [
+      "train/2000Sq"
+    ]
+ },
+
+
 
   "train.Pattern_Action10": {
     "category": "neutral",
@@ -235,6 +320,43 @@
 
 
 
+  "train.KRWAirHorn1": {
+    "category": "neutral",
+    "sounds": [
+      "train/KRWAirHorn1"
+    ]
+ },
+
+  "train.KRWAirHorn2": {
+    "category": "neutral",
+    "sounds": [
+      "train/KRWAirHorn2"
+    ]
+ },
+
+  "train.KRWDoorAnnounce": {
+    "category": "neutral",
+    "sounds": [
+      "train/KRWDoorAnnounce"
+    ]
+ },
+
+  "train.KRWEHorn1": {
+    "category": "neutral",
+    "sounds": [
+      "train/KRWEHorn1"
+    ]
+ },
+
+  "train.KRWEHorn2": {
+    "category": "neutral",
+    "sounds": [
+      "train/KRWEHorn2"
+    ]
+ },
+
+
+
   "train.ED60BlowerLoop": {
     "category": "neutral",
     "sounds": [
@@ -337,6 +459,13 @@
     "category": "neutral",
     "sounds": [
       "train/ED60BreakerOff"
+    ]
+ },
+
+  "train.KRWnull": {
+    "category": "neutral",
+    "sounds": [
+      "train/KRWnull"
     ]
  }
 
