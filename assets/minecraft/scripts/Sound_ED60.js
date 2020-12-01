@@ -406,7 +406,6 @@ if (speed>0.1) {
 		}
 		else {
 			su.stopSound('sound_mhnlib', 'RTMLib.Run.Common.Run30km2');
-
 		}
 
 		//Run60km
