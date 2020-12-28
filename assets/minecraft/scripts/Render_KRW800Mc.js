@@ -230,6 +230,24 @@ function updateTick(entity) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function detectMiddleCar(entity) {
+
+	if(entity == null) return;
+
+	var formation = entity.getFormation();
+
+	if(formation == null) return false;
+
+	var current = formation.getEntry(entity).entryId + 1;
+	var max = formation.size();
+
+	if(current == 1 || current == max) return false;
+	else return true;
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function xorshift(seed) {
 
 	var minDigits = 5;
@@ -1076,17 +1094,20 @@ function renderOtherParts(entity) {
 	var doorClsL = entity.doorMoveL / 60;
 	var doorClsR = entity.doorMoveR / 60;
 
+	var isMiddleCar = detectMiddleCar(entity);
+
 	//前照灯
-	if (trainDir == 0) { //進行
-		GL11.glPushMatrix();
-		headlighton.render(renderer);
-		taillightoff.render(renderer);
-		GL11.glPopMatrix();
-	} else { //後退
-		GL11.glPushMatrix();
+	if(!isMiddleCar) {
+		if (trainDir == 0) { //進行
+			headlighton.render(renderer);
+			taillightoff.render(renderer);
+		} else { //後退
+			headlightoff.render(renderer);
+			taillighton.render(renderer);
+		}
+	} else {
 		headlightoff.render(renderer);
-		taillighton.render(renderer);
-		GL11.glPopMatrix();
+		taillightoff.render(renderer);
 	}
 
 	//運転台戸閉め灯
