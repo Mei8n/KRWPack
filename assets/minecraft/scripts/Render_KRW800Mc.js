@@ -1193,3 +1193,4 @@ function render(entity, pass, par3) {
 	GL11.glPopMatrix();
 
 }
+//test
